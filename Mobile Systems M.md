@@ -75,28 +75,20 @@ Typically the variation of one aspect impacts on the others, and that's why the 
 
 ### Communication Standards
 IEEE 802.x standards defines physical layer and dataling layer protocols.
-
-**Question**: How does Ethernet try to avoid collision on a shared communication medium?
-**Answer**:  CSMA/CD (Carrier Sensing Multiple Access / Collision Detection)
-- Carrier Sensing (i.e on the cable there is a carrier - always powered - so the nodes can allign themselves around this carrier)
-- Collision Detection - there is smth at layer2 that makes nodes able to detect if someone is already using that channel.
-
 #### CSMA/CD Algorithm
-Ethernet (IEEE 802.3) is based on CSMA/CD (Carrier Sense Multiple Access with Collision Detection ~ *il portatore del segnale percepisce gli accessi multipli e rileva le collisioni*) algorithm. It's an **optimistic approach**, that:
-- performs **==channel sensing==**, to detect if someone is already using it:
-	- if not (idle), transmit immediately;
+Ethernet (IEEE 802.3) is based on CSMA/CD (Carrier Sense Multiple Access with Collision Detection ~ *il portatore del segnale percepisce gli accessi multipli con rilevamento delle collisioni*) algorithm. It's an **optimistic approach**, that allows multiple access (MA), i.e. allows multiple devices to share the same communication medium:
+- performs **==channel sensing==** (CS), to detect if someone is already using it:
+	- if not (idle), transmit immediately, but keep listening to the channel;
 	- otherwise (occupied), wait until the channel becomes idle;
-- ==**collision detection**==:
+- ==**collision detection**== (CD):
 	- immediate abortion of a transmission if collision is detected;
-	- the following transmission try will occur after waiting for a ==random== time interval.
+	- the following transmission try will occur after waiting for a ==**random time interval**==.
 	- ==**exponential backoff**==: the backoff time is chosen in an interval that grows exponentially over time, to minimize the probability of repeated collisions.
 The exponential backoff and randomization prevents the device backoff synchronization (that is when devices keep trying to retransmit at the same interval of time).
 
 **NB**: That's possible due to the transmission medium characteristics in Ethernet (cable), which doesn't cause signal degradation or propagation problems of any kind! We'll see that in wireless it's not so trivial to detect that (due to signal degradation, but also to other factors).
 
-
-
-How ethernet works: How ethernet puts packets at layer 2 on the bus trying to avoid collisions (at layer2 the classical problem is if ur using a shared medium transmission - in case of ethernet is the cable, in wifi is the space/air in which the signal travels - where different nodes can decide to transmit packets at the same time)
+How ethernet works: How ethernet puts packets at layer 2 on the bus trying to avoid collisions (at layer2 the classical problem is if you're using a shared medium transmission - in case of ethernet is the cable, in wifi is the space/air in which the signal travels - where different nodes can decide to transmit packets at the same time)
 
 Ethernet: shared bus (single cable) connecting many different PCs, how does ethernet avoid collisions? 
 
