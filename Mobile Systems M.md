@@ -340,8 +340,8 @@ The clock synchronization is necessary because in Bluetooth, contrary to WiFi, t
 One piconet disadvantage is that it requires some time to be built (in seconds). That's tollerable for the devices that Bluetooth is thought for (printers, headphones, etc.).
 Once the connection is enstablished, it remains so until the end of the usage.
 ![[Pasted image 20240109174118.png]]
-##### Frequency hopping
-Bluetooth exploits frequency hopping in 2.4GHz band. Since piconet members have successfully passed the page phase, we know their clocks are synchronized.
+#### Frequency hopping
+Bluetooth exploits frequency hopping in 2.4GHz band (79 hop frequencies, at 1 MHz distance). Since piconet members have successfully passed the page phase, we know their clocks are synchronized.
 The hopping sequence is determined based on the master address. Each piconet member has to follow the same sequence.
 Master and slaves communicate alternating in periodic slots (called rounds). In each slot only a device can communicate: master can communicate using odd slots, while slaves even ones. That prevents collisions.
 Pros:
@@ -351,9 +351,9 @@ Cons:
 - the slot usage is not optimized, since not always a device has something to send/receive.
 
 NB: the master can use its slot to send messages but also 
-##### Timing and clock
+#### Timing and clock
 Any bluetooth device has its own native logical clock CLKN. The piconet has a clock, that coincides with the CLKN of the master. 
-##### Connections
+#### Connections
 There are 2 types of connections:
 - ==**Asynchronous Connection-Less (ACL)**==: used for **data** traffic (not voice or multimedia) and best-effort service (simplicity over guarantees). Supports:
 	- packet-switch connections;
@@ -369,7 +369,7 @@ There are 2 types of connections:
 In SCO connections, a channel is reserved for 2 time slots for communication between master and one specific slave. The reservation periodicity is decided by the master, independently by the need of transmission. ACL communication can only occur in pause intervals between SCO reserved slots. That's also why there is a limit to 3 SCO connections, otherwise every slot could be reserved, not leaving any space for ACLs. 
 ![[Pasted image 20240109192238.png]]
 
-##### Device States
+#### Device States
 Bluetooth is not only a 2 layers protocol, but much more (e.g. how devices communicate).
 Different states:
 - active
@@ -377,18 +377,46 @@ Different states:
 - park (low consumption)
 - sniff (low consumption)
 ![[Pasted image 20240109192425.png]]
-##### Service Discovery Protocol
+#### Service Discovery Protocol
 Since it was created to replace cables, a user would also need to discover what service a particular node offers.
-
-##### Scatternet
-A scatternet is a combination of more piconets where at least one node participate in both of 2 of the piconets (that for 2 piconets forming a scatternet).
-
-##### Bluetooth Low Energy (BLE)
-
+#### Scatternet
+Piconets are the classical way to use Bluetooth, but it's not the only topology available.
+A scatternet is a combination of more piconets where at least one node participate in both of 2 of the piconets (that for 2 piconets forming a scatternet): they can have a common master but also a common slave.
+![[Pasted image 20240109204749.png]]
+Performance in a scatternet is absolutely not optimal, since the communication becomes multi-hop and the cost of creating a connection increases. Moreover to coordinate all these nodes become much complex, with inquiry and page phases requiring a lot more time.
+#### Bluetooth Low Energy (BLE)
+Bluetooth variant that allows to significantly reduce battery consumption, by keeping a great communication range. It was included in Bluetooth 4.0.
+The main difference with classic Bluetooth is that BLE has a different set of frequencies (40 instead of 79), but wider (2MHz instead of 1MHz).
+To avoid interferences and reduce power consumption, BLE uses 3 channels.
+Nodes can send advertising packets (advertising node) in broadcast or listen for offered services (scanner node). But since any node (both advertising and scanner) can use all the channels indiscriminately, there's only 1 probability on 9 that a scanner will detect an advertising packet. Therefore BLE has the disadvantage of having a long and variable discovery time.
 ### ZigBee (IEEE 802.15.4)
+Another wireless PAN standard, but specifically designed for sensors and actuators networks, with the following requirements:
+- reliability;
+- cost-effectiveness;
+- low power;
+While Bluetooth is designed for domestic environments (replace cables at home), ZigBee is designed for industrial ones (monitoring).
+Bluetooth was not suitable for industrial environments, due to its topologies beeing too complex to manage with increasing sizes.
+ZigBee supports up to 64k nodes. As BT, ZigBee provides profiles for higher layers of the support/application stack.
+It's optimized for topology formation time, especially for when a new node connects (<30ms compared to BT's several seconds).
+Support to full mesh networking.
+> NB: in ZigBee there's nothing that automatically decides a network topology or how to access a channel. Those choices must be done by the network administrator that programs the PAM coordinator.
+#### Topologies
+3 different topologies:
+- **star**, same as piconet, is the simplest one;
+- **mesh**, similiar to WiFi mesh. Each node can have an arbitrary number of connections towards other nodes in its neighborhood. It's very resilient, since each node can have multiple connections. Disadvantage: Overhead;
+- **cluster tree**, tree hierarchical topology, with PAN coordinator as the root node. RFD can only be the leaves. The root node has global visibility. Great for scalability and low coordination costs but it's not robust to failures.
 
+ ![[Pasted image 20240109212026.png]]
+#### Devices Different Roles
+There are different roles for ZigBee devices:
+- **PAN coordinator** (~master), one for each ZigBee network. It activates the network formation and acts like a router once the network is functioning. The PAN coordinator must be a reliable node (high battery level, possibly fixed or with limited mobility, etc.);
+- **Full Function Device (FFD)**, participates in messages routing;
+- **Reduced Function Device (RFD)**, executes only sensing and actuating operations, no routing.
 
-
+#### Channel Access Options
+To access the channel, the nodes can choose between 2 networks types:
+- **non-beaconed network**, exploits CSMA/CA, positive ACKs for successful reception of packets;
+- **beacon-enabled network**, 
 
 
 
