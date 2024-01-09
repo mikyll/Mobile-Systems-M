@@ -138,19 +138,20 @@ How does it work? Suppose that B wants to transmit to C;
 Collisions may occur anyway (e.g. RTS frame collisions), but at least data frames (which is the important part of the communication) can NOT.
 
 Current situation? WiFi uses CSMA/CA, which basically integrates MACA, but MACA is still left optional. Even if it's not perfect for WiFi, it was adopted because it's simple and therefore allows the usage of more bandwidth.
-
 ### WiFi (IEEE 802.11) Configurations
 ![[Pasted image 20240106190124.png]]
 There are two primary WiFi configurations:
 - ==**ad-hoc mode**==: there are **no access points** between wireless devices and they connect directly;
 - ==**base station**== (or infrastructure mode): there is **one AP** that acts like a gateway to reach the Internet and each device connects to it;
 
+In **base station** mode uses the protocol probe/response: a mobile node sends a "probe broadcast message" and Access Points that receive that message respond with a "response message" to signal their presence. Then the mobile node will have a list of available APs to connect to (manually or automatically).
 In base station mode, there are no "new" routing problems. Some of the small ones could be:
 - what happens if a mobile node moves to another Access Point?
 - what happens to our possibility of using the network connection?
 Typically in these 2 scenarios (e.g. when using a service which is continuous in time), the connection must be restarted, because the mobile node changes IP address, when it connects to a different Access Point. In fact, when changing IP address, in a client/server model, the TCP connection breaks, and it has to be re-enstablished, by building a new one. Sometimes there are middlewares that handle this to improve the user experience, for example Unibo Almawifi automatically detects when a user disconnects from an Access Point and connects to another, and the framework automatically handles this situation.
 
-In ad-hoc mode, there is a routing problem that was not present in infrastructure mode (base station): trying to use traditional IP routing (i.e. the one for fixed nodes, often based on Dijkstra's algorithm), it may not always work, but most certainly it's not efficient. A path that might be optimal at a certain time interval t1, might not be optimal anymore at a t2.
+
+In **ad-hoc** mode, there is a routing problem that was not present in infrastructure mode (base station): trying to use traditional IP routing (i.e. the one for fixed nodes, often based on Dijkstra's algorithm), it may not always work, but most certainly it's not efficient. A path that might be optimal at a certain time interval t1, might not be optimal anymore at a t2.
 Considerations: 
 - a "scarsly mobile" node could be better to be used as part of the path;
 - if a node has low battery probably is not so good to be used, since it might go offline.
@@ -250,9 +251,83 @@ Motivations:
 - GSM only specifies how (mechanisms) to operate handoff, not why
 
 ![[Pasted image 20240109124258.png]]
+==**Handoff steps**== (same MSC):
+1. Old BSS decides to perform the handoff process, and send a message to the MSC, providing a list of possible desinations (one or more new BSSs).
+2. MSC notifies the new BSS, because it needs to allocate resources.
+3. (If there is enough space) the new BSS alloactes the radio channel that the mobile visitor will use. If it doens't arrive in a given time interval, the radio channel is deallocated. NB: that's proactive, because the channel is allocated before receiving the actual connection.
+4. New BSS signals the MSC and old BSS it's readiness.
+5. Old BSS informs the mobile device the need to operate handover towards the new BSS.
+6. The mobile deevice signals to the new BSS to activate the new channel.
+7. Mobile device signals to MSC (through the new BSS) that the handoff has been completed, and MSC performs a re-routing.
+8. MSC deallocates resources of the old routing path and notify the old BSS that deallocates the old radio channel associated with the mobile node.
+
+> That's how handoff works in cellular networks. These terms refer to 2G, but the concepts are valid for any later generation).
+
+In crowded areas, typically you can still get connected, due to the fact that an area can be covered by multiple antennas.
+
+One BSS has N radio channel slots to be allocated for N different users (different frequencies, each for a different visitor).
+Among these, a quota is always maintained for moving users. The actual amount is not defined in the standard, but usually around 25%.
+That's a static reservation, which has a cost and is not optimal, but cannot be predicted apriori.
+In fact, when a BSS predicts the new BSS the mobile node can connect to, the prediction MAY be wrong. Therefore resources need to be allocated, even if not always used.
+Common goal: achieve service continuity at max at any time. Target is to perform handoff in less than 30ms (main supported service was voice, and it's proven that humans do not notice delays under 30ms).
+
+**Handoff** (different MSC):
+![[gsm_handoff_different_cells.png]]
+
+1. The correspondent mobile node starts a call (or data session) towards another mobile node.
+2. The request passes through the PSTN that identifies, given the number of the receiver, the corresponding HLR (of the receiver).
+3. From the receiver HLR it's possible to obtain the current location of the receiver node and its MSC (the MSC that it's currently connected to).
+4. The connection is enstablished.
+
+If the receiver moves, the new MSCs are appended at the end of the chain, but the anchor will always be present.
+
+Anchor MSC is important because in case the mobile phone changes, at runtime, the cell to other MSC, it's the anchor that maintains the link with the currently visited MSC. Independently from your position, you have an anchor MSC (the point where the conversation started), if you or the receiver change position, there's still a link to it. The anchor MSC also keeps information about the call (duration and cost, for example).
+
+Obviously it's possible to have a "direct link" or a chain of links for all the visited MSC during the service. Both options are possible according to the standard. 
+
+There's an optional feature (IS-41) that optimize the path, by minimizing it. However, what's not changed is the anchor MSC.
+
+**IS-41** example:
+![[gsm_handoff_different_cells_is-41.png]]
+
+Handoff classification:
+- connectivity:
+	- **horizontal**, if the connectivity is homogeneous (e.g. handoff between two GSM BSS);
+	- **vertical**, if the connectivity is heterogeneous (e.g. handoff passing from 4G connectivity to WiFi);
+- node that initiate the procedure:
+	- **mobile-initiated** (e.g. WiFi);
+	- **network-initiated** (e.g. GSM);
+- when it's triggered:
+	- **reactive**, if the handoff is triggered only after (as a consequence, as a reaction) a node loses connectivy to the previous AP (e.g. WiFi);
+	- **proactive**, if the handoff is triggered before that happens (e.g. GSM);
+- management:
+	- **hard**, if the mobile device disconnects from the old BSS (e.g. GSM, WiFi);
+	- **soft**, if during time interval of the handoff the mobile device stays connected both to the old BSS and the new one (not possible in GSM, nor WiFi, but one could have 2 WiFi cards);
+### Bluetooth (IEEE 802.15)
+Bluetooth belongs to wireless Personal Area Network (PAN) family, with relatively small range: ~10-100m, low cost (~5/10$ per interface) and that manages both voice and data. It was designed as a technology for cable replacement. 
+Bluetooth standard defines specs of protocols for wireless communication, how to use them, and the corresponding software stack.
+
+Main characteristics:
+- works in 2.4GHz frequencies (same as WiFi), exploiting ***frequency hopping***;
+- initial bandwidth of ~1Mbps;
+- low consumption: 1mW-10mW;
+- piconet, network "star" topology with a master and 7 slaves at most;
+
+Main differences with WiFi:
+- In Bluetooth the communication always passes through the master, while in WiFi there is a point-to-point communication between master (AP) and slave (MN).
+- Bluetooth needs a preliminar discovery phase, while in WiFi a mobile node simply sends a probe message to all near APs.
+- Very limited broadcast mechanism.
+
+#### Bluetooth Topology Formation
+Bluetooth topology is the piconet, that consists of a star network formed by a master and up to 7 slaves. Actually nodes can be up to 256 if set to "parked" state, i.e. they're part of the network but they're inactive and cannot communicate. Each slave communicate through a single channel in frequency hopping.
+The piconet formation occurs in 2 phases:
+1. Inquiry phase, a node 
 
 
 
+
+
+### ZigBee (IEEE 802.15.4)
 
 
 

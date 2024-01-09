@@ -6,4 +6,5 @@
 - WiFi issues
 - MACA
 - WiMAX, WiFi Mesh, MBWA, Vehicular Mobility
+- GSM architecture
 - GSM handoff
