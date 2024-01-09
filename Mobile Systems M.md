@@ -155,10 +155,103 @@ Considerations:
 - a "scarsly mobile" node could be better to be used as part of the path;
 - if a node has low battery probably is not so good to be used, since it might go offline.
 #### WiFi Direct
-WiFi Direct (or WiFi P2P) is a sort of masked "infrastructure mode", since it allows 2 nodes to connect directly. However, what actually happens is that one node acts as an Access Point for the other, but it's a software implementation.
+WiFi Direct (or WiFi P2P) is a sort of **masked "infrastructure mode"**, since it allows 2 nodes to connect directly. However, what actually happens is that one node acts as an Access Point for the other, but it's a **software** implementation.
 The interesting aspect is that only one of the two nodes participating in the communication has to be compliant with WiFi Direct standard to enstablish a peer-to-peer connection.
 
 #### WiMAX (IEEE 802.16)
+To cover big areas, WiFi 
+Goal: grant access to high bandwidth (70Mbps) in metropolitan areas, covering the last mile, since WiFi didn't have enough coverage range (at most 250m). 2 types of stations:
+- base stations, installed by Internet Service Providers, and connected via cable to the Internet;
+- subscriber stations, installed by users, which acts like modem.
+
+#### WiFi Mesh (IEEE 802.11s)
+WiFi alone cannot be used to cover metropolitan areas. Therefore a variant specific for this task was introduced: IEEE 802.11s, WiFi Mesh, is a WiFi variant that exploits access points (base stations) to create a mesh network. In WiFi mesh, connections can be transfered from one base station to another, granting mobility support.
+Pros:
+- reduced costs;
+- robustness;
+Cons:
+- routing complexity;
+- implementation difficulties;
+- introduced overhead.
+WiFi Mesh didn't have much success, due to the fact that, in order to reach robustness, there was the need to check APs (if one broke for some reason, it would have been necessary to change all the routing paths utilizing the node),
+
+#### MBWA (IEEE 802.11p)
+Mobile Broadband Wireless Access (MBWA) is a standard, which was abandoned quite early, that allowed connections of devices moving at over 250 km/h. WiFi wouldn't allow this, since the association time is too long (several hundreds of ms, compared to 5ms of MBWA).
+MBWA didn't have much success, because of WiFi variant IEEE 802.11p.
+
+#### Vehicular Mobility (IEEE 802.11p)
+WiFi standard variant proper for vehicular mobility. Includes the exchange of data between vehicles at high velocity and road infrastructures (connected to Internet). This technology is used by some car models.
+
+### Cellular Networks
+Cellular networks are called this way, due to the implementation concept: geographical areas are divided in adjacent **cells**. Each cell is coveder by an antenna called **Base Station** (BS), as Access Points in base mode.
+Each BS is connected to a **Mobile Switching Center** (MSC), that is a fixed station connected to Internet via cable, that connects cells to the Wide Area Network (WAN).
+![[Pasted image 20240109011837.png]]
+
+Suppose we have two nodes A and B, each one referencing a different BSs (BSa and BSb) both belonging to different MSCs (MSCa and MSCb).
+A wants to communicate with B, therefore:
+1. Node A sends a request to BSa;
+2. BSa forwards the message to MSCa;
+3. MSCa, passing through Internet, locates MSCb and sends it the message;
+4. MSCb forwards the message to BSb;
+5. BSb sends the message to node B.
+
+MSCs task is to handle mobility of cellular devices, so that the final user doesn't even notice the cell switching.
+Initially it wasn't used Internet, but a proprietary cabled network belonging to telecom companies. 
+
+#### Standard Generations
+- **1G**, full **analogic** communication (circuit switching);
+- **2G**, only **voice channels**, with communication implemented through **digital** circuit switching (NB: before it was analogic). Example: Global System for Mobile communications (GSM) standard. 2G is the generation where GSM started to gain popularity;
+- **2.5G**, channels for **voice and data**. Still relatively ridiculous datarate (384Kbps). Examples: 
+	- General Packet Radio Service (GPRS) standard, which is an evolution of GSM;
+	- Enhanced Data rates for Global Evolution (EDGE), also an evolution of GSM;
+- **3G**, channels for **voice and data**. Basically the same as 2.5G but with increased datarate. Reduction of cells size. Example: Universal Mobile Telecommunications Service (UMTS);
+- **4G**, channels for **voice and data**. Increased datarate (up to 1000Mbps download, 500Mbps upload). NB: it's interesting noting that typically in wired connections download and upload datarate are the same, but it's up to the protocol designer to specify it (maybe have greater download, since it is the mostly used);
+- **5G**
+
+### GSM (Global System for Mobile communications)
+Global System for Mobile communications (GSM) is a standard developed for mobile communication systems. It's the most widely used standard for mobile phones globally and serves as the foundaton for 2G mobile networks.
+GSM architecture is hierarchical and follows locality principle.
+
+![[Pasted image 20240109120618.png]]
+
+A Mobile Station (mobile node, e.g. a smartphone) is composed by:
+- one **Terminal Equipment (TE)**, containing terminal/user-specific data (associated with SIM card)
+- one **Mobile Terminal (MT)**, that allows to communicate with the BSS.
+A Base Subsystem Station (BSS) is composed by:
+- one **Base Station Controller (BSC)**, that manages radio channels, paging and handoff for different BTSs;
+- many **Base Transceiver Station (BTS)**, that manages channel allocation, signaling, frequency hopping, handover triggers. BTS contains transceiver that enable them to communicate with MS.
+
+##### BTS (Base Transceiver Station)
+BTS are distributed accross the country and provide coverage to mobile devices.
+![[Pasted image 20240109121046.png]]
+
+
+##### BSC (Base Station Controller)
+BSC are located in centralized sites and manages many BTS.
+![[Pasted image 20240109121132.png]]
+
+##### MSC (Mobile Switching Center)
+MSC is used to setup and clear calls and deliver text messages. It also tracks the location of mobile devices under its management.
+![[Pasted image 20240109121305.png]]
+
+MSC acts like a **gateway** to:
+- **Public Switching Telephone Network (PSTN)**, which is the traditional and circuit-switched network used prior to Internet;
+- **packet data networks** (like Internet) which are more recent.
+
+MSC contains 2 registries:
+- **Home Location Register (HLR)** is a centralized database that stores permanent info about subscribed (literally "abbonati", via a telephonic/Internet contract) mobile devices. These info includes and identifier, some location data, service that the user activated, etc. When a mobile node - subscribed to that HLR - starts a call or data session, the MSC queries the HLR to get the needed info.
+- **Visitor Location Register (VLR)** is a temporary database associated with each MSC and stores info about mobile devices currently within the coverage range of that MSC (i.e. under one or more of the BSS referencing that MSC). When a mobile device enters the coverage area of a MSC, its VLR is updated. It also help in load balancing, since it reduces the overall query load to the centralized HLR.
+MSC, HLR and VLR serve to provide seamless mobile communication services, ensuring that subscriber information is efficiently managed, and calls can be set up regardless of the mobile device's current location, within the network.
+
+#### GSM Handoff (or Handover)
+Motivations:
+- stronger signal
+- load balancing
+- GSM only specifies how (mechanisms) to operate handoff, not why
+
+![[Pasted image 20240109124258.png]]
+
+
 
 
 
