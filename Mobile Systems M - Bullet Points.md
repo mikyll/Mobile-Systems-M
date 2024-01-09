@@ -5,6 +5,8 @@
 - Ethernet CSMA/CD
 - WiFi issues
 - MACA
-- WiMAX, WiFi Mesh, MBWA, Vehicular Mobility
-- GSM architecture
+- Wireless Protocols (WiMAX, WiFi Mesh, MBWA, Vehicular Mobility)
+- Cellular Networks and GSM
 - GSM handoff
+- Bluetooth
+- ZigBee
