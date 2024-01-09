@@ -311,7 +311,7 @@ Main characteristics:
 - works in 2.4GHz frequencies (same as WiFi), exploiting ***frequency hopping***;
 - initial bandwidth of ~1Mbps;
 - low consumption: 1mW-10mW;
-- piconet, network "star" topology with a master and 7 slaves at most;
+- **piconet**, network "star" topology with a master and 7 slaves at most;
 
 Main differences with WiFi:
 - In Bluetooth the communication always passes through the master, while in WiFi there is a point-to-point communication between master (AP) and slave (MN).
@@ -319,13 +319,71 @@ Main differences with WiFi:
 - Very limited broadcast mechanism.
 
 #### Bluetooth Topology Formation
-Bluetooth topology is the piconet, that consists of a star network formed by a master and up to 7 slaves. Actually nodes can be up to 256 if set to "parked" state, i.e. they're part of the network but they're inactive and cannot communicate. Each slave communicate through a single channel in frequency hopping.
+Bluetooth topology is the piconet, that consists of a star network formed by a master and up to 7 slaves. Actually nodes can be up to 256 if set to "parked"/"standby" state, i.e. they're part of the network but they're inactive and cannot communicate. Each slave communicate through a single channel in frequency hopping.
 The piconet formation occurs in 2 phases:
-1. Inquiry phase, a node 
+1. Inquiry phase, to discover the participant and who'll be the master (stupidly/simple enough, the one who started this phase).
+2. Page phase, where the master enstablish a bidirectional channel to the slaves.
+##### Inquiry Phase
+Goal: collect sufficient info and nodes to enstablish a piconet.
+A node that wants to communicate enters the "inquiry mode": it sends its ID and waits for an answer from its neighbours (containing their IDs). At the end, the node will have a list of the IDs that participate to the piconet. To save energy, other nodes can switch between "inquiry scan mode" and "standby mode".
+The node that starts the inquiry becomes the master, and the other will be the slaves. After a time interval, if it received at least one answer, the master enters the page mode.
+![[Pasted image 20240109173833.png]]
+Example:
+- purple starts inquiry mode;
+- blue is outsite, therefore doesn't receive the inquiry message (and won't be able to join further on);
+- red is in range but doesn't respond because it's in standby mode;
+- yellows respond because are in "inquiry scan mode" and the connection with them is enstablished.
+##### Page Phase
+The master enstablish a bidirectional communication channel with its slaves.
+Then it sends the value of its logical clock to the slaves, in order to make them synchronize with it, and requires the slaves to send their estimated clocks and their bluetooth addresses. Another info that is exchanged is the frequency sequence.
+The clock synchronization is necessary because in Bluetooth, contrary to WiFi, the communication is split in time slots to prevent collisions *by design*.
+One piconet disadvantage is that it requires some time to be built (in seconds). That's tollerable for the devices that Bluetooth is thought for (printers, headphones, etc.).
+Once the connection is enstablished, it remains so until the end of the usage.
+![[Pasted image 20240109174118.png]]
+##### Frequency hopping
+Bluetooth exploits frequency hopping in 2.4GHz band. Since piconet members have successfully passed the page phase, we know their clocks are synchronized.
+The hopping sequence is determined based on the master address. Each piconet member has to follow the same sequence.
+Master and slaves communicate alternating in periodic slots (called rounds). In each slot only a device can communicate: master can communicate using odd slots, while slaves even ones. That prevents collisions.
+Pros:
+- tends to be more robust to distrubs;
+- harder to attack a node if it continuously changes frequency;
+Cons:
+- the slot usage is not optimized, since not always a device has something to send/receive.
 
+NB: the master can use its slot to send messages but also 
+##### Timing and clock
+Any bluetooth device has its own native logical clock CLKN. The piconet has a clock, that coincides with the CLKN of the master. 
+##### Connections
+There are 2 types of connections:
+- ==**Asynchronous Connection-Less (ACL)**==: used for **data** traffic (not voice or multimedia) and best-effort service (simplicity over guarantees). Supports:
+	- packet-switch connections;
+	- point-multipoint connections;
+	- symmetric (max ~400Kbit/s)/asymmetric (max ~700Kbit/s downlink and ~60Kbit/s uplink) connections.
+	NB: a slave can transmit only if it received the permission from the master in the previous slot.
+- ==**Synchronous Connection-Oriented (SCO)**==: used for real-time and **multimedia** traffic. Guaranteed bandwidth (64Kbit/s). Support:
+	- circuit-switched connections;
+	- point-point connections;
+	- symmetric connections;
+	**Max 3 connections SCO** towards the same or different slaves, to avoid consume the already little bandwidth for BT. There is no retransmission of packets if they're lost. Why? Because in real-time communication the user just wants a low latency, it doesn't care about the multimedial content to be completely intact. A potential retransmission would do more damage than otherwise (think of it as for UDP).
 
+In SCO connections, a channel is reserved for 2 time slots for communication between master and one specific slave. The reservation periodicity is decided by the master, independently by the need of transmission. ACL communication can only occur in pause intervals between SCO reserved slots. That's also why there is a limit to 3 SCO connections, otherwise every slot could be reserved, not leaving any space for ACLs. 
+![[Pasted image 20240109192238.png]]
 
+##### Device States
+Bluetooth is not only a 2 layers protocol, but much more (e.g. how devices communicate).
+Different states:
+- active
+- hold (low consumption)
+- park (low consumption)
+- sniff (low consumption)
+![[Pasted image 20240109192425.png]]
+##### Service Discovery Protocol
+Since it was created to replace cables, a user would also need to discover what service a particular node offers.
 
+##### Scatternet
+A scatternet is a combination of more piconets where at least one node participate in both of 2 of the piconets (that for 2 piconets forming a scatternet).
+
+##### Bluetooth Low Energy (BLE)
 
 ### ZigBee (IEEE 802.15.4)
 
@@ -348,6 +406,6 @@ The piconet formation occurs in 2 phases:
 
 ## Chapter 4 - Android
 
-## Chapter 5 - 
+## Chapter 5 - Discovery
 
 ## Chapter 6 - 
