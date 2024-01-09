@@ -24,14 +24,14 @@ There are some kind of losses in power received (Pr) by the receiver, from the t
 	**NB**: it impacts the coverage area of a wireless system, especially when direct line-of-sight communication is not possible.
 
 In real life scenarios, the signal tends to be a fluctuation influenced by both of these two laws (which can be thought of as 2 straight lines):
-![](../resources/gfx/Pasted image 20231210014023.png)
+<img src="../resources/gfx/Pasted image 20231210014023.png">
 
 #### Channel Fading Models
 The signal is also influenced by physical phenomena that affects its propagation. The most relevant and dominant ones are shadowing, Raileigh fading, and frequency-selective fading.
 
 NB: large-scale VS small-scale fading. Slow fading implies that the changes in signal strength occur over larger distances or longer periods, making them more predictable and manageable.
 
-![[Pasted image 20231210012429_edited.png]]
+<img src="../resources/gfx/Pasted image 20231210012429_edited.png">
 
 The combination of all these effects produces the so called `Pr` which is the Power Received, which usually fluctuates depending on the distance.
 ##### Shadowing
@@ -88,7 +88,7 @@ It's the wireless communications for "short-range" (<250m), bandwidth up to 866 
 ##### Wireless LAN Issues
 The following problems are 802.11 issues, that doesn't happen in Ethernet.
 ###### Hidden Node Issue
-![[Pasted image 20240106171425.png]]
+<img src="../resources/gfx/Pasted image 20240106171425.png">
 Example:
 1. A starts transmittig to B;
 2. C cannot be aware of A's communication, because it's out of range, therefore C starts transmitting to B;
@@ -99,7 +99,7 @@ Occurs when two or more nodes (A and C in the example) are within the range of a
 Is this problem solvable by CSMA? No, but it's not usefull at all.
 
 ###### Exposed Node Issue
-![[Pasted image 20240106172055.png]]
+<img src="../resources/gfx/Pasted image 20240106172055.png">
 Example:
 1. B starts transmitting to A;
 2. C detects this transmission and does NOT send any communication towards D;
@@ -110,7 +110,7 @@ Occurs when one node refrains from transmitting, even though it could, because i
 ###### Multiple Access Collision Avoidance
 To solve hidden node and exposed node issues, CSMA/CD is not suitable. Traditionally it was coupled with an additional algorithm, called **MACA** (Multiple Access with Collision Avoidance).
 
-![[Pasted image 20240106173355.png]]
+<img src="../resources/gfx/Pasted image 20240106173355.png">
 How does it work? Suppose that B wants to transmit to C;
 1. B transmits a first RTS (Ready To Send) frame towards C, which includes the length of the message;
 2. C replies with a CTS (Clear to Send) frame, that also includes information about the length of the message;
@@ -121,7 +121,7 @@ Collisions may occur anyway (e.g. RTS frame collisions), but at least data frame
 
 Current situation? WiFi uses CSMA/CA, which basically integrates MACA, but MACA is still left optional. Even if it's not perfect for WiFi, it was adopted because it's simple and therefore allows the usage of more bandwidth.
 ### WiFi (IEEE 802.11) Configurations
-![[Pasted image 20240106190124.png]]
+<img src="../resources/gfx/Pasted image 20240106190124.png">
 There are two primary WiFi configurations:
 - **ad-hoc mode**: there are **no access points** between wireless devices and they connect directly;
 - **base station** (or infrastructure mode): there is **one AP** that acts like a gateway to reach the Internet and each device connects to it;
@@ -168,7 +168,7 @@ WiFi standard variant proper for vehicular mobility. Includes the exchange of da
 ### Cellular Networks
 Cellular networks are called this way, due to the implementation concept: geographical areas are divided in adjacent **cells**. Each cell is coveder by an antenna called **Base Station** (BS), as Access Points in base mode.
 Each BS is connected to a **Mobile Switching Center** (MSC), that is a fixed station connected to Internet via cable, that connects cells to the Wide Area Network (WAN).
-![[Pasted image 20240109011837.png]]
+<img src="../resources/gfx/Pasted image 20240109011837.png">
 
 Suppose we have two nodes A and B, each one referencing a different BSs (BSa and BSb) both belonging to different MSCs (MSCa and MSCb).
 A wants to communicate with B, therefore:
@@ -195,7 +195,7 @@ Initially it wasn't used Internet, but a proprietary cabled network belonging to
 Global System for Mobile communications (GSM) is a standard developed for mobile communication systems. It's the most widely used standard for mobile phones globally and serves as the foundaton for 2G mobile networks.
 GSM architecture is hierarchical and follows locality principle.
 
-![[Pasted image 20240109120618.png]]
+<img src="../resources/gfx/Pasted image 20240109120618.png">
 
 A Mobile Station (mobile node, e.g. a smartphone) is composed by:
 - one **Terminal Equipment (TE)**, containing terminal/user-specific data (associated with SIM card)
@@ -206,16 +206,16 @@ A Base Subsystem Station (BSS) is composed by:
 
 ##### BTS (Base Transceiver Station)
 BTS are distributed accross the country and provide coverage to mobile devices.
-![[Pasted image 20240109121046.png]]
+<img src="../resources/gfx/Pasted image 20240109121046.png">
 
 
 ##### BSC (Base Station Controller)
 BSC are located in centralized sites and manages many BTS.
-![[Pasted image 20240109121132.png]]
+<img src="../resources/gfx/Pasted image 20240109121132.png">
 
 ##### MSC (Mobile Switching Center)
 MSC is used to setup and clear calls and deliver text messages. It also tracks the location of mobile devices under its management.
-![[Pasted image 20240109121305.png]]
+<img src="../resources/gfx/Pasted image 20240109121305.png">
 
 MSC acts like a **gateway** to:
 - **Public Switching Telephone Network (PSTN)**, which is the traditional and circuit-switched network used prior to Internet;
@@ -232,7 +232,7 @@ Motivations:
 - load balancing
 - GSM only specifies how (mechanisms) to operate handoff, not why
 
-![[Pasted image 20240109124258.png]]
+<img src="../resources/gfx/Pasted image 20240109124258.png">
 **Handoff steps** (same MSC):
 1. Old BSS decides to perform the handoff process, and send a message to the MSC, providing a list of possible desinations (one or more new BSSs).
 2. MSC notifies the new BSS, because it needs to allocate resources.
@@ -254,7 +254,7 @@ In fact, when a BSS predicts the new BSS the mobile node can connect to, the pre
 Common goal: achieve service continuity at max at any time. Target is to perform handoff in less than 30ms (main supported service was voice, and it's proven that humans do not notice delays under 30ms).
 
 **Handoff** (different MSC):
-![[gsm_handoff_different_cells.png]]
+<img src="../resources/gfx/gsm_handoff_different_cells.png">
 
 1. The correspondent mobile node starts a call (or data session) towards another mobile node.
 2. The request passes through the PSTN that identifies, given the number of the receiver, the corresponding HLR (of the receiver).
@@ -270,7 +270,7 @@ Obviously it's possible to have a "direct link" or a chain of links for all the 
 There's an optional feature (IS-41) that optimize the path, by minimizing it. However, what's not changed is the anchor MSC.
 
 **IS-41** example:
-![[gsm_handoff_different_cells_is-41.png]]
+<img src="../resources/gfx/gsm_handoff_different_cells_is-41.png">
 
 Handoff classification:
 - connectivity:
@@ -309,7 +309,7 @@ The piconet formation occurs in 2 phases:
 Goal: collect sufficient info and nodes to enstablish a piconet.
 A node that wants to communicate enters the "inquiry mode": it sends its ID and waits for an answer from its neighbours (containing their IDs). At the end, the node will have a list of the IDs that participate to the piconet. To save energy, other nodes can switch between "inquiry scan mode" and "standby mode".
 The node that starts the inquiry becomes the master, and the other will be the slaves. After a time interval, if it received at least one answer, the master enters the page mode.
-![[Pasted image 20240109173833.png]]
+<img src="../resources/gfx/Pasted image 20240109173833.png">
 Example:
 - purple starts inquiry mode;
 - blue is outsite, therefore doesn't receive the inquiry message (and won't be able to join further on);
@@ -321,7 +321,7 @@ Then it sends the value of its logical clock to the slaves, in order to make the
 The clock synchronization is necessary because in Bluetooth, contrary to WiFi, the communication is split in time slots to prevent collisions *by design*.
 One piconet disadvantage is that it requires some time to be built (in seconds). That's tollerable for the devices that Bluetooth is thought for (printers, headphones, etc.).
 Once the connection is enstablished, it remains so until the end of the usage.
-![[Pasted image 20240109174118.png]]
+<img src="../resources/gfx/Pasted image 20240109174118.png">
 #### Frequency hopping
 Bluetooth exploits frequency hopping in 2.4GHz band (79 hop frequencies, at 1 MHz distance). Since piconet members have successfully passed the page phase, we know their clocks are synchronized.
 The hopping sequence is determined based on the master address. Each piconet member has to follow the same sequence.
@@ -349,7 +349,7 @@ There are 2 types of connections:
 	**Max 3 connections SCO** towards the same or different slaves, to avoid consume the already little bandwidth for BT. There is no retransmission of packets if they're lost. Why? Because in real-time communication the user just wants a low latency, it doesn't care about the multimedial content to be completely intact. A potential retransmission would do more damage than otherwise (think of it as for UDP).
 
 In SCO connections, a channel is reserved for 2 time slots for communication between master and one specific slave. The reservation periodicity is decided by the master, independently by the need of transmission. ACL communication can only occur in pause intervals between SCO reserved slots. That's also why there is a limit to 3 SCO connections, otherwise every slot could be reserved, not leaving any space for ACLs. 
-![[Pasted image 20240109192238.png]]
+<img src="../resources/gfx/Pasted image 20240109192238.png">
 
 #### Device States
 Bluetooth is not only a 2 layers protocol, but much more (e.g. how devices communicate).
@@ -358,13 +358,13 @@ Different states:
 - hold (low consumption)
 - park (low consumption)
 - sniff (low consumption)
-![[Pasted image 20240109192425.png]]
+<img src="../resources/gfx/Pasted image 20240109192425.png">
 #### Service Discovery Protocol
 Since it was created to replace cables, a user would also need to discover what service a particular node offers.
 #### Scatternet
 Piconets are the classical way to use Bluetooth, but it's not the only topology available.
 A scatternet is a combination of more piconets where at least one node participate in both of 2 of the piconets (that for 2 piconets forming a scatternet): they can have a common master but also a common slave.
-![[Pasted image 20240109204749.png]]
+<img src="../resources/gfx/Pasted image 20240109204749.png">
 Performance in a scatternet is absolutely not optimal, since the communication becomes multi-hop and the cost of creating a connection increases. Moreover to coordinate all these nodes become much complex, with inquiry and page phases requiring a lot more time.
 #### Bluetooth Low Energy (BLE)
 Bluetooth variant that allows to significantly reduce battery consumption, by keeping a great communication range. It was included in Bluetooth 4.0.
@@ -388,7 +388,7 @@ Support to full mesh networking.
 - **mesh**, similiar to WiFi mesh. Each node can have an arbitrary number of connections towards other nodes in its neighborhood. It's very resilient, since each node can have multiple connections. Disadvantage: Overhead;
 - **cluster tree**, tree hierarchical topology, with PAN coordinator as the root node. RFD can only be the leaves. The root node has global visibility. Great for scalability and low coordination costs but it's not robust to failures.
 
- ![[Pasted image 20240109212026.png]]
+ <img src="../resources/gfx/Pasted image 20240109212026.png">
 #### Devices Different Roles
 There are different roles for ZigBee devices:
 - **PAN coordinator** (~master), one for each ZigBee network. It activates the network formation and acts like a router once the network is functioning. The PAN coordinator must be a reliable node (high battery level, possibly fixed or with limited mobility, etc.);
