@@ -49,7 +49,7 @@ The signal is also ==influenced by physical phenomena== that affects its ==propa
 
 NB: large-scale VS small-scale fading. Slow fading implies that the changes in signal strength occur over larger distances or longer periods, making them more predictable and manageable.
 
-![[Pasted image 20231210012429_edited.png]]
+![[channel_fading.png]]
 
 ==The combination of all these effects produces the so called `Pr`== which is the Power Received, which usually fluctuates depending on the distance.
 ##### Shadowing

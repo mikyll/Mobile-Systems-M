@@ -42,12 +42,12 @@ However, MACA introduces also some overhead, and that's the reason why in modern
 
 ---
 
-**==Question==**:
+**==Question==**: What is **GSM**? How is it **structured**? What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 **==Answer==**:
 
 ---
 
-**==Question==**:
+**==Question==**: How is the **handoff** handled in GSM (distinguish between same and different localities)? How is it **classified**?
 **==Answer==**:
 
 
@@ -58,29 +58,15 @@ ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che pratica
 Domande esami:
 
 Chapter 1
-- hidden node and exposed node issues
-- MACA
-- GSM: handoff handling
-- GSM: handoff classification
 - Bluetooth: main characteristics
 - Bluetooth: differences between ACL and SCO? Is there retransmission in SCO? Why?
 - ZigBee: topologies and roles?
 
 
 CH1
-- parlare di hidden/exposed node issues
-- MACA caratteristiche 
-- MACA risolve hidden/exposed node?
 - Bluetooth: differenze SCO e ACL
 
 Comunicazioni wireless
-a. Si parli dei problemi dell’hidden node e exposed node
-
-b. Maca per WiFi risolve questi problemi?
-c. Caratteristiche del protocollo MACA
-d. Per quanto tempo i nodi stanno in silenzio?
-e. Il problema dell’exposed node è risolto da MACA?
-f. Come può in nodo mobile interagire con questo protocollo?
 
 Differenze tra SCO e ACL in bluetooth
 
