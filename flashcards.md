@@ -21,6 +21,8 @@ degradation of the wireless signal. The most important and common are:
 - **multipath fading**, is due to signal reaching the receiver through different paths. Causes rapid oscillations in signal strenght;
 - **frequency selective fading**, is due to how different ranges in frequencies sprectrum react to noises and other effects. Causes frequency-dependent variations in signal strenght.
 
+![alt](./resources/gfx/channel_fading.png)
+
 Also other phenomena, like rain, magnetic fields, irregular surfaces.
 
 </details>
