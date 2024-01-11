@@ -59,7 +59,40 @@ Moreover, there are 2 most common issues
   
 - Hidden node issue: MACA can partially solve this issue, but there are still few cases when it may occurr. For example, C may not hear CTS because it was out of range, but it's moving towards B.
 - Exposed node issue: is untouched.
+
 However, MACA introduces also some overhead, and that's the reason why in modern implementations it's left optional.
+
+</details>
+
+---
+
+**Question**: What is **GSM**? How is it **structured**? What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
+
+<details><summary><b>Answer: TODO</b></summary>
+
+</details>
+
+---
+
+**Question**: How is the **handoff** handled in GSM (distinguish between same and different localities)? How is it **classified**? Is the MSC chain kept?
+
+<details><summary><b>Answer: TODO</b></summary>
+
+</details>
+
+---
+
+**Question**:
+
+<details><summary><b>Answer: TODO</b></summary>
+
+</details>
+
+---
+
+**Question**:
+
+<details><summary><b>Answer: TODO</b></summary>
 
 </details>
 
