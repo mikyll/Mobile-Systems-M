@@ -114,7 +114,7 @@ Example:
 
 Occurs when two or more nodes (A and C in the example) are within the range of a central access point AP (B in the example), but they are out of range or unable to sense each other's transmissions.
 
-Is this problem solvable by CSMA? No, but it's not usefull at all.
+Is this problem solvable by CSMA? No, but it's not useless at all.
 
 ###### Exposed Node Issue
 ![[Pasted image 20240106172055.png]]
