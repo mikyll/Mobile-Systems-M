@@ -7,16 +7,21 @@
 **Question**: How is the **wireless signal propagation** influenced? What are **channel fading models**? Provide some example.
 
 <details><summary><b>Answer: </b></summary>
-  
-When traveling through air, the wireless signal experiences propagation losses, due to the planet/atmosphere and physical phenomena. These losses influences the strength of the signal.
-Channel fading models are mathematical representations that help describe signal propagation losses.
-Generic propagation losses, according to Maxwell's laws:
-- **Free-space loss**, is due to air resistance. Without any obstacles, the signal strenght decreases when distance and/or frequency increases.
-- **Plane earth loss**, is due to Earth's curvature. The signal strenght decreases when traveling along Earth's surface, proportionally to distance.
-Physical phenomena (approximated through channel fading models):
+
+Wireless signals are less reliable than cabled ones, sincew ireless signals are never 100% guaranteed to be received.
+When traveling through air, the wireless signal experiences propagation losses, due to the planet/atmosphere and physical phenomena. These losses influences the strength of the signal that, to
+be received, needs to reach a given threshold.
+To understand how wireless signals propagate, researches created 2 propagation models, based on Maxwell's laws:
+- **Free-space loss**, according to which, the power of a wireless signal propagating in empty space decrease with its traveled distance (inverse of the square of the distance).
+- **Plane earth loss**, according to which, due to Earth's curvature, the power of a wireless signal decreases when traveling along Earth's surface (inverse of the fourth power of the distance).
+
+In real-world scenarios, the conditions are much more complex, and these are, in fact, just approximated models. In real world there are many phenomena that contribute to the
+degradation of the wireless signal. The most important and common are:
 - **shadowing**, is due to obstacles along signal path. Causes long-term/slow variation in signal strenght;
 - **multipath fading**, is due to signal reaching the receiver through different paths. Causes rapid oscillations in signal strenght;
 - **frequency selective fading**, is due to how different ranges in frequencies sprectrum react to noises and other effects. Causes frequency-dependent variations in signal strenght.
+
+Also other phenomena, like rain, magnetic fields, irregular surfaces.
 
 </details>
 
