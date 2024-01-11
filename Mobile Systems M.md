@@ -416,12 +416,10 @@ There are different roles for ZigBee devices:
 
 #### Channel Access Options
 To access the channel, the nodes can choose between 2 networks types:
-- **non-beaconed network**, exploits CSMA/CA, positive ACKs for successful reception of packets;
-- **beacon-enabled network**, 
+- **non-beaconed network**, the nodes will start communicating by basically exploiting MACA and sending positive ACKs for successful reception of packets;
+- **beacon-enabled network**, similiar to SCO channels in Bluetooth, the PAN coordinator transmits the permission to transmit (as beacons) at regular time intervals.
 
-
-
-
+Summary on ZigBee: is a sort of combination of the previously seen protocols. It's pretty much domain-specific and it's rare to see (even more rare on a smartphone).
 
 ## Chapter 2 - MANET and Routing (ISO/OSI Layer 3)
 

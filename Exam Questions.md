@@ -23,12 +23,12 @@ Ethernet adopts the algorithm called CSMA/CD (which stands for Carrier Sensing M
 ---
 
 **==Question==**: Can **CSMA/CD** work correctly over **wireless** medium? What are the **most common issues**?
-**==Answer==**: TODO
+**==Answer==**: CSMA/CD is a collision detection algorithm used in Ethernet. It cannot work correctly in wireless communication, because the communication here is more like a probability: we're not sure a message will be received or not, and there's no easy way to monitor a wireless signal. Moreover, CSMA/CD needs the communication medium to be duplex, as the Ethernet one (wireless is half-duplex).
 
----
-
-**==Question==**: What are hidden node and exposed node issues?
-**==Answer==**: TODO
+Moreover, there are 2 most common issues
+![[wireless_common_issues.png]]
+- Hidden node issue. It occurs when a node (A) starts transmitting to another one (B), and a third node (C) cannot detect the already ongoing transmission between the other two. Therefore, when it starts transmitting as well, it causes a collision;
+- Exposed node issue. It occurs when a node (B) transmits to another node (A), and a third node (C) doesn't start transmitting to its peer (D) because it detects the already ongoin transmission between the other nodes, even tough it doesn't interefere with it.
 
 ---
 
