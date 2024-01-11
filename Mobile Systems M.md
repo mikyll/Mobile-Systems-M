@@ -158,6 +158,7 @@ Considerations:
 #### WiFi Direct
 WiFi Direct (or WiFi P2P) is a sort of **masked "infrastructure mode"**, since it allows 2 nodes to connect directly. However, what actually happens is that one node acts as an Access Point for the other, but it's a **software** implementation.
 The interesting aspect is that only one of the two nodes participating in the communication has to be compliant with WiFi Direct standard to enstablish a peer-to-peer connection.
+> NB: it's different from the hotspot setting! This is a peer-to-peer connection between 2 nodes.
 
 #### WiMAX (IEEE 802.16)
 To cover big areas, WiFi 
