@@ -1,4 +1,8 @@
-## Chapter 1
+<div align="center">
+  <h1>Flashcards</h1>
+</div>
+
+## Chapter 1 - Wireless Communication
 
 **Question**: How is the **wireless signal propagation** influenced? What are **channel fading models**? Provide some example.
 
@@ -32,11 +36,11 @@ Ethernet adopts the algorithm called CSMA/CD (which stands for Carrier Sensing M
 
 ---
 
-**Question**: Can **CSMA/CD** work correctly over **wireless** medium? What are the **most common issues**?
+**Question**: What is **CSMA/CD**? Can **CSMA/CD** work correctly over **wireless** medium? What are the **most common issues**?
 
 <details><summary><b>Answer: </b></summary>
   
-CSMA/CD is a collision detection algorithm used in Ethernet. It cannot work correctly in wireless communication, because the communication here is more like a probability: we're not sure a message will be received or not, and there's no easy way to monitor a wireless signal. Moreover, CSMA/CD needs the communication medium to be duplex, as the Ethernet one (wireless is half-duplex).
+CSMA/CD is a collision detection algorithm used in Ethernet networks to manage access to a shared communication medium, typically a full-duplex cable in modern environments. It cannot work correctly in wireless communication, because the communication here is more like a probability: we're never 100% sure a message will be received or not, and there's no easy way to monitor a wireless signal.
 
 Moreover, there are 2 most common issues
 ![alt](./resources/gfx/wireless_common_issues.png)
@@ -61,6 +65,8 @@ However, MACA introduces also some overhead, and that's the reason why in modern
 
 ---
 
+## Chapter 2 - Mobile Ad Hoc NETwork (MANET)
+
 **Question**:
 
 <details><summary><b>Answer: </b></summary>
@@ -78,6 +84,7 @@ However, MACA introduces also some overhead, and that's the reason why in modern
 roba da chiedere al prof:
 ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che praticamente integra MACA, ma in questo caso, viene comunque (solitamente) lasciato opzionale?
 
+## Extra
 
 Domande esami:
 
