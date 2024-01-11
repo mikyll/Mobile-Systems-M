@@ -75,7 +75,23 @@ However, MACA introduces also some overhead, and that's the reason why in modern
 
 **Question**: What is **GSM**? How is it **structured**? What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 
-<details><summary><b>Answer: TODO</b></summary>
+<details><summary><b>Answer: </b></summary>
+
+Global System for Mobile communications (GSM) is the most widely used standard for mobile phones globally, and serves as the foundations for 2G mobile networks, and its principles
+are still used nowadays, in modern technologies. GSM has a hierarchical architecture that follows the locality principle.
+
+A Mobile System (MS) is composed by:
+- Terminal Equipment (TE), associated with SIM card, containing terminal/user specific data;
+- Mobile Terminal (MT), that allows to communicate with the BSS;
+
+A Base Station Subsystem (BSS) is composed by:
+- Base Station Controller (BSC), that allocates radio channels and handles handovers. BSC manages many BTS;
+- Base Transceiver Station (BTS), that handles connections with MS;
+
+Mobile Switching Center (MSC) acts like a gateway to Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
+MSC contains 2 registries:
+- Home Location Register (HLR), is a centralized database that stores permanent information about subscribed mobile devices. When a user buys a subscription (via SIM card), all the subscription info gets registered in HLR;
+- Visitor Location Register (VLR), is a temporary database that stores information about mobile devices that are currently within the MSC coverage area (under the BSSs it manages)
 
 </details>
 
