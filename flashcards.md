@@ -41,7 +41,7 @@ Also other phenomena, like rain, magnetic fields, irregular surfaces.
 <details><summary><b>Answer: </b></summary>
 
 #### How does **Ethernet** try to **avoid collision** on a shared communication medium?
-Ethernet is an optimistic approach, meaning that try to avoid collisions as bet as it can. There were old Ethernet competitors, such as token-passing ring, that instead avoided collisions by design, but they didn't have so much success as Ethernet.
+Ethernet (IEEE 802.3) is an optimistic approach, meaning that try to avoid collisions as bet as it can. There were old Ethernet competitors, such as token-passing ring, that instead avoided collisions by design, but they didn't have so much success as Ethernet.
 Ethernet adopts the algorithm called CSMA/CD (which stands for Carrier Sensing Multiple Access with Collision Detection)
 - **Carrier Sensing** (CS), means that the devices that participate in the communication, senses the medium (e.g. cable) to check if it's being used it's idle. If idle, the device trasmits immediately, otherwise it waits;
 - **Multiple Access** (MA), means that the communication medium is shared between potentially multiple different devices, that could possibly want to use it at the same time;
@@ -71,6 +71,26 @@ Moreover, there are 2 most common issues
 ![alt](./resources/gfx/wireless_common_issues.png)
 - **Hidden node issue**. It occurs when a node (A) starts transmitting to another one (B), and a third node (C) cannot detect the already ongoing transmission between the other two. Therefore, when it starts transmitting as well, it causes a collision;
 - **Exposed node issue**. It occurs when a node (B) transmits to another node (A), and a third node (C) doesn't start transmitting to its peer (D) because it detects the already ongoin transmission between the other nodes, even tough it doesn't interefere with it.
+
+</details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+
+---
+
+### WiFi
+**Question**:
+- What is **WiFi** and what are its characteristics?
+- What are the primary WiFi **configurations**?
+
+<details><summary><b>Answer: </b></summary>
+
+#### What is **WiFi** and what are its characteristics?
+WiFi (IEEE 802.11) is a standard for short range (up to 250m) wireless transmission, up to 866Mbps bandwidth. The standard covers the first two layers (physical and data link/MAC) and provides some security aspects. It doesn't include quality of service specifications.
+
+#### What are the primary WiFi **configurations**?
+There are two primary WiFi configurations:
+- **Ad hoc mode**, in which nodes communicate directly, peer-to-peer. Each endpoint potentially a mobile node and is connected to the other. Distant node could communicate by using a chain of ad hoc connections. It's more complex, and less used than infrastructure mode.
+- **Infrastructure mode** (base station), in which there are some fixed, cabled nodes called Access Points (APs/base stations). A mobile node can obtain a list of the available APs by using the _probe/response_ protocol. Afterwards, it can connect to one (or more, if the mobile node has different WiFi cards) manually or automatically.
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
@@ -167,7 +187,7 @@ Handoff classifications:
 - Does a long call create a chain?
 - Is the MSC chain kept?
 
-<details><summary><b>Answer: TODO</b></summary>
+<details open><summary><b>Answer: TODO</b></summary>
 
 #### How is the **handoff** handled (distinguish between same and different localities)?
 Steps for the handoff under the same MSC:
@@ -199,19 +219,45 @@ The MSC chain can be kept or not, it depends. There is a standard called IS-41, 
 
 ### Bluetooth
 **Question**:
-- What is Bluetooth and what are its main characteristics?
-- 
+- What is Bluetooth and what are its main **characteristics**?
+- What are the differences with **WiFi**?
+- What are the differences between **ACL** and **SCO**?
+- Is there **retransmission** in SCO? Why?
 
-<details><summary><b>Answer: TODO</b></summary>
+<details open><summary><b>Answer: TODO</b></summary>
+
+#### What is Bluetooth and what are its main characteristics?
+Bluetooth (IEEE 802.15) belongs to the family of Personal Area Network (PAN) protocols, which range is quite limited (10-100m). It was created to replace cables with a low cost solution that had a decent datarate (at least 1Mbps). The network topology it uses is called piconet, and is formed by a _master_ and up to 7 _slaves_.
+Bluetooth standard defines not only the protocol but also the associated software stack, as well as profiles for its usage.
+
+#### What are the differences with **WiFi**?
+The main differences are:
+...
+
+#### What are the differences between **ACL** and **SCO**?
+...
+
+#### Is there **retransmission** in SCO? Why?
+...
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
+### ZigBee
 **Question**:
+- What is ZigBee and what are its **characteristics**?
+- What are the possible **topologies**?
+- What are the **roles**?
 
-<details><summary><b>Answer: TODO</b></summary>
+<details open><summary><b>Answer: TODO</b></summary>
+
+#### What is ZigBee and what are its **characteristics**?
+
+#### What are the possible **topologies**?
+
+#### What are the **roles**?
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
@@ -243,8 +289,8 @@ Domande esami:
 
 Chapter 1
 - Bluetooth: main characteristics
-- Bluetooth: differences between ACL and SCO? Is there retransmission in SCO? Why?
-- Bluetooth: differenze SCO e ACL
+- Bluetooth: differences between ACL and SCO?
+- Is there retransmission in SCO? Why?
 - ZigBee: topologies and roles?
 a. Zigbee quali sono le topologie?
 b. Quali sono i ruoli?
