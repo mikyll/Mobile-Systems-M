@@ -221,6 +221,7 @@ The MSC chain can be kept or not, it depends. There is a standard called IS-41, 
 **Question**:
 - What is Bluetooth and what are its main **characteristics**?
 - What are the differences with **WiFi**?
+- What is **frequency hopping**?
 - What are the differences between **ACL** and **SCO**?
 - Is there **retransmission** in SCO? Why?
 
@@ -233,6 +234,13 @@ Bluetooth standard defines not only the protocol but also the associated softwar
 #### What are the differences with **WiFi**?
 The main differences are:
 ...
+
+#### What is **frequency hopping**?
+Bluetooth uses the 2.4GHz ISM band (from 2.4 to 2.4835 GHz), which is also the same range of frequencies used by many wireless technologies/devices (including WiFi), since this band was designated for unlicensed operation. What's the consequence of this? It's that different technologies based on 2.4GHz, may interfere the one with the other.
+
+Bluetooth, to manage its communication over this overcrowded band, uses a mechanism called "**frequency hopping**": the 2.4GHz band can be divided into 79 channels, each of 1MHz width. The bluetooth actively changes communication channel, by hopping between frequencies in a defined sequence (based on master's address), so that the communication _timeline_ is divded in time slots (625 picoseconds, 1600 times per second), in which only a device can communicate. This prevents interferences and adds a layer of security.
+
+Also "adaptive frequency hopping", to better improve this mechanism, marks channels with high interferences as "bad channels" and avoid them.
 
 #### What are the differences between **ACL** and **SCO**?
 ...
