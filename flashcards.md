@@ -275,7 +275,75 @@ ZigBee (IEEE 802.15.4)
 
 ## Chapter 2 - Mobile Ad Hoc NETwork (MANET)
 
+### MANET
 **Question**:
+- What are MANETs and what are their main **characteristics**?
+- What are its main problems?
+- What are the **types** of routing protocols?
+
+<details><summary><b>Answer: </b></summary>
+
+#### What are MANETs and what are their main **characteristics**?
+Mobile Ad hoc NETworks are networks made by node that communicate in ad hoc mode. Its main characteristics are that they're very dynamic, they can be created and configured quickly, on-the-fly; the involved nodes are typically heterogeneous; each node is a potential router.
+
+#### What are its main problems?
+MANETs problems are: limited range, hidden node issue, transmission error, mobility, energetic limits and security. Also, even though it should be obvious in ad-hoc mode, in MANETs the routing is quite complicated.
+
+#### What are the **types** of routing protocols?
+Routing protocols in MANETs can be divided into:
+- **proactive** protocols, keep valid routes regardless of ongoing traffic;
+- **reactive** protocols, keep valid routed only when there's traffic (on communication demand);
+- **geographic** protocols, use the destination location to route the messages;
+- **hybrid** protocols, that combine other categories.
+
+</details>
+
+---
+
+### Flooding Routing
+**Question**:
+- How does flooding routing protocol **works**?
+- **When** is it used?
+- How can it be **optimized**?
+- What is the **broadcast storm issue**?
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+
+---
+
+### DSR Routing
+**Question**:
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+
+---
+
+### AODV Routing
+**Question**:
+- What is AODV routing protocol?
+- What do tables contain?
+- What happens if there are link errors?
+- How are link errors handled?
+- Can loops be formed? How?
+- What happens in case of loops?
+- What happens if nobody has a path towards the destination node, after a fault?
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+
+---
+
+### GPSR Routing
+**Question**:
+a. Parlare di gpsr
+b. Greedy forwarding
+c. Perimeter forwarding
+d. Come viene costruito il grafo per il perimeter forwarding?
 
 <details><summary><b>Answer: </b></summary>
 
@@ -294,12 +362,3 @@ ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che pratica
 
 ## Extra
 
-Domande esami:
-
-Chapter 1
-- Bluetooth: main characteristics
-- Bluetooth: differences between ACL and SCO?
-- Is there retransmission in SCO? Why?
-- ZigBee: topologies and roles?
-a. Zigbee quali sono le topologie?
-b. Quali sono i ruoli?
