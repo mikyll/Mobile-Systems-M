@@ -4,7 +4,11 @@
 
 ## Chapter 1 - Wireless Communication
 
-**Question**: How is the **wireless signal propagation** influenced? What are **channel fading models**? Provide some example.
+### Wireless Signals Propagation
+**Question**:
+- How is the **wireless signal propagation** influenced?
+- What are **channel fading models**?
+- Provide some example.
 
 <details><summary><b>Answer: </b></summary>
 
@@ -29,7 +33,9 @@ Also other phenomena, like rain, magnetic fields, irregular surfaces.
 
 ---
 
-**Question**: How does **Ethernet** try to **avoid collision** on a shared communication medium?
+### Ethernet
+**Question**:
+- How does **Ethernet** try to **avoid collision** on a shared communication medium?
 
 <details><summary><b>Answer: </b></summary>
   
@@ -43,7 +49,11 @@ Ethernet adopts the algorithm called CSMA/CD (which stands for Carrier Sensing M
 
 ---
 
-**Question**: What is **CSMA/CD**? Can **CSMA/CD** work correctly over **wireless** medium? What are the **most common issues**?
+### CSMA/CD
+**Question**:
+- What is **CSMA/CD**?
+- Can **CSMA/CD** work correctly over **wireless** medium?
+- What are the **most common issues**?
 
 <details><summary><b>Answer: </b></summary>
   
@@ -51,14 +61,16 @@ CSMA/CD is a collision detection algorithm used in Ethernet networks to manage a
 
 Moreover, there are 2 most common issues
 ![alt](./resources/gfx/wireless_common_issues.png)
-- Hidden node issue. It occurs when a node (A) starts transmitting to another one (B), and a third node (C) cannot detect the already ongoing transmission between the other two. Therefore, when it starts transmitting as well, it causes a collision;
-- Exposed node issue. It occurs when a node (B) transmits to another node (A), and a third node (C) doesn't start transmitting to its peer (D) because it detects the already ongoin transmission between the other nodes, even tough it doesn't interefere with it.
+- **Hidden node issue**. It occurs when a node (A) starts transmitting to another one (B), and a third node (C) cannot detect the already ongoing transmission between the other two. Therefore, when it starts transmitting as well, it causes a collision;
+- **Exposed node issue**. It occurs when a node (B) transmits to another node (A), and a third node (C) doesn't start transmitting to its peer (D) because it detects the already ongoin transmission between the other nodes, even tough it doesn't interefere with it.
 
 </details>
 
 ---
 
-**Question**: Does **MACA** solve hidden node and exposed node issues?
+### MACA
+**Question**:
+- Does **MACA** solve hidden node and exposed node issues?
 
 <details><summary><b>Answer: </b></summary>
 
@@ -73,39 +85,107 @@ However, MACA introduces also some overhead, and that's the reason why in modern
 
 ---
 
-**Question**: What is **GSM**? How is it **structured**? What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
+### Global System for Mobile communications (GSM)
+**Question**:
+- What is **GSM**?
+- How is it **structured**?
+- What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 
 <details><summary><b>Answer: </b></summary>
 
-Global System for Mobile communications (GSM) is the most widely used standard for mobile phones globally, and serves as the foundations for 2G mobile networks, and its principles
-are still used nowadays, in modern technologies. GSM has a hierarchical architecture that follows the locality principle.
+What is **GSM**?
+Global System for Mobile communications (GSM) is the most widely used standard for mobile phones globally, and serves as the foundations for 2G mobile networks, and its principles are still used nowadays, in modern technologies. GSM has a hierarchical architecture that follows the locality principle.
 
-A Mobile System (MS) is composed by:
-- Terminal Equipment (TE), associated with SIM card, containing terminal/user specific data;
-- Mobile Terminal (MT), that allows to communicate with the BSS;
+How is it **structured**?
+GSM architecture includes different elements:
+- a Mobile System (**MS**), that is composed by:
+  - Terminal Equipment (**TE**), associated with SIM card, containing terminal/user specific data;
+  - Mobile Terminal (**MT**), that allows to communicate with the BSS;
+- a Base Station Subsystem (**BSS**), that is composed by:
+  - Base Station Controller (**BSC**), that allocates radio channels and handles handovers. BSC manages many BTS;
+  - Base Transceiver Station (**BTS**), that handles connections with MS;
+- a Mobile Switching Center (**MSC**), that acts like a gateway to Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
 
-A Base Station Subsystem (BSS) is composed by:
-- Base Station Controller (BSC), that allocates radio channels and handles handovers. BSC manages many BTS;
-- Base Transceiver Station (BTS), that handles connections with MS;
-
-Mobile Switching Center (MSC) acts like a gateway to Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
+What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 MSC contains 2 registries:
-- Home Location Register (HLR), is a centralized database that stores permanent information about subscribed mobile devices. When a user buys a subscription (via SIM card), all the subscription info gets registered in HLR;
-- Visitor Location Register (VLR), is a temporary database that stores information about mobile devices that are currently within the MSC coverage area (under the BSSs it manages)
+- Home Location Register (**HLR**), is a centralized database that stores permanent information about subscribed mobile devices. When a user buys a subscription (via SIM card), all the subscription info gets registered in HLR;
+- Visitor Location Register (**VLR**), is a temporary database that stores information about mobile devices that are currently within the MSC coverage area (under the BSSs it manages)
 
 </details>
 
 ---
 
-**Question**: How is the **handoff** handled in GSM (distinguish between same and different localities)? How is it **classified**? Is the MSC chain kept?
+### GSM: Handoff (1)
+**Question**:
+- What is the **handoff** in in GSM?
+- How is it **classified**?
+
+<details><summary><b>Answer:</b></summary>
+
+The handoff (or handover) is a procedure in GSM that allows a mobile device to seamlessly switch connection from one cell to another, without interrupting an ongoing call or a data session. It's purpose is to provide service continuity.
+It has many advantages, such as:
+- always be connected to the BSS with the strongest signal;
+- load balancing between different BSS;
+The GSM standard doesn't specify when or why the handover should occur, but just the mechanism.
+
+Handoff classifications:
+- connectivity:
+  - horizontal, if same connectivity (GSM);
+  - vertical, if different connectivity (WiFi -> 4G);
+- node that initiate the procedure:
+  - network-initiated (GSM);
+  - mobile-initiated (WiFi);
+- when it's triggered:
+  - proactive, if the handoff is triggered before the connection to previous AP is lost (GSM);
+  - reactive, if the handoff is triggered after the connection to previous AP is lost (WiFi);
+- management
+  - hard, when the old connection breaks before the new one is enstablished (GSM, WiFi);
+  - soft, when the old connection is kept until the new one is enstablished (WiFi with 2 cards);
+
+</details>
+
+---
+
+### GSM: Handoff (2)
+**Question**:
+- How is the **handoff** handled (distinguish between same and different localities)? TODO
+- Can packets be **lost**?
+- Does a long call create a chain?
+- Is the MSC chain kept?
 
 <details><summary><b>Answer: TODO</b></summary>
 
+How is the **handoff** handled (distinguish between same and different localities)?
+Steps for the handoff under the same MSC:
+1. Old BSS decides to perform the handoff process and sends a message to the MSC, provide a list of possible new BSSs.
+2. MCS notifies the new BSSs, because they need to allocate resources.
+3. (If there is enough space) the new BSS allocates the radio channel for the new visitor. If it doesn't arrive in time, it gets deallocated.
+4. New BSS notifies the MSC and old BSS that it's ready.
+5. Old BSS informs the mobile device the need to operate handover towards the new BSS.
+6. The mobile device signals to the new BSS to activate the new channel.
+7. The mobile device signals to MSC that the handoff has been completed, and MSC performs re-routing.
+8. The MSC deallocates resources of the old routing path and notifies the old BSS that deallocates the old radio channel not used anymore.
+
+Steps for the handoff under different MSCs:
+1. TODO
+
+Can packets be **lost**?
+Yes they can, especially with hard handoffs. Actually, it's almost impossible to have avoid packet loss completely, but there are mitigation techniques
+
+Does a long call create a chain?
+If a node is moving, typically a long call creates a chain of MSC, where newer MSCs gets appended to the latest visited one. The first one is called anchor MSC, is always present and doesn't change for the whole duration of the voice call or data session.
+
+Is the MSC chain kept?
+The MSC chain can be kept or not, it depends. There is a standard called IS-41, that optimizes the MSCs chain path, linking the anchor MSC directly with the latest MSC visited.
+
 </details>
 
 ---
 
+### Bluetooth
 **Question**:
+- What is Bluetooth and what are its main characteristics?
+- 
 
 <details><summary><b>Answer: TODO</b></summary>
 
@@ -145,47 +225,9 @@ ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che pratica
 Domande esami:
 
 Chapter 1
-- hidden node and exposed node issues
-- MACA
-- GSM: handoff handling
-- GSM: handoff classification
 - Bluetooth: main characteristics
 - Bluetooth: differences between ACL and SCO? Is there retransmission in SCO? Why?
-- ZigBee: topologies and roles?
-
-
-CH1
-- parlare di hidden/exposed node issues
-- MACA caratteristiche 
-- MACA risolve hidden/exposed node?
 - Bluetooth: differenze SCO e ACL
-
-Comunicazioni wireless
-a. Si parli dei problemi dell’hidden node e exposed node
-
-b. Maca per WiFi risolve questi problemi?
-c. Caratteristiche del protocollo MACA
-d. Per quanto tempo i nodi stanno in silenzio?
-e. Il problema dell’exposed node è risolto da MACA?
-f. Come può in nodo mobile interagire con questo protocollo?
-
-Differenze tra SCO e ACL in bluetooth
-
-GSM wireless communication
-a. Come avviene la gestion dell’handoff in GSM?
-b. Reattivo o proattivi?
-c. Ci possono essere perdite di pacchetti?
-d. Durante una chiamata lunga si crea una catena?
-
-Wireless communication
-a. GSM come viene gestito l’handoff nella stessa località?
-b. Come viene gestito tra località diverse?
-c. Viene mantenuta la catena di msc?
-d. Può esservi la perdita di pacchetti nell’handoff?
-
-Wireless communication bluetooth
-a. Differenze tra SCO e ACL
-
-Wireless communication
+- ZigBee: topologies and roles?
 a. Zigbee quali sono le topologie?
 b. Quali sono i ruoli?
