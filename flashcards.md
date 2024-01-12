@@ -309,14 +309,51 @@ Routing protocols in MANETs can be divided into:
 
 <details><summary><b>Answer: </b></summary>
 
+#### How does flooding routing protocol **works**?
+Flooding is the most basic and simple routing protocol, where each node forwards an ingoing packet to each node available in broadcast, except for the sender (the one from who the current node received the packet), until the destination is reached.
+
+#### **When** is it used?
+Flooding is the simples, most trivial and straightforward routing protocol. It has some advantages, such as the fact that it doesn't require any storage of information on nodes. It has many problems, mostly efficiency ones, since the number of generated packets grows exponentially with the number of nodes. However, it still finds some uses, for example in emergency scenarios or when there's no way around. Flooding is often used in conjunction with other protocols, for example to deliver control packets.
+
+#### How can it be **optimized**?
+Examples:
+- to **avoid recursive sends** (sending a packet to a node that already received it), we could add an ID to the packet;
+- to **avoid infinite hops** even after the packet is received, we could use a TTL (Time-To-Live);
+
+#### What is the **broadcast storm issue**?
+Broadcast storm issue, is something that's often involved in flooding, and occur when a large number of broacast or multicast messages are rapidly propagated and circulated through the network (nothing -> nothing -> spike of traffic -> nothing -> ...). That creates excessive traffic and potentially degrading network performances.
+
 </details>
 
 ---
 
 ### DSR Routing
 **Question**:
+- What is DSR routing and how does it **work**?
+- What **problems** there could be?
+- How can it be **optimized**?
 
-<details><summary><b>Answer: </b></summary>
+<details><summary><b>Answer: TODO</b></summary>
+
+#### What is DSR routing and how does it **work**?
+Dynamic Source Routing (DSR) is a full reactive routing protocol, where the sender has to find a valid routing path. The steps for Source (S) to find a valid route to reach Destination (D), are the following:
+1. S uses **flooding** to send a **control packet RREQ** (Route REQuest) in broadcast;
+2. Each node that receives RREQ check if it doesn't have already sent it, and if it did not, it appends its node ID and forwards the packet again in broadcast;
+3. This procedure repeats until D is reached;
+4. When D receives the packet, it uses the chain of nodes in the header (path S->D), builds a control packet RREP (Route REPly), adding the path to it and sends it back in unicast to S;
+5. S receives RREP, retrieves the path to reach D and saves it in its cache;
+6. S sends the actual data packets to D, including the path in their headers.
+
+#### What **problems** there could be?
+- This protol faces many collisions, due to the fact that the traffic concentrates in small intervals of time (broadcast storm issue).
+- Moreover there is the hidden node issue, when for example two nodes are sending to the same destination, a collision is very likely to occur. 
+
+In general, it's a matter of trade-offs.
+
+#### How can it be **optimized**?
+For example through **path caching**: any node cache new path that it happens to discover (in any possible ways). Some obvious advantages, but also some disadvantages, such as invalid caches (being a MANET, after some time, the path doesn't work anymore). How can those be invalidated in a MANET? Through Route ERRor (RERR) control packet.
+
+When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path tha is not available anymore. Any node that overhears this, can update its cache as well.
 
 </details>
 
@@ -332,7 +369,10 @@ Routing protocols in MANETs can be divided into:
 - What happens in case of loops?
 - What happens if nobody has a path towards the destination node, after a fault?
 
-<details><summary><b>Answer: </b></summary>
+<details><summary><b>Answer: TODO</b></summary>
+
+#### What is AODV routing protocol?
+Ad hoc On-demand Distance Vector (AODV) is a routing protocol that ...
 
 </details>
 
@@ -345,7 +385,7 @@ b. Greedy forwarding
 c. Perimeter forwarding
 d. Come viene costruito il grafo per il perimeter forwarding?
 
-<details><summary><b>Answer: </b></summary>
+<details><summary><b>Answer: TODO</b></summary>
 
 </details>
 
