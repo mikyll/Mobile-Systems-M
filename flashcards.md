@@ -227,7 +227,7 @@ The MSC chain can be kept or not, it depends. There is a standard called IS-41, 
 <details open><summary><b>Answer: TODO</b></summary>
 
 #### What is Bluetooth and what are its main characteristics?
-Bluetooth (IEEE 802.15) belongs to the family of Personal Area Network (PAN) protocols, which range is quite limited (10-100m). It was created to replace cables with a low cost solution that had a decent datarate (at least 1Mbps). The network topology it uses is called piconet, and is formed by a _master_ and up to 7 _slaves_.
+Bluetooth (IEEE 802.15.1) belongs to the family of Personal Area Network (PAN) protocols, which range is quite limited (10-100m). It was created to replace cables with a low cost solution that had a decent datarate (at least 1Mbps). The network topology it uses is called piconet, and is formed by a _master_ and up to 7 _slaves_.
 Bluetooth standard defines not only the protocol but also the associated software stack, as well as profiles for its usage.
 
 #### What are the differences with **WiFi**?
@@ -254,6 +254,7 @@ The main differences are:
 <details open><summary><b>Answer: TODO</b></summary>
 
 #### What is ZigBee and what are its **characteristics**?
+ZigBee (IEEE 802.15.4)
 
 #### What are the possible **topologies**?
 
