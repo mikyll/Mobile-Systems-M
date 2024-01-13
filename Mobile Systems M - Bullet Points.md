@@ -10,3 +10,18 @@
 - GSM handoff
 - Bluetooth
 - ZigBee
+
+## Chapter 2 - Routing Protocols
+
+- Classifications
+- Flooding
+- **DSR** (Dynamic Source Routing)
+	- RREQ/RRES
+	- route error
+	- caching
+- **AODV** (Ad hoc On-demand Distance Vector)
+	- RREQ/RRES
+	- routing tables
+	- timeout
+	- link failure detection and handling
+	- 

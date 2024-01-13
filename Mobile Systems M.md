@@ -141,7 +141,7 @@ Current situation? WiFi uses CSMA/CA, which basically integrates MACA, but MACA 
 ### WiFi (IEEE 802.11) Configurations
 ![[Pasted image 20240106190124.png]]
 There are two primary WiFi configurations:
-- ==**ad-hoc mode**==: there are **no access points** between wireless devices and they connect directly;
+- ==**ad hoc mode**==: there are **no access points** between wireless devices and they connect directly;
 - ==**base station**== (or infrastructure mode): there is **one AP** that acts like a gateway to reach the Internet and each device connects to it;
 
 In **base station** mode uses the protocol probe/response: a mobile node sends a "probe broadcast message" and Access Points that receive that message respond with a "response message" to signal their presence. Then the mobile node will have a list of available APs to connect to (manually or automatically).
@@ -258,7 +258,7 @@ Motivations:
 3. (If there is enough space) the new BSS alloactes the radio channel that the mobile visitor will use. If it doens't arrive in a given time interval, the radio channel is deallocated. NB: that's proactive, because the channel is allocated before receiving the actual connection.
 4. New BSS signals the MSC and old BSS it's readiness.
 5. Old BSS informs the mobile device the need to operate handover towards the new BSS.
-6. The mobile deevice signals to the new BSS to activate the new channel.
+6. The mobile device signals to the new BSS to activate the new channel.
 7. Mobile device signals to MSC (through the new BSS) that the handoff has been completed, and MSC performs a re-routing.
 8. MSC deallocates resources of the old routing path and notify the old BSS that deallocates the old radio channel associated with the mobile node.
 
@@ -422,6 +422,75 @@ To access the channel, the nodes can choose between 2 networks types:
 Summary on ZigBee: is a sort of combination of the previously seen protocols. It's pretty much domain-specific and it's rare to see (even more rare on a smartphone).
 
 ## Chapter 2 - MANET and Routing (ISO/OSI Layer 3)
+
+### MANET
+Not all mobile systems operate in infrastructure mode. A Mobile Ad hoc NETwork is a network that is created dynamically, on-the-fly, by nodes that operate in ad-hoc mode.
+Main characteristics:
+- dynamic creation, (to satisfy immediate necessities);
+- quick deployment, highly configurable (no infrastructure needed);
+- highly volatile resources (time-dependant resources, that may not be available in time continuity);
+- heterogeneous nodes;
+- battery nodes;
+- each node is a potential router.
+
+Problems:
+### Routing
+
+#### Dynamic Source Routing (DSR)
+
+Main differences between AODV and DSR:
+- DSR stores path in headers -> lower space for data;
+- AODV stores path in nodes -> much more space for data;
+
+both have 2 discovery phases:
+1. RREQ phase (in broadcast), to reach the destination node
+2. RREP phase (in unicast), to go back to the source node, with a valid path to the destination.
+
+
+AODV:
+1. S wants to send a packet to D;
+2. S checks if it has a route to D;
+3. If it doesnt, it starts a route discovery process (**flooding** in broadcast with RREQ);
+4. Each node receiving RREQ, if it doesn't have a valid route to D, rebroadcast the message and updates its own ***route table***. A route table includes entries with the following information:
+	- seq (sequence number), is used to track the freshness of routing information;
+	- dest (destination node), identifies a destination node;
+	- next (next-hop), contains the address of the next node of the route, to forward packets towards the destination node;
+	- hop (hop count), the number of hops to reach the destination node;
+5. When RREQ reaches D or a node with a valid route to D, a RREP is generated and sent back to S (in unicast);
+6. When RREP travels back towards S, each node it passes by updates its route table, adding another entry. 
+
+After the discovery phase, nodes will have cached route tables containing both direct and inverse paths. S will choose the table entry with the lowest number of hops, to reach the destination.
+
+#### Timeout
+To prevent nodes from maintaining invalid or obsolete entries in routing tables, each route expires after a given timeout. Timeout must be sufficiently long to allow RRES packets to return back from the destination.
+Also, forward routes are removed after a certain amount of time (active_route_timeout) if not used. Since we are in MANET, the network is highly variable and mobile, so it's unlikely for a route to be valid during a long period of time. If that route is not used, it could just sit there wasting storage.
+
+#### Link Failure Detection
+Failure detection is performed both in reactive and proactive ways:
+- **reactive**, when a forward towards an active node (towards which there was a route) fails. In this case all neighbours are informed, through a RERR packet and they invalidate their entry. When S receives RERR, it starts a new route discovery process towards D (NB: there's no certainty that there will be a node with a route to S, in this case typically it performs a flooding, hoping it will reach);
+- **proactive**, by periodically sending hello messages to active nodes.
+
+#### Optimizations
+1) To limit flooding during route discovery phase, it's possible to perform flooding by using increasingly growing (over time) TTL, until a RREP is received.
+2) If during the route discovery phase, a node receiving RREQ for a destination, already has a path towards it, it can instantly reply with RREP. But this can generate ***loops***, if RRER of the broken link is lost and the sender doesn't know it.
+![[routing_loops.png]]
+To solve Loops problem, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Chapter 3 - Mobile IP and Positioning
 
