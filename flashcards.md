@@ -327,7 +327,7 @@ Broadcast storm issue, is something that's often involved in flooding, and occur
 
 ---
 
-### DSR Routing
+### DSR Routing ([doc link](https://www.rfc-editor.org/rfc/rfc4728.html))
 **Question**:
 - What is DSR routing and how does it **work**?
 - What **problems** there could be?
