@@ -297,6 +297,7 @@ Routing protocols in MANETs can be divided into:
 - **hybrid** protocols, that combine other categories.
 
 </details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
@@ -324,6 +325,7 @@ Examples:
 Broadcast storm issue, is something that's often involved in flooding, and occur when a large number of broacast or multicast messages are rapidly propagated and circulated through the network (nothing -> nothing -> spike of traffic -> nothing -> ...). That creates excessive traffic and potentially degrading network performances.
 
 </details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
@@ -356,6 +358,7 @@ For example through **path caching**: any node cache new path that it happens to
 When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path tha is not available anymore. Any node that overhears this, can update its cache as well.
 
 </details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
@@ -395,6 +398,7 @@ During the route discovery phase, the RREQ will be carrying the destination node
 The source starts a new discovery phase, performing RREQ flooding.
 
 </details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
@@ -408,14 +412,38 @@ d. Come viene costruito il grafo per il perimeter forwarding?
 <details><summary><b>Answer: TODO</b></summary>
 
 </details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
+### Topic
 **Question**:
 <details><summary><b>Answer: </b></summary>
 
 </details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
+---
+
+### Topic
+**Question**:
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+
+---
+
+## Chapter 3 - Mobile IP and Positioning
+
+### Topic
+**Question**:
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+
+---
 
 roba da chiedere al prof:
 ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che praticamente integra MACA, ma in questo caso, viene comunque (solitamente) lasciato opzionale?
