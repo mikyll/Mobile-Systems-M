@@ -372,7 +372,16 @@ When a node cannot reach the following one in the route chain, it sends back to 
 <details><summary><b>Answer: TODO</b></summary>
 
 #### What is AODV routing protocol?
-Ad hoc On-demand Distance Vector (AODV) is a routing protocol that ...
+Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that consists in [...]
+Its main difference with DSR is that AODV doesn't save path information inside packet headers, but instead stores them into the single nodes (similiar to IP routing). That reduces the overhead and allows for more data to be transferred inside the packet payloads.
+
+#### What do tables contain?
+AODV exploits routing tables, saved on each MANET node, to save information about routes to reach the nodes. When a node S wants to send a packet to a node D, it first check if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding (RREQ(ID,src,dst) in broadcast). Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (direct path and inverse path entries). To prevent outdated or invalid routing table entries, there is a timeout mechanism (which is longer for direct routes).
+
+Example:
+- when receiving a RREQ a node updates its routing table by adding an "inverse path entry"
+- inverse paths are the ones to return from D to S (used for RRES);
+- direct paths are the ones to reach 
 
 </details>
 
