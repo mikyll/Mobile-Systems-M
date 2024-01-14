@@ -24,4 +24,5 @@
 	- routing tables
 	- timeout
 	- link failure detection and handling
-	- 
+	- optimizations
+	- loops

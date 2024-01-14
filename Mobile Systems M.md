@@ -434,7 +434,6 @@ Main characteristics:
 - each node is a potential router.
 
 Problems:
-### Routing
 
 #### Dynamic Source Routing (DSR)
 
@@ -447,7 +446,13 @@ both have 2 discovery phases:
 2. RREP phase (in unicast), to go back to the source node, with a valid path to the destination.
 
 
-AODV:
+### Ad hoc On-demand Distance Vector (AODV)
+Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol. Let's break down its name:
+- **ad hoc**, because its for MANET, where nodes communicate in ad hoc mode, without access points (not infrastructure mode);
+- **on-demand**, because routes are only enstablished and maintained when needed;
+- **distance vector**, refers to the routing algorithm used. In networking, a "distance" vector routing algorithm, is a type of algorithm where each "router node" maintains a table that contains distance (cost) to every other router in the network. "Vector" refers to the direction/path to reach a destination. In fact, AODV uses route tables, where each entry has information about the destination node of the route entry (vector), and the number of hops needed to reach it (distance).
+
+AODV steps:
 1. S wants to send a packet to D;
 2. S checks if it has a route to D;
 3. If it doesnt, it starts a route discovery process (**flooding** in broadcast with RREQ);
@@ -472,24 +477,67 @@ Failure detection is performed both in reactive and proactive ways:
 
 #### Optimizations
 1) To limit flooding during route discovery phase, it's possible to perform flooding by using increasingly growing (over time) TTL, until a RREP is received.
-2) If during the route discovery phase, a node receiving RREQ for a destination, already has a path towards it, it can instantly reply with RREP. But this can generate ***loops***, if RRER of the broken link is lost and the sender doesn't know it.
+2) If during the route discovery phase, a node receiving RREQ for a destination, already has a path towards it, it can instantly reply with RREP. But this can generate ***routing loops***, if RRER of the broken link is lost and the sender doesn't know it.
 ![[routing_loops.png]]
-To solve Loops problem, 
+To solve Loops problem, it's possible to adopt a **Destination Sequence Number (DSN)**: RREQ carries a DSN, that is incremented at each hop. If a node has a route to the RREQ destination, with an higher DSN than the one from RREQ, then it replies with the route, otherwise it forwards the RREQ packet.
 
 
 
+### Greedy Perimeter Stateless Routing (GPSR)
+Greedy Perimeter Stateless Routing (GPSR) is a routing protocol that didn't have the same historic success than DSR and AODV (those two had a great success due to their simplicity), but is still an interesting approach.
+It's a **geographical** routing protocol, that takes into account 2 important assumption, to reach the destination node:
+- source node knows the location of the destination node;
+- every node has a list of neighbor nodes and their locations (they achieve that by periodically exchanging location beacons).
+
+There are 2 schemas for data forwarding:
+- greedy forwarding
+- perimeter forwarding;
+
+#### Greedy Forwarding
+In greedy forwarding, data is sent to the neighbor node that is estimated as the closes towards the destination, using only the location info of the neighbors of the currentnode.
+![[Pasted image 20240114000847.png]]
+In the example above, E is not in the coverage range of D, and no other E's neighbor is closer to E, therefore there is a forwarding failure.
+When this happens, typically the algorithm switchs to perimeter forwarding.
+
+#### Perimeter Forwarding
+It tries to find a route around the "holes" (in the previous example, the hole was between E and D). Each node calculates a Relative Neighborhood ***Graph*** (RNG). This graph is defined by a simple constraint: two nodes A and B are connected only if there is not a third node C whose distance is less than A **and** B.
+![[gpsr_rng.png]]
+RNG then traverses the graph following the right-hand rule (counter clockwise), so in the previous example, it would reach S, then A, ...
+
+Problem: there can still be loops, but they can be avoided by using sequence numbers in route tables, as in AODV
+
+[Comparative analysis paper](https://www.researchgate.net/publication/349377283_Comparative_analysis_of_AODV_DSDV_and_GPSR_routing_protocols_in_MANET_scenarios_of_real_urban_area#fullTextFileContent)
 
 
+### Temporally Ordered Routing Algorithm (TORA)
+Temporally Ordered Routing Algorithm (TORA) is a more recent, proactive, protocol, still used nowadays in practical settings. Main **characteristics**:
+- highly adaptive, efficient and scalable;
+- loop-free by design;
+- highly distributed;
 
+Key **design** concepts:
+- control messages are exchanged by a very small set of nodes locally close to each other;
+- nodes maintain routing info about their neighbors;
+- a **height metric** is used to model the state of the network (the lower the height, the closer to the destination);
 
+During route creation and maintenance nodes enstablish Directed Acyclic Graphs (DAGs). The data should follow the path that minimizes the height, like a liquid.
 
+![[tora_routing_scheme.png]]
 
+Basic functions:
+- **Rroute creation**, based on a *query/reply* process, started by source S, towards destination D. It's performed by flooding a QRY packet. If a route exists, an UDP packet is returned.
+- **Route maintenance**, link-reversal algorithm, that activates only when necessary (reacts when there is a link failure). NB: TORA reacts to link failures with **local** repairs.
+- **Route erasure**, a CLR packet is flooded to erase invalid routes.
 
+Route creation:
+![[Pasted image 20240114012635.png]]
 
+TORA has low overhead for control packets, since the reconfigurations are localized; TORA is also faster to respond to failures than DSR or AODV; 
+However, each protocol/algorithm has its own usage/field, and usually it depends on the domain of the application and the aspects that it wants to optimize.
 
-
-
-
+Consider that energy consumption typically is a big matter in mobile systems, and the power needed to transmit a packet is proportional to the packet size, but also proportional to distance².
+### Clustering
+Clustering is a technique utilized to reduce power consumption. It consists in dividing the network in groups of nodes (clusters)
 
 
 ## Chapter 3 - Mobile IP and Positioning
