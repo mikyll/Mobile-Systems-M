@@ -137,7 +137,7 @@ GSM architecture includes different elements:
 - a Mobile Switching Center (**MSC**), that acts like a gateway to Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
 
 #### What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
-MSC contains 2 registries:
+MSC contains 2 registries, needed to perform calls processing, location tracking and mobility management in GSM networks:
 - Home Location Register (**HLR**), is a centralized database that stores **permanent** information about subscribed mobile devices. When a user buys a subscription (via SIM card), all the user and subscription info gets registered in HLR (credit, cost, profiles, activated services, etc.). It won't be updated again;
 - Visitor Location Register (**VLR**), is a **temporary** database that stores information about mobile devices that are currently within the MSC coverage area (under the BSSs it manages).
 
@@ -189,10 +189,10 @@ Handoff classifications:
 - Does a long call create a chain?
 - Is the MSC chain kept?
 
-<details open><summary><b>Answer: TODO</b></summary>
+<details><summary><b>Answer: </b></summary>
 
 #### How is the **handoff** handled (distinguish between same and different localities)?
-Steps for the handoff under the same MSC:
+Steps for the **handoff under the same MSC**:
 1. Old BSS decides to perform the handoff process and sends a message to the MSC, provide a list of possible new BSSs.
 2. MCS notifies the new BSSs, because they need to allocate resources.
 3. (If there is enough space) the new BSS allocates the radio channel for the new visitor. If it doesn't arrive in time, it gets deallocated.
@@ -202,8 +202,11 @@ Steps for the handoff under the same MSC:
 7. The mobile device signals to MSC that the handoff has been completed, and MSC performs re-routing.
 8. The MSC deallocates resources of the old routing path and notifies the old BSS that deallocates the old radio channel not used anymore.
 
-Steps for the handoff under different MSCs:
-1. TODO
+Steps for the **handoff under different MSCs**:
+1. Suppose a mobile node S starts a call towards a mobile node D.
+2. Through the phone number of D the PSTN reaches the HLR of D.
+3. From the HLR it's possible to reach the current MSC to which D is attached: this is the Anchor MSC, and will be the first MSC node, forming a chain. The anchor node also saves all the info needed for the call or data session.
+4. When the destination moves, if it switches MSC, the new MSC will be appended at the end of the chain.
 
 #### Can packets be **lost**?
 Yes they can, especially with hard handoffs. Actually, it's almost impossible to have avoid packet loss completely, but there are mitigation techniques
@@ -230,12 +233,18 @@ The MSC chain can be kept or not, it depends. There is a standard called IS-41, 
 <details open><summary><b>Answer: TODO</b></summary>
 
 #### What is Bluetooth and what are its main characteristics?
-Bluetooth (IEEE 802.15.1) belongs to the family of Personal Area Network (PAN) protocols, which range is quite limited (10-100m). It was created to replace cables with a low cost solution that had a decent datarate (at least 1Mbps). The network topology it uses is called piconet, and is formed by a _master_ and up to 7 _slaves_.
+Bluetooth (IEEE 802.15.1) belongs to the family of Personal Area Network (PAN) protocols, which range is quite limited (10-100m). It was created to **replace cables** with a low cost solution that had a decent datarate (at least 1Mbps). The network topology it uses is called piconet, and is formed by a _master_ and up to 7 _slaves_.
 Bluetooth standard defines not only the protocol but also the associated software stack, as well as profiles for its usage.
 
 #### What are the differences with **WiFi**?
-The main differences are:
-...
+The main differences with Wi-Fi are:
+- uses cases;
+- coverage range;
+- data transfer rate;
+- power consumption;
+- in Bluetooth the communication always passes through the master, in Wi-Fi the communication is P2P between AP and MNs;
+- Bluetooth needs a preliminar discovery phase;
+- Bluetooth has a very limited broadcast mechanism;
 
 #### What is **frequency hopping**?
 Bluetooth uses the 2.4GHz ISM band (from 2.4 to 2.4835 GHz), which is also the same range of frequencies used by many wireless technologies/devices (including WiFi), since this band was designated for unlicensed operation. What's the consequence of this? It's that different technologies based on 2.4GHz, may interfere the one with the other.
@@ -245,10 +254,22 @@ Bluetooth, to manage its communication over this overcrowded band, uses a mechan
 Also "adaptive frequency hopping", to better improve this mechanism, marks channels with high interferences as "bad channels" and avoid them.
 
 #### What are the differences between **ACL** and **SCO**?
-...
+Bluetooth supports two types of connections:
+- **Asynchronous Connection-Less (ACL)**:
+  - is used only for data (no voice);
+  - packet-switched connections;
+  - point-multipoint connections;
+  - symmetric/asymmetric connections;
+  - retransmission of lost packets;
+- **Synchronous Connection-Oriented (SCO)**:
+  - is used for multimedia data in real-time;
+  - circuit-switched connections;
+  - point-point connections;
+  - symmetric connections;
+  - no retransmission of lost packets;
 
 #### Is there **retransmission** in SCO? Why?
-...
+In Bluetooth SCO there is NO retransmission if packets are lost, because in real-time communication the user just wants low latency, it doesn't care about the multimedia content to be completely intact (e.g. think about voice calls).
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
