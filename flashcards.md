@@ -429,17 +429,41 @@ Greedy Perimeter Stateless Routing (GSPR) is a routing protocol that ... TODO
 - What is **TORA** routing protocol and what are its main characteristic?
 - What are its main **functions**?
 
-
 <details><summary><b>Answer: </b></summary>
+
+#### What is **TORA** routing protocol and what are its main characteristic?
+Temporally Ordered Routing Algorithm (TORA) is a more recent routing protocol, that is still used nowadays in practical settings. Its main characteristics are the following:
+- highly adaptive, efficient and scalable;
+- is loop-free by design;
+- is highly distributed;
+
+It's based on a graph structure called Directed Acyclic Graph (DAG), organized by an height metric. The data packets flows in this graph towards the bottom, as a liquid. 
+
+#### What are its main **functions**?
+TORA is based on 3 main functions:
+- Route **creation**, based on a query/reply process, started by the source node, towards the destination. It's performed by flooding the network with a QRY packet and, if a route exists, an UDP packet is returned to source.
+- Route **maintenance**, consists of a LOCAL link repair, when a link failuer is detected (reactive repair).
+- Route **failure**, a CLR packet is flooded to erase invalid routes.
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
-### Topic
+### Clustering
 **Question**:
+- What is Clustering in a MANET?
+- In what consist Leach and Heed algorithms?
+
 <details><summary><b>Answer: </b></summary>
+
+#### What is Clustering in a MANET?
+Clustering is a technique utilized to reduce energy consumption in MANETs. It's very suitable for sensors networks and consists in grouping nodes in clusters, with a clusterhead and some gateway, and in aggregating multiple data in a single packet, that gets forwarded through the gateway.
+
+#### In what consist Leach and Heed algorithms?
+Leach and Heed are two algorithms for Clustering in MANETs:
+- In **Leach**, the clusterhead is chosen in a compeltely random way, it sends a broadcast message to inform other nodes, and ordinary nodes attach to the closer one. The clusterhead is reassigned every now and then to try performing some load balancing.
+- In **Heed**, clusterheads are chosen based on the level of battery, through a probabilistic election. Nodes announce their intention (clusterhead or not) and cost function (based on battery), and other nodes select and attach the best candidate, through aa probabilistic metric.
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
