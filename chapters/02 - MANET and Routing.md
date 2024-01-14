@@ -1,4 +1,10 @@
-## Chapter 2 - MANET and Routing (ISO/OSI Layer 3)
+[[Index](../)]&nbsp;&nbsp;
+[[⏮️](./01%20-%20Wireless.md)]
+[[◀️](./01%20-%20Wireless.md)]
+[[▶️](./03%20-%20Mobile%20IP%20and%20Positioning.md)]
+[[⏭️](./06)]
+
+<h1 align="center">Chapter 2 - MANET and Routing (ISO/OSI Layer 3)</h1>
 
 ### MANET
 Not all mobile systems operate in infrastructure mode. A Mobile Ad hoc NETwork is a network that is created dynamically, on-the-fly, by nodes that operate in ad-hoc mode.
