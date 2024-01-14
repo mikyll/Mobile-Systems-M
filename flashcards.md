@@ -329,7 +329,7 @@ Broadcast storm issue, is something that's often involved in flooding, and occur
 
 ---
 
-### DSR Routing ([doc link](https://www.rfc-editor.org/rfc/rfc4728.html))
+### DSR Routing ([RFC 4728](https://www.rfc-editor.org/rfc/rfc4728.html))
 **Question**:
 - What is DSR routing and how does it **work**?
 - What **problems** there could be?
@@ -362,7 +362,7 @@ When a node cannot reach the following one in the route chain, it sends back to 
 
 ---
 
-### AODV Routing ([doc link](https://www.ietf.org/rfc/rfc3561.txt))
+### AODV Routing ([RFC 3561](https://www.ietf.org/rfc/rfc3561.txt))
 **Question**:
 - What is AODV routing protocol?
 - What do tables contain?
@@ -404,20 +404,32 @@ The source starts a new discovery phase, performing RREQ flooding.
 
 ### GPSR Routing
 **Question**:
-a. Parlare di gpsr
-b. Greedy forwarding
-c. Perimeter forwarding
-d. Come viene costruito il grafo per il perimeter forwarding?
+- What is **GPSR** routing protocol?
+- What are **greedy forwarding** and **perimeter forwarding**?
+- How is the perimeter forwarding **graph** built?
 
 <details><summary><b>Answer: TODO</b></summary>
+
+#### What is **GPSR** routing protocol?
+Greedy Perimeter Stateless Routing (GSPR) is a routing protocol that ... TODO
+
+#### What are **greedy forwarding** and **perimeter forwarding**?
+
+#### How is the perimeter forwarding **graph** built?
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
 
 ---
 
-### Topic
+### TORA Routing
+> **NB**: Details on TORA won't be asked during the exam.
+
 **Question**:
+- What is **TORA** routing protocol and what are its main characteristic?
+- What are its main **functions**?
+
+
 <details><summary><b>Answer: </b></summary>
 
 </details>
