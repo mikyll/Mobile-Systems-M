@@ -4,6 +4,7 @@
 [[▶️](./02%20-%20MANET%20and%20Routing.md)]
 [[⏭️](.)]
 
+<span id="back-to-top"/>
 <h1 align="center">Chapter 1 - Wireless (ISO/OSI Layer 2)</h1>
 
 When dealing with mobile systems, the nodes are almost always connected through a wireless connectivity medium.
@@ -401,6 +402,7 @@ There are different roles for ZigBee devices:
 - **Full Function Device (FFD)**, participates in messages routing;
 - **Reduced Function Device (RFD)**, executes only sensing and actuating operations, no routing.
 
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 #### Channel Access Options
 To access the channel, the nodes can choose between 2 networks types:
 - **non-beaconed network**, exploits CSMA/CA, positive ACKs for successful reception of packets;
