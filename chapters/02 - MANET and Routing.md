@@ -84,7 +84,7 @@ When this happens, typically the algorithm switchs to perimeter forwarding.
 
 #### Perimeter Forwarding
 It tries to find a route around the "holes" (in the previous example, the hole was between E and D). Each node calculates a Relative Neighborhood ***Graph*** (RNG). This graph is defined by a simple constraint: two nodes A and B are connected only if there is not a third node C whose distance is less than A **and** B.
-![alt](../resources/gfx/gpsr_rng.png)
+![alt](gpsr_perimeter_forwarding_rng.png)
 RNG then traverses the graph following the right-hand rule (counter clockwise), so in the previous example, it would reach S, then A, ...
 
 Problem: there can still be loops, but they can be avoided by using sequence numbers in route tables, as in AODV.

@@ -422,7 +422,7 @@ GPSR performs data fowarding according to 2 schemas, _greedy forwarding_ and _pe
 
 #### How is the perimeter forwarding **graph** built?
 The perimeter forwarding graph is called Relative Neighborhood Graph (RNG) and is built by each node based on a constraint: two nodes A and B are connected if and only if there is not a third node C whose distance to both A and B is closer than the one between A and B (C-A < A-B && C-B < A-B).
-![alt](./resources/gfx/gpsr_rng.png)
+![alt](gpsr_perimeter_forwarding_rng.png)
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
