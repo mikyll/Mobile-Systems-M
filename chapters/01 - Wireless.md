@@ -6,7 +6,7 @@
 [[▶️](./02%20-%20MANET%20and%20Routing.md)]
 [[⏭️](.)]
 
-<h1 align="center">Chapter 1 - Wireless (ISO/OSI Layer 2)</h1>
+<h1 align="center">Chapter 1 - Wireless (ISO/OSI Layer 1/2)</h1>
 
 When dealing with mobile systems, the nodes are almost always connected through a wireless connectivity medium.
 
