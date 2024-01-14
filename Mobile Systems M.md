@@ -481,8 +481,6 @@ Failure detection is performed both in reactive and proactive ways:
 ![[routing_loops.png]]
 To solve Loops problem, it's possible to adopt a **Destination Sequence Number (DSN)**: RREQ carries a DSN, that is incremented at each hop. If a node has a route to the RREQ destination, with an higher DSN than the one from RREQ, then it replies with the route, otherwise it forwards the RREQ packet.
 
-
-
 ### Greedy Perimeter Stateless Routing (GPSR)
 Greedy Perimeter Stateless Routing (GPSR) is a routing protocol that didn't have the same historic success than DSR and AODV (those two had a great success due to their simplicity), but is still an interesting approach.
 It's a **geographical** routing protocol, that takes into account 2 important assumption, to reach the destination node:
@@ -494,7 +492,7 @@ There are 2 schemas for data forwarding:
 - perimeter forwarding;
 
 #### Greedy Forwarding
-In greedy forwarding, data is sent to the neighbor node that is estimated as the closes towards the destination, using only the location info of the neighbors of the currentnode.
+In greedy forwarding, data is sent to the neighbor node that is estimated as the closes towards the destination, using only the location info of the neighbors of the current node.
 ![[Pasted image 20240114000847.png]]
 In the example above, E is not in the coverage range of D, and no other E's neighbor is closer to E, therefore there is a forwarding failure.
 When this happens, typically the algorithm switchs to perimeter forwarding.
@@ -504,10 +502,9 @@ It tries to find a route around the "holes" (in the previous example, the hole w
 ![[gpsr_rng.png]]
 RNG then traverses the graph following the right-hand rule (counter clockwise), so in the previous example, it would reach S, then A, ...
 
-Problem: there can still be loops, but they can be avoided by using sequence numbers in route tables, as in AODV
+Problem: there can still be loops, but they can be avoided by using sequence numbers in route tables, as in AODV.
 
 [Comparative analysis paper](https://www.researchgate.net/publication/349377283_Comparative_analysis_of_AODV_DSDV_and_GPSR_routing_protocols_in_MANET_scenarios_of_real_urban_area#fullTextFileContent)
-
 
 ### Temporally Ordered Routing Algorithm (TORA)
 Temporally Ordered Routing Algorithm (TORA) is a more recent, proactive, protocol, still used nowadays in practical settings. Main **characteristics**:
@@ -536,8 +533,59 @@ TORA has low overhead for control packets, since the reconfigurations are locali
 However, each protocol/algorithm has its own usage/field, and usually it depends on the domain of the application and the aspects that it wants to optimize.
 
 Consider that energy consumption typically is a big matter in mobile systems, and the power needed to transmit a packet is proportional to the packet size, but also proportional to distance².
+
+NB: having a large per-hops distance (less nodes but very distanced), typically has more disadvantages than advantages.
+- usually to increase the coverage area you have to repeat the signal in space;
+- if you increase the frequency of the carrier => more bandwidth, but less distance;
+- higher frequencies experience more absorption, more energy consumption and possibly even human health issues (since due to more transmission power);
+- higher power => less antennas but less possibility of retransmission.
 ### Clustering
-Clustering is a technique utilized to reduce power consumption. It consists in dividing the network in groups of nodes (clusters)
+Clustering is a technique utilized to reduce resource consumption (especially power). It consists in dividing the network in groups of nodes (clusters) and sending to the cluster, a single dense packet that contains information for all the nodes included in the cluster: data aggregator.
+It's particularly useful for sensors networks.
+
+Nodes have different **types**:
+- clusterhead, fundamental for forwarding of packets inside the cluster. It aggregates data from ordinary nodes which then sends to the gateway;
+- gateway, allows to forward packets outside the cluster (to other clusters);
+- ordinary nodes, typically are sensors.
+![[Pasted image 20240114015117.png]]
+#### Some Clustering Algorithms
+- **Leach**, some local nodes are **randomly** chosen to be clusterhead, then each node chooses its most close one to aggregate. Clusterhead is periodically re-assigned;
+- **Heed**, clusterheads are choosen by the **energy level** (cost function) of nodes, by a probabilistic election poll;
+- Weighted Clustering Algorithm (WCA), similiar to Heed but takes into account different weights for the cost function.
+
+### Wi-Fi Direct
+In a Wi-Fi Direct network, nodes communicate by enstablishing a Peer-To-Peer (P2P) group, through a software Access Point. The device implementing the AP functionality, is called P2P Group Owner GO, and other devices acts like clients.
+A device can also be both client and P2P GO, alternating the two roles by time-sharing the Wi-Fi interface.
+Devices communicate by enstablishing a P2P group.
+
+#### Comparison Bluetooth Scatternet vs Wi-Fi Direct P2P Group
+|  | Bluetooth Scatternet | Wi-Fi Direct P2P Group |
+| ---- | ---- | ---- |
+| **Leader substitution** | If the master goes offline, a new one is elected | If the P2P GO goes offline, the P2P group needs to be recreated. |
+| **Communication** | Only between master and slave | Full P2P (also between client and another client) |
+#### Wi-Fi Direct Group Formation
+In Wi-Fi Direct, the group formation procedure involves 2 phases:
+1. **Determination of P2P GO**, which can be:
+	- **negotiated**, two P2P devices negotiates for P2P GO based on their desires and capabilities;
+	- **selected**, during the formation or for example at application level;
+1. **Provisioning of P2P Group**, that involves the creation of a P2P group session with credentials that are provisioned through simple Wi-Fi configuration.
+
+There are 3 group formation techniques, and the protocol includes all of them:
+- **Standard**, involves a discovery phase to find existing groups and Wi-Fi networks (by probe/response). Then they negotiate: the nodes interested in becoming P2P GO declare it and include a random tie-breaker bit to prevent conflicts (the one with bigger bit will become the GO);
+- **Autonomous**, a P2P devices autonomously creates a P2P group where it assumes the P2P GO role. Other devices can detect the group and connect.
+- **Persistent**, similiar to Standard, but after discovery phase, the P2P GO maintains the group info. Those can be used to reenstablish the group (accelerating the process).
+
+### Dense MANET
+
+
+
+
+
+
+
+
+
+
 
 
 ## Chapter 3 - Mobile IP and Positioning
