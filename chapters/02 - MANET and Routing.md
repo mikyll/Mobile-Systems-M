@@ -61,9 +61,7 @@ Failure detection is performed both in reactive and proactive ways:
 #### Optimizations
 1) To limit flooding during route discovery phase, it's possible to perform flooding by using increasingly growing (over time) TTL, until a RREP is received.
 2) If during the route discovery phase, a node receiving RREQ for a destination, already has a path towards it, it can instantly reply with RREP. But this can generate ***routing loops***, if RRER of the broken link is lost and the sender doesn't know it.
-
 ![alt](../resources/gfx/routing_loops.png)
-
 To solve Loops problem, it's possible to adopt a **Destination Sequence Number (DSN)**: RREQ carries a DSN, that is incremented at each hop. If a node has a route to the RREQ destination, with an higher DSN than the one from RREQ, then it replies with the route, otherwise it forwards the RREQ packet.
 
 ### Greedy Perimeter Stateless Routing (GPSR)
@@ -78,13 +76,13 @@ There are 2 schemas for data forwarding:
 
 #### Greedy Forwarding
 In greedy forwarding, data is sent to the neighbor node that is estimated as the closes towards the destination, using only the location info of the neighbors of the current node.
-![alt](../resources/gfx/Pasted image 20240114000847.png)
+![alt](../resources/gfx/gpsr_greedy_forwarding.png)
 In the example above, E is not in the coverage range of D, and no other E's neighbor is closer to E, therefore there is a forwarding failure.
 When this happens, typically the algorithm switchs to perimeter forwarding.
 
 #### Perimeter Forwarding
 It tries to find a route around the "holes" (in the previous example, the hole was between E and D). Each node calculates a Relative Neighborhood ***Graph*** (RNG). This graph is defined by a simple constraint: two nodes A and B are connected only if there is not a third node C whose distance is less than A **and** B.
-![alt](gpsr_perimeter_forwarding_rng.png)
+![alt](../resources/gfx/gpsr_perimeter_forwarding_rng.png)
 RNG then traverses the graph following the right-hand rule (counter clockwise), so in the previous example, it would reach S, then A, ...
 
 Problem: there can still be loops, but they can be avoided by using sequence numbers in route tables, as in AODV.
@@ -112,7 +110,7 @@ Basic functions:
 - **Route erasure**, a CLR packet is flooded to erase invalid routes.
 
 Route creation:
-![alt](../resources/gfx/Pasted image 20240114012635.png)
+![alt](../resources/gfx/tora_route_creation.png)
 
 TORA has low overhead for control packets, since the reconfigurations are localized; TORA is also faster to respond to failures than DSR or AODV; 
 However, each protocol/algorithm has its own usage/field, and usually it depends on the domain of the application and the aspects that it wants to optimize.
@@ -132,8 +130,7 @@ Nodes have different **types**:
 - clusterhead, fundamental for forwarding of packets inside the cluster. It aggregates data from ordinary nodes which then sends to the gateway;
 - gateway, allows to forward packets outside the cluster (to other clusters);
 - ordinary nodes, typically are sensors.
-![alt](../resources/gfx/Pasted image 20240114015117.png)
-
+![alt](../resources/gfx/clustering_node_types.png)
 #### Some Clustering Algorithms
 - **Leach**, some local nodes are **randomly** chosen to be clusterhead, then each node chooses its most close one to aggregate. Clusterhead is periodically re-assigned;
 - **Heed**, clusterheads are choosen by the **energy level** (cost function) of nodes, by a probabilistic election poll;
