@@ -1,6 +1,6 @@
-<div align="center">
-  <h1>Flashcards</h1>
-</div>
+<span id="back-to-top"/>
+<h1 align="center">Flashcards</h1>
+
 
 ## Chapter 1 - Wireless Communication
 
@@ -30,7 +30,7 @@ degradation of the wireless signal. The most important and common are:
 Also other phenomena, like rain, magnetic fields, irregular surfaces.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -48,7 +48,7 @@ Ethernet adopts the algorithm called CSMA/CD (which stands for Carrier Sensing M
 - **Collision Detection** (CD). When a device transmits, it keeps listening to the medium and, in case it detects a collision, it immediately stops the trasmission and waits. To try again and retransmit, one must wait for a **random time interval**, choosen according to the **exponential backoff**: after each collision, the waiting time increases exponentially, preventing consecutive collision to happen.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -73,7 +73,7 @@ Moreover, there are 2 most common issues
 - **Exposed node issue**. It occurs when a node (B) transmits to another node (A), and a third node (C) doesn't start transmitting to its peer (D) because it detects the already ongoin transmission between the other nodes, even tough it doesn't interefere with it.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -93,7 +93,7 @@ There are two primary WiFi configurations:
 - **Infrastructure mode** (base station), in which there are some fixed, cabled nodes called Access Points (APs/base stations). A mobile node can obtain a list of the available APs by using the _probe/response_ protocol. Afterwards, it can connect to one (or more, if the mobile node has different WiFi cards) manually or automatically.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -111,7 +111,7 @@ There are two primary WiFi configurations:
 However, MACA introduces also some **overhead**, and that's the reason why in modern implementations it's left **optional**.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -138,11 +138,13 @@ GSM architecture includes different elements:
 
 #### What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 MSC contains 2 registries:
-- Home Location Register (**HLR**), is a centralized database that stores permanent information about subscribed mobile devices. When a user buys a subscription (via SIM card), all the subscription info gets registered in HLR;
-- Visitor Location Register (**VLR**), is a temporary database that stores information about mobile devices that are currently within the MSC coverage area (under the BSSs it manages)
+- Home Location Register (**HLR**), is a centralized database that stores **permanent** information about subscribed mobile devices. When a user buys a subscription (via SIM card), all the user and subscription info gets registered in HLR (credit, cost, profiles, activated services, etc.). It won't be updated again;
+- Visitor Location Register (**VLR**), is a **temporary** database that stores information about mobile devices that are currently within the MSC coverage area (under the BSSs it manages).
+
+When a MS moves to a new MSC (MSC1 -> MSC2), the VLR of MSC2 will add an entry for the MS, by querying the HLR of MSC1. Having information locally is a way to create some sort of load balancing, since once the info are saved in the local VLR, there's no need to keep querying the HLR.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -176,7 +178,7 @@ Handoff classifications:
   - soft, when the old connection is kept until the new one is established (WiFi with 2 cards);
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -213,7 +215,7 @@ If a node is moving, typically a long call creates a chain of MSC, where newer M
 The MSC chain can be kept or not, it depends. There is a standard called IS-41, that optimizes the MSCs chain path, linking the anchor MSC directly with the latest MSC visited.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -249,7 +251,7 @@ Also "adaptive frequency hopping", to better improve this mechanism, marks chann
 ...
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -269,7 +271,7 @@ ZigBee (IEEE 802.15.4)
 #### What are the **roles**?
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -297,7 +299,7 @@ Routing protocols in MANETs can be divided into:
 - **hybrid** protocols, that combine other categories.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -325,7 +327,7 @@ Examples:
 Broadcast storm issue, is something that's often involved in flooding, and occur when a large number of broacast or multicast messages are rapidly propagated and circulated through the network (nothing -> nothing -> spike of traffic -> nothing -> ...). That creates excessive traffic and potentially degrading network performances.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -358,7 +360,7 @@ For example through **path caching**: any node cache new path that it happens to
 When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path tha is not available anymore. Any node that overhears this, can update its cache as well.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -398,7 +400,7 @@ During the route discovery phase, the RREQ will be carrying the destination node
 The source starts a new discovery phase, performing RREQ flooding.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -425,7 +427,7 @@ The perimeter forwarding graph is called Relative Neighborhood Graph (RNG) and i
 ![alt](./resources/gfx/gpsr_rng.png)
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -453,7 +455,7 @@ TORA is based on 3 main functions:
 - Route **failure**, a CLR packet is flooded to erase invalid routes.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -473,7 +475,7 @@ Leach and Heed are two algorithms for Clustering in MANETs:
 - In **Heed**, clusterheads are chosen based on the level of battery, through a probabilistic election. Nodes announce their intention (clusterhead or not) and cost function (based on battery), and other nodes select and attach the best candidate, through aa probabilistic metric.
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -494,7 +496,7 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 #### What are the possible **group formation techniques**?
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -505,7 +507,7 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 <details><summary><b>Answer: </b></summary>
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
@@ -518,7 +520,7 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 <details><summary><b>Answer: </b></summary>
 
 </details>
-<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 ```
