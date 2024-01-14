@@ -172,8 +172,8 @@ Handoff classifications:
   - proactive, if the handoff is triggered before the connection to previous AP is lost (GSM);
   - reactive, if the handoff is triggered after the connection to previous AP is lost (WiFi);
 - management
-  - hard, when the old connection breaks before the new one is enstablished (GSM, WiFi);
-  - soft, when the old connection is kept until the new one is enstablished (WiFi with 2 cards);
+  - hard, when the old connection breaks before the new one is established (GSM, WiFi);
+  - soft, when the old connection is kept until the new one is established (WiFi with 2 cards);
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
@@ -422,7 +422,7 @@ GPSR performs data fowarding according to 2 schemas, _greedy forwarding_ and _pe
 
 #### How is the perimeter forwarding **graph** built?
 The perimeter forwarding graph is called Relative Neighborhood Graph (RNG) and is built by each node based on a constraint: two nodes A and B are connected if and only if there is not a third node C whose distance to both A and B is closer than the one between A and B (C-A < A-B && C-B < A-B).
-![alt](gpsr_perimeter_forwarding_rng.png)
+![alt](./resources/gfx/gpsr_rng.png)
 
 </details>
 <p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
@@ -430,7 +430,7 @@ The perimeter forwarding graph is called Relative Neighborhood Graph (RNG) and i
 ---
 
 ### TORA Routing
-> **NB**: Details on TORA won't be asked during the exam.
+> **NB**: Specific details on TORA won't be asked during the exam.
 
 **Question**:
 - What is **TORA** routing protocol and what are its main characteristic?
@@ -477,6 +477,27 @@ Leach and Heed are two algorithms for Clustering in MANETs:
 
 ---
 
+### Wi-Fi Direct
+**Question**:
+- How does **Wi-Fi Direct** work?
+- Provide a **comparison** between **Bluetooth Scatternet** and Wi-Fi Direct groups.
+- What are the possible **group formation techniques**?
+
+<details><summary><b>Answer: TODO</b></summary>
+
+#### How does **Wi-Fi Direct** work?
+In Wi-Fi Direct nodes communicate by establishing a Peer-to-Peer (P2P) group, through a software based AP. In Wi-Fi P2P groups, there is a P2P Group Owner (GO) and other devices act like clients.
+
+#### Provide a **comparison** between **Bluetooth Scatternet** and Wi-Fi Direct groups.
+Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their topology and the fact that only the P2P GO and the master can communicate with external nodes (from other P2P groups or other scatternets).
+
+#### What are the possible **group formation techniques**?
+
+</details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+
+---
+
 ## Chapter 3 - Mobile IP and Positioning
 
 ### Topic
@@ -488,8 +509,18 @@ Leach and Heed are two algorithms for Clustering in MANETs:
 
 ---
 
-roba da chiedere al prof:
-ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che praticamente integra MACA, ma in questo caso, viene comunque (solitamente) lasciato opzionale?
-
 ## Extra
 
+### Template
+```
+### Topic
+**Question**:
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#chapter-1---wireless-communication">back to top</a>)</p>
+
+---
+```
+roba da chiedere al prof:
+ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che praticamente integra MACA, ma in questo caso, viene comunque (solitamente) lasciato opzionale?

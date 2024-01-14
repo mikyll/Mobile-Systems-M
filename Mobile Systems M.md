@@ -556,11 +556,11 @@ Nodes have different **types**:
 ### Wi-Fi Direct
 In a Wi-Fi Direct network, nodes communicate by establishing a Peer-To-Peer (P2P) group, through a software Access Point. The device implementing the AP functionality, is called P2P Group Owner GO, and other devices acts like clients.
 A device can also be both client and P2P GO, alternating the two roles by time-sharing the Wi-Fi interface.
-Devices communicate by establishing a P2P group.
 
 #### Comparison Bluetooth Scatternet vs Wi-Fi Direct P2P Group
 |  | Bluetooth Scatternet | Wi-Fi Direct P2P Group |
 | ---- | ---- | ---- |
+| **Communication towards extern** | Only the master can communicate with nodes from other scatternets | Only the P2P GO can communicate with clients from other P2P groups |
 | **Leader substitution** | If the master goes offline, a new one is elected | If the P2P GO goes offline, the P2P group needs to be recreated. |
 | **Communication** | Only between master and slave | Full P2P (also between client and another client) |
 #### Wi-Fi Direct Group Formation
