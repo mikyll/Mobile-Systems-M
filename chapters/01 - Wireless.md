@@ -10,7 +10,7 @@
 
 When dealing with mobile systems, the nodes are almost always connected through a wireless connectivity medium.
 
-One of the ==main differencies from the wired connections==, is that in wired ones (e.g. Ethernet) the signal cannot be lost before being received, due to its distance (at least in local networks, it can happen in bigger ones). Generally speaking, that's due to the fact that after X length, there's something that regenerates the signal.
+One of the main differencies from the wired connections, is that in wired ones (e.g. Ethernet) the signal cannot be lost before being received, due to its distance (at least in local networks, it can happen in bigger ones). Generally speaking, that's due to the fact that after X length, there's something that regenerates the signal.
 
 What's for sure, is that in cabled connections, there are NEVER propagation problems.
 On the contrary, in wireless communication, you'll always (more or less) have propagation problems: the signal power decreases in space moving further away, at least directly, since you can always repeat the signal.
@@ -18,38 +18,38 @@ On the contrary, in wireless communication, you'll always (more or less) have pr
 When you're too far from an AP (Access Point) you'll not be able to associate to it anymore and you have to move near or change it.
 
 ### Wireless Propagation Models
-The signal decreases while traveling along distances, and that physical behaviour is described by ==Maxwell's laws==.
+The signal decreases while traveling along distances, and that physical behaviour is described by Maxwell's laws.
 
-Wireless propagation models are mathematical representations used to describe how radio frequency (RF) ==signals travel and **attenuate as they propagate** through air and other mediums==. Those help researchers and engineers understand and predict the behaviour of wireless communication systems.
+Wireless propagation models are mathematical representations used to describe how radio frequency (RF) signals travel and **attenuate as they propagate** through air and other mediums. Those help researchers and engineers understand and predict the behaviour of wireless communication systems.
 
 #### Signal Propagation Losses
 There are some kind of losses in power received (Pr) by the receiver, from the transmitter. In fact, two important concepts in **wireless propagation** are the following, related to Maxwell's equations:
-- ==**Free-space loss**== (~path loss), `Pr(d) ~ Pt * Gt * Gr (λ / 4 Π d)²
+- **Free-space loss** (~path loss), `Pr(d) ~ Pt * Gt * Gr (λ / 4 Π d)²
 	is the reduction in signal strenght, as a radio wave travels through free space **without any obstacles** or reflections. 2 times inversely proportional to distance (`d²`).
 	**NB**: it increases with distance and frequency 
-- ==**Plane earth loss**== (~groud reflection loss), `Pr(d) ~ Pt * Gt * Gr (ht * hr / d² )²
+- **Plane earth loss** (~groud reflection loss), `Pr(d) ~ Pt * Gt * Gr (ht * hr / d² )²
 	is **due to Earth's curvature** and affects signals that travel along its surface. Earth is a "curve reflector". 4 times inversely proportional to distance (`d⁴`).
 	**NB**: it impacts the coverage area of a wireless system, especially when direct line-of-sight communication is not possible.
 
-==In real life scenarios, the signal tends to be a fluctuation influenced by both of these two laws== (which can be thought of as 2 straight lines):
+In real life scenarios, the signal tends to be a fluctuation influenced by both of these two laws (which can be thought of as 2 straight lines):
 ![alt](../resources/gfx/signal_propagation.png)
 
 #### Channel Fading Models
-The signal is also ==influenced by physical phenomena== that affects its ==propagation==. The most relevant and dominant ones are shadowing, Raileigh fading, and frequency-selective fading.
+The signal is also influenced by physical phenomena that affects its propagation. The most relevant and dominant ones are shadowing, Raileigh fading, and frequency-selective fading.
 
 NB: large-scale VS small-scale fading. Slow fading implies that the changes in signal strength occur over larger distances or longer periods, making them more predictable and manageable.
 
 ![alt](../resources/gfx/channel_fading.png)
 
-==The combination of all these effects produces the so called `Pr`== which is the Power Received, which usually fluctuates depending on the distance.
+The combination of all these effects produces the so called `Pr` which is the Power Received, which usually fluctuates depending on the distance.
 ##### Shadowing
-==Occurs when the signal encounters **obstacles** along its path, causing **long-term strenght variations**.==
+Occurs when the signal encounters **obstacles** along its path, causing **long-term strenght variations**.
 Also called slow-fading, refers to the long-term variations in signal strenght caused by obstacles and environmental features in the propagation path. It's a type of large-scale or "slow" fading phenomenon that affects the received signal strength, leading to signal fluctuations over distance and time. It's caused by the partial/total absorption and partia/total reflection due to objects (trees, buildings, mobile vehicles, ...) and causes a decrease of the received power strength in a wide spectrum of frequencies. This kind of fading can be calculated for smaller objects, but usually, under a mathematical point of view, we tend to refer to pdf (probability distribution functions): considerations about shadowing usually lead to approximations of the probability of being in the coverage area of the signal.
 ##### Multipath Rayleigh Fading
-==Occurs when the signal reaches the receiver through **multiple paths**, causing **rapid oscillations** in signal strength (constructive/destructive interferences).==
+Occurs when the signal reaches the receiver through **multiple paths**, causing **rapid oscillations** in signal strength (constructive/destructive interferences).
 It's a type of fast-fading/small-scale fading. When traveling, usually an electromagnetic signal never go through one single path, but gets scattered many times and what is received is the sum of the "bits" of signal that reaches it, coming from multiple different paths.
 ##### Frequency-Selective Fading
-==**Different frequency** components of the signal experience varying levels of fading, causing **frequency-dependent strength variations**.==
+**Different frequency** components of the signal experience varying levels of fading, causing **frequency-dependent strength variations**.
 It's a kind of fading similiar to shadowing, that happens when the signal travels through a channel with varying characteristics across its frequency spectrum (for example there could be some obstacles that interfere more at lower frequencies, and cause the signal propagation to fade the most, while at higher frequencies that's not an issue).
 ##### Other Effects
 Scattering due to rough surfaces; rain-associated attenuation; gas-associated attenuation; ...
@@ -73,13 +73,13 @@ IEEE 802.x standards defines physical layer and dataling layer protocols.
 
 #### Ethernet (IEEE 802.3)
 Ethernet (IEEE 802.3) is based on CSMA/CD (Carrier Sense Multiple Access with Collision Detection ~ *il portatore del segnale percepisce gli accessi multipli con rilevamento delle collisioni*) algorithm. It's an **optimistic approach**, that allows multiple access (MA), i.e. allows multiple devices to share the same communication medium:
-- performs **==channel sensing==** (CS), to detect if someone is already using it:
+- performs **channel sensing** (CS), to detect if someone is already using it:
 	- if not (idle), transmit immediately, but keep listening to the channel;
 	- otherwise (occupied), wait until the channel becomes idle;
-- ==**collision detection**== (CD):
+- **collision detection** (CD):
 	- immediate abortion of a transmission if collision is detected;
-	- the following transmission try will occur after waiting for a ==**random time interval**==.
-	- ==**exponential backoff**==: the backoff time is chosen in an interval that grows exponentially over time, to minimize the probability of **repeated collisions**.
+	- the following transmission try will occur after waiting for a **random time interval**.
+	- **exponential backoff**: the backoff time is chosen in an interval that grows exponentially over time, to minimize the probability of **repeated collisions**.
 The exponential backoff and randomization prevents the device backoff synchronization (that is when devices keep trying to retransmit at the same interval of time).
 
 **NB**: That's possible due to the transmission medium characteristics in Ethernet (cable), which doesn't cause signal degradation or propagation problems of any kind! We'll see that in wireless it's not so trivial to detect that (due to signal degradation, but also to other factors).
@@ -116,7 +116,7 @@ Example:
 Occurs when one node refrains from transmitting, even though it could, because it incorrectly believes it might interfere with ongoing communications between other nodes.
 
 ###### Multiple Access Collision Avoidance
-To solve hidden node and exposed node issues, CSMA/CD is not suitable. Traditionally it was coupled with an additional algorithm, called ==**MACA** (Multiple Access with Collision Avoidance)==.
+To solve hidden node and exposed node issues, CSMA/CD is not suitable. Traditionally it was coupled with an additional algorithm, called **MACA** (Multiple Access with Collision Avoidance).
 
 ![alt](../resources/gfx/maca.png)
 How does it work? Suppose that B wants to transmit to C;
@@ -131,8 +131,8 @@ Current situation? WiFi uses CSMA/CA, which basically integrates MACA, but MACA 
 ### WiFi (IEEE 802.11) Configurations
 ![alt](../resources/gfx/wifi_configurations.png)
 There are two primary WiFi configurations:
-- ==**ad hoc mode**==: there are **no access points** between wireless devices and they connect directly;
-- ==**base station**== (or infrastructure mode): there is **one AP** that acts like a gateway to reach the Internet and each device connects to it;
+- **ad hoc mode**: there are **no access points** between wireless devices and they connect directly;
+- **base station** (or infrastructure mode): there is **one AP** that acts like a gateway to reach the Internet and each device connects to it;
 
 In **base station** mode uses the protocol probe/response: a mobile node sends a "probe broadcast message" and Access Points that receive that message respond with a "response message" to signal their presence. Then the mobile node will have a list of available APs to connect to (manually or automatically).
 In base station mode, there are no "new" routing problems. Some of the small ones could be:
@@ -242,7 +242,7 @@ Motivations:
 - GSM only specifies how (mechanisms) to operate handoff, not why
 
 ![alt](../resources/gfx/gsm_handoff_same_msc.png)
-==**Handoff steps**== (same MSC):
+**Handoff steps** (same MSC):
 1. Old BSS decides to perform the handoff process, and send a message to the MSC, providing a list of possible desinations (one or more new BSSs).
 2. MSC notifies the new BSS, because it needs to allocate resources.
 3. (If there is enough space) the new BSS alloactes the radio channel that the mobile visitor will use. If it doens't arrive in a given time interval, the radio channel is deallocated. NB: that's proactive, because the channel is allocated before receiving the actual connection.
@@ -346,12 +346,12 @@ NB: the master can use its slot to send messages but also
 Any bluetooth device has its own native logical clock CLKN. The piconet has a clock, that coincides with the CLKN of the master. 
 #### Connections
 There are 2 types of connections:
-- ==**Asynchronous Connection-Less (ACL)**==: used for **data** traffic (not voice or multimedia) and best-effort service (simplicity over guarantees). Supports:
+- **Asynchronous Connection-Less (ACL)**: used for **data** traffic (not voice or multimedia) and best-effort service (simplicity over guarantees). Supports:
 	- packet-switch connections;
 	- point-multipoint connections;
 	- symmetric (max ~400Kbit/s)/asymmetric (max ~700Kbit/s downlink and ~60Kbit/s uplink) connections.
 	NB: a slave can transmit only if it received the permission from the master in the previous slot.
-- ==**Synchronous Connection-Oriented (SCO)**==: used for real-time and **multimedia** traffic. Guaranteed bandwidth (64Kbit/s). Support:
+- **Synchronous Connection-Oriented (SCO)**: used for real-time and **multimedia** traffic. Guaranteed bandwidth (64Kbit/s). Support:
 	- circuit-switched connections;
 	- point-point connections;
 	- symmetric connections;
