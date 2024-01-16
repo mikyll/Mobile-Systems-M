@@ -6,7 +6,7 @@
 <details open>
   
   - [Chapter 1 - Wireless Communication](#chapter-1---wireless-communication)
-  - [Chapter 2 - Mobile Ad Hoc NETwork (MANET)](#chapter-2---mobile-ad-hoc-network-manet)
+  - [Chapter 2 - MANET](#chapter-2---mobile-ad-hoc-network-manet)
   
 </details>
 
