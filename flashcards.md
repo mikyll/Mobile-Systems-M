@@ -257,12 +257,14 @@ There is also an optimized version, called "adaptive frequency hopping", to bett
 Bluetooth supports two types of connections:
 - **Asynchronous Connection-Less (ACL)**:
   - is used only for data (no voice);
+  - higher datarate (>500Kbps);
   - packet-switched connections;
   - point-multipoint connections;
   - symmetric/asymmetric connections;
   - retransmission of lost packets;
 - **Synchronous Connection-Oriented (SCO)**:
   - is used for multimedia data in real-time;
+  - lower datarate (64Kbps);
   - circuit-switched connections;
   - point-point connections;
   - symmetric connections;
