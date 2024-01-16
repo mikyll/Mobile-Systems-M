@@ -7,6 +7,8 @@
   
   - [Chapter 1 - Wireless Communication](#chapter-1---wireless-communication)
   - [Chapter 2 - MANET](#chapter-2---mobile-ad-hoc-network-manet)
+  - [Chapter 3 - Mobile IP and Positioning](#chapter-3---mobile-ip-and-positioning)
+  - [Chapter 4 - Internet of Things](#chapter-4---internet-of-things-iot)
   
 </details>
 
@@ -532,6 +534,17 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 ---
 
 ## Chapter 3 - Mobile IP and Positioning
+
+### Topic
+**Question**:
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+## Chapter 4 - Internet of Things (IoT)
 
 ### Topic
 **Question**:
