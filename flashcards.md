@@ -243,7 +243,7 @@ The MSC chain can be kept or not, it depends. There is a standard called IS-41, 
 - What are the differences between **ACL** and **SCO**?
 - Is there **retransmission** in SCO? Why?
 
-<details open><summary><b>Answer: </b></summary>
+<details><summary><b>Answer: </b></summary>
 
 #### What is Bluetooth and what are its main characteristics?
 Bluetooth (IEEE 802.15.1) belongs to the family of Personal Area Network (PAN) protocols, which range is quite limited (10-100m). It was created to **replace cables** with a low cost solution that had a decent datarate (at least 1Mbps). The network topology it uses is called piconet, and is formed by a _master_ and up to 7 _slaves_.
