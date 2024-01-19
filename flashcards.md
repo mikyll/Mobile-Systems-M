@@ -559,50 +559,65 @@ This solution was never actually successful due to the fact that for a device to
 
 ### Mobile IP ([RFC 5944](https://datatracker.ietf.org/doc/html/rfc5944))
 **Question**:
-- What is Mobile IP and what is its purpose?
-- How does Mobile IP work?
-- What happens if the MH moves to another network (different FA)? Is there packet loss?
-
+- What is Mobile IP and what is its **purpose**?
+- How does Mobile IP **work**?
+- What's Mobile IP **triangular routing**? How can it be optimized?
+- Does Mobile IP face **ingress/egress filtering problems**? How can they be solved?
+- What happens in Mobile IP handover, in terms of **packet loss**? Is there any? Does FA **retransmit** packets?
 - Mobile IP is proactive or reactive? Vertical or horizontal?
-
-- 
-- Durante lo spostamento in una località i pacchetti continuano ad arrivare all’FA?
-- Il vecchio FA effettua la ritrasmissione dei pacchetti ?
-
-- Cosa succede nell’handoff in mobile Ip? (x2)
-- Problemi scarto pacchetti ingresso e uscita?
-- Il problema di avere lo stesso indirizzo c’è anche in ip v4?
-- Perché mipv6 non è usato ?
-- In mipv4 si possono perdere pacchetti succede anche in mipv6 con il tunneling?
-- Differenze tra mipv4 e mipv4? (x2)
-- Ottimizzazioni del triangular routing?
-- Problema di mipv6 perché è poco adottato?
-- Ottimizzazioni presenti?
-- principali differenze con MobileIPv6
+- What are the main **differences** between Mobile IP and Mobile IPv6?
 
 <details><summary><b>Answer: </b></summary>
 
 #### What is Mobile IP and what is its purpose?
-Mobile IP is a communication protocol (standard) that allows mobile hosts to move by keeping a permanent IP address. That's useful for example to keep ongoing active TCP connections while moving between different APs.
+Mobile IP was the only successful level 3 standard (network layer) that solved mobility issues in infrastructured networks. It allows mobile nodes to move between different APs by keeping a permanent IP address, abstracting it from upper layers, to whitch it's completely transparent.\
+That's useful for example to keep ongoing active TCP connections while moving between different APs.
+
+NB: Mobile IP idea is to be completely transparent to other layers and be free for extra configuration needed to be done, for example, by network administrators.
 
 #### How does Mobile IP work?
 In Mobile IP, a Mobile Host (**MH**) has 2 IP addresses:
 - **Home Address (HoA)**, is the permanent IP address;
 - **Care-of Address (CoA)**, is a temporary address, which is associated to the network the MH is currently visiting.
 
-The basic idea can be compared to moving to a new apartment: if the post office is not informed, the mails will keep arrive to the old aparment. Mobile IP works just like that. There are 2 crucial entities:
+The basic idea can be compared to moving to a new apartment: if the post office is not informed, the mails will keep arrive to the old aparment. Mobile IP works just like that.\
+There are 2 crucial entities:
 - Home Agent (**HA**, ~old post office), is a router that maintains a table with the information of all the MHs whose permanent IP address is in the HA network.
 - Foreign Agent (**FA**, ~new post office), is a router that maintains information about MHs that are visiting its network, by assigning them a CoA, which is needed to route traffic from/to a MH and its HA.
 
-To perform the communication, HA and FA enstablish a tunnel connection whose endpoints are the permament IP address and the CoA of the two hosts involved in communication. HA and FA perform the routing, based on IP-within-IP encapsulation ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003)). The communication chain is CH->HA->FA->MH
+To perform the communication, HA and FA enstablish a **tunnel connection** whose endpoints are the permament IP address and the CoA of the two hosts involved in communication. HA and FA perform the routing, based on IP-within-IP encapsulation ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003)). The communication chain is CH->HA->FA->MH.
 
-#### What happens if the MH moves to another network (different FA)? Is there packet loss?
-If a MH moves to a new FA, the packets that meanwhile were sent to it, will be delivered to the old FA, who will drop them. There's no mechanism that prevents this behaviour in Mobile IP
+#### What's Mobile IP **triangular routing**? How can it be optimized?
+**Triangular routing** is the most common problem in Mobile IP. It occurs when MH and CH are close, but the HA is far, making the path much longer that it should have been, and generating overhead.
+
+A possible optimization would be to make the correspondent node CH aware of the CoA of MH, after the first interaction: when CH sends its first packet to HA, HA sends back the CoA of MH. Afterwards, CH and MH can communicate directly through tunneling. This solution solves both triangular routing and ingress/egress problems, but is only part of Mobile IPv6, so both CH and MH must be compliant with it.
+
+#### Does Mobile IP face **ingress/egress filtering problems**? How can they be solved?
+Ingress/Egress filtering problem is typical of Mobile IP and occurs when CH is located in the Home Network, due to routers firewalls (FA and HA): the router may decide to drop packets because the address inside the header is "strange":
+- **egress filtering**, the source address of a packet coming from the internal network doesn't belonging to the internal network;
+- **ingress filtering**, the destination address of a packet arriving from an external network belongs to the internal network (HA's one), instead of an external one.
+
+A possible solution would be to configure the router's firewall to not drop these packets, but that's not Mobile IP initial idea, as it wanted to prevent any kind of extra configurations of the infrastructure.\
+Therefore, a more suitable solution, is to make HA and FA use the tunneling in both directions. However, that generates even more overhead, with the so called **quadrilateral routing**, and for this reason is left optional.
+
+#### What happens during Mobile IP handover, in terms of **packet loss**? Is there any? Does FA **retransmit** packets?
+When a MH moves to another network (new FA -> new CoA), the packets that meanwhile were sent to the old CoA (before CoA is updated), will still be delivered to the old FA, who will drop them. Therefore there may be some packet loss. 
+
+From the CH (could be a service, e.g. YouTube) point of view, there are no changes at all! It keeps sending packets to HA, which then forwards them to the correct FA through the CoA.
+
+Mobile IP doesn't specify anything about packet loss and retransmission, therefore FA doesn't perform any kind of retransmission. There might be some delay or packet loss, but the service continuity (connection) is kept, which it was the purpose of Mobile IP.\
+If we want retransmission, that must be implemented by upper layers. For example TCP does that through ACK; UDP, on the other hand, does not.
 
 #### Mobile IP is proactive or reactive? Vertical or horizontal?
 Mobile IP is typically considered to be reactive, due to the registration often being triggered by the movement of the node, with no previous notifications.
 
 I would also consider it horizontal, since it's basically a routing protocol, for mobile nodes in infrastructured networks. It uses and itneracts with different layers too (MAC addresses, upper layers to prevent packet loss in some way, etc.), but it's main purpose is communication routing in mobile nodes.
+
+#### What are the main **differences** between Mobile IP and Mobile IPv6?
+Mobile IP was created as a patch to the existing IP, in order to support mobility in infrastructure network, trying to make it the most transparent as possible. This transparency constraints, as a direct consequence, generates some obvious overhead and side-effects, such as triangular routing and ingress/egress filtering problems.
+
+Mobile IPv6, on the other hand, doesn't have those problems
+For example, it automatically solves the triangular routing problem, by making CH aware of MH CoA: after the first message from CH to HA, the HA sends back a CoA update, so that further communication between CH and MH can happen in a direct way between the two nodes.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -611,6 +626,15 @@ I would also consider it horizontal, since it's basically a routing protocol, fo
 
 ### I-TCP
 **Question**: 
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### GPS
+**Question**:
 <details><summary><b>Answer: </b></summary>
 
 </details>
