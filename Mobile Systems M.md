@@ -220,8 +220,8 @@ A Mobile Station (mobile node, e.g. a smartphone) is composed by:
 - one **Terminal Equipment (TE)**, containing terminal/user-specific data (associated with SIM card)
 - one **Mobile Terminal (MT)**, that allows to communicate with the BSS.
 A Base Subsystem Station (BSS) is composed by:
-- one **Base Station Controller (BSC)**, that manages radio channels, paging and handoff for different BTSs;
-- many **Base Transceiver Station (BTS)**, that manages channel allocation, signaling, frequency hopping, handover triggers. BTS contains transceiver that enable them to communicate with MS.
+- many **Base Transceiver Station (BTS)**, that is responsible for radio communication with mobile devices;
+- one **Base Station Controller (BSC)**, that manages and controls multiple (co-located) BTSs. It's responsible for the allocation of radio channels on BTS, and also coordinates the handover process between different cells;
 
 ##### BTS (Base Transceiver Station)
 BTS are distributed accross the country and provide coverage to mobile devices.
@@ -242,7 +242,7 @@ MSC acts like a **gateway** to:
 
 MSC contains 2 registries:
 - **Home Location Register (HLR)** is a centralized database that stores permanent info about subscribed (literally "abbonati", via a telephonic/Internet contract) mobile devices. These info includes and identifier, some location data, service that the user activated, etc. When a mobile node - subscribed to that HLR - starts a call or data session, the MSC queries the HLR to get the needed info.
-- **Visitor Location Register (VLR)** is a temporary database associated with each MSC and stores info about mobile devices currently within the coverage range of that MSC (i.e. under one or more of the BSS referencing that MSC). When a mobile device enters the coverage area of a MSC, its VLR is updated. It also help in load balancing, since it reduces the overall query load to the centralized HLR.
+- **Visitor Location Register (VLR)** is a temporary database associated with each MSC and stores info about mobile devices currently within the coverage range of that MSC (i.e. under one or more of the BSS referencing that MSC). When a mobile device enters the coverage area of a MSC, its VLR is updated by querying the HLR of the MSC where it was initially registered. It also help in load balancing, since it reduces the overall query load to the centralized HLR.
 MSC, HLR and VLR serve to provide seamless mobile communication services, ensuring that subscriber information is efficiently managed, and calls can be set up regardless of the mobile device's current location, within the network.
 
 #### GSM Handoff (or Handover)
@@ -357,9 +357,10 @@ Any bluetooth device has its own native logical clock CLKN. The piconet has a cl
 #### Connections
 There are 2 types of connections:
 - ==**Asynchronous Connection-Less (ACL)**==: used for **data** traffic (not voice or multimedia) and best-effort service (simplicity over guarantees). Supports:
+	- best-effort service;
 	- packet-switch connections;
 	- point-multipoint connections;
-	- symmetric (max ~400Kbit/s)/asymmetric (max ~700Kbit/s downlink and ~60Kbit/s uplink) connections.
+	- symmetric (max ~400Kbit/s) or asymmetric (max ~700Kbit/s downlink and ~60Kbit/s uplink) connections.
 	NB: a slave can transmit only if it received the permission from the master in the previous slot.
 - ==**Synchronous Connection-Oriented (SCO)**==: used for real-time and **multimedia** traffic. Guaranteed bandwidth (64Kbit/s). Support:
 	- circuit-switched connections;
@@ -600,13 +601,104 @@ Problems:
 - delegate disconnection;
 
 
+## Chapter 3 - Mobile IP and Positioning
+In infrastructured networks, the routing problem is already almost solved: the mobile node connects to an Access Point and the rest is managed through traditional routing.
 
+However, when a node moves, it could change AP and the IP address (node identifier) as well, aborting any ongoing active connection. In GSM/3G/4G networks, there is a proactive resource acquisition for channel allocation to obtain service continuity. The solution would be to keep the same IP address for a mobile user even when it moves, but is it possible?
 
-## Chapter 3 - asted image 20231210014023.
+### Position Management
+2 approaches to know mobile nodes position:
+- **location update**, nodes share their position to the infrastructure;
+- **location search**, the infrastructure collects location information of mobile nodes;
 
-### 2.1 MANET and Routing
+In Wi-Fi typically the approach is location update, because it's not the purpose of Wi-Fi to discover position of mobile nodes; on the other hand, in cellular networks (GSM, etc.) the approach is usually location search.
 
-### 2.2 Mobile IP and Positioning
+#### Location Update
+Can be:
+- **static**, updates are triggered when exiting a predefined area;
+- **dynamic**, triggering depends on user communications and mobility patterns (e.g. data based on time, movement, distance, which are values that can change dynamically in time);
+
+#### Location Search
+Different approaches:
+- **blanket polling**, asking in local broadcast all the cells of an area (e.g. all the cells under the control of the MSC where the call arrives);
+- **expanding ring search**, starting from the last known location of the device, incrementally expanding the search range (similar to flooding with increasing TTL);
+- **sequential paging**, based estimation of location probability (sequentially from the most probable to the least one). 
+
+### Host Identity Protocol
+It was a network protocol that proposed to separate the identity and locality information of hosts:
+- Host Identity Tag (HIT), for the host identification;
+- IP, for the host location;
+When Internet was born, it was designed for static network infrastructure "star-like", completely ignoring mobility and security.
+
+To not change the TCP/IP stack (i.e. to not touch existing layers), it introduces a new intermediate layer (~2.5 layer) between network and transport layers.
+
+**Main disadvantage**: compliant devices must implement HIP at kernel level, since they must change their TCP/IP stack.
+
+### Mobile IP
+Mobile IP is the one standard that had success in solving mobility issues. 
+
+**Problem**: an IP address associated with a mobile node, depends on the network it's attached to. When it changes the network, the IP typically changes and packets belonging to currently active connections have to be delivered towards the new IP address.
+
+**Intuitive solution**: ~location update approach. To handle it as if you were moving in a new apartment. You leave a forwarding address to the old post-office, which then is delegated to send the messages to your new location.
+
+#### Main Idea
+Consider two nodes:
+- **Mobile Host (MH)**, can move and receives data;
+- **Correspondent Host (CH)**, can be fixed or mobile, and sends data (packets) to MH.
+According to Mobile IP, the information about MH location, is always maintained in a third node called **Home Agent (HA)**. Therefore, when CH wants to send packets to MH, it doesn't send them directly to MH (CH doesn't know its position), but sends them to HA, which acts like an intermediary node. 
+Actually, HA doesn't forward them directly to MH, but to another intermediary node called **Foreign Agent (FA)**.
+![[mobile_ip_basic_idea.png]]
+
+Basically:
+- **Home Agent (HA)** is the old post office (intermediary sender);
+- **Forward Agent (FA)** is the new post office (intermediary receiver);
+
+**Problem**: triangular routing, when the HA is located far but MH and CH are close. In this situation the protocol is very inefficient.
+##### Home Agent
+It plays the role of **router** and is positioned inside the home network of MH. it's purpose is to **maintain the mobility binding** of MH's **IP address** with its **Care-of Address (CoA)**, which is an IP address that identifies the current location of MH.
+
+##### Foreign Agent
+Is a router as well. When MH is not in the same area of HA, the FA is used to send/receive data to/from HA.
+To associate MH to the FA in a certain area:
+- FA periodically sends advertising messages to discover the MH in his own locality;
+- MH can also send solicitation messages to register its CoA to FA;
+Once the MH is associated with the FA, it will receive from it a CoA (temporary IP), and the MH will register it its HA, passing through the FA.
+
+![[mobile_ip_address_management.png]]
+
+Example:
+1. CH wants to communicate with MH (it knows its HoA). 
+2. CH uses the permanent home IP address MH as the destination address of the packets to send. 
+3. But this IP address belongs to the HA, which instead of forwarding the packets to a node that is physically inside its network, it redirects them towards the CoA through an IP tunnel ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003)), that means encapsulating the packet in a new IP packet, but with a different IP address: the CoA.
+
+![[mobile_ip_example.png]]
+
+#### Care-of Address
+There are two types of CoA (the network admin can decide which one to use):
+- **Foreign Agent CoA**, it is the FA IP address itself and is provided to the MH through advertising messages. To distinguish between different MH under the same FA network, FA also registers the MH's **MAC** addresses. This way there's o waste of IP addresses.
+- **Co-Located CoA**, is a standard IP address, allocated by the FA for a single MH. This way, the HA packets can reach *directly* the MH, but if there are too many FA risks to run out of available addresses.
+#### Tunneling
+The CH packet is encapsulated from HA in the payload of another packet that contains the CoA of the destination (MH) in its header. This mechanism is called **IP-withing-IP** ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003) standard).
+
+##### Practical Example
+Suppose we buy a new laptop (MH) and we wanna use MobileIP. We inform our network administrator, so it provides us a permanent Mobile IP (HoA): 10.0.8.5. This address binds us permanently to the HA, which is the gateway of the network to which our HoA belongs (10.0.8.0/24).
+Then we move to a new FA (10.4.5.43) and we receive from it a new CoA (the address of the FA, 10.4.5.43). MH register it in the home HA, passing through FA.
+
+A new node, CH wants to communicate with us: it knows the IP of our laptop, and will send packets setting 10.0.8.5 as the destination address. Those packets will reach the HA, that will incapsulate them in a new IP packet with FA CoA destination (10.4.5.43).
+
+When these packets reach FA, FA will decapsulate them and will route them towards our node, using the MAC address of our laptop.
+
+To send packets back to CH, instead, we can use direct communication exploiting the node IP address, since it's contained in the packet's header source field.
+
+> **NB**: if a MH leaves the FA network, and meanwhile it receives packets for the MH, those packets are dropped: there's no recover mechanism in Mobile IP. However, upper layers could implement something to solve this issue (e.g. ACK in TCP).
+
+### Issues in Ingress/Egress Filtering
+The HA encapsulation has some side effects: routers may **drop MH packets** because the addresses doesn't match:
+- source address not belonging to the HA internal network;
+- destination address not belonging to an external network, but the HA's one;
+Possible solution is to configure the routers to not drop those packets. However, there's nothing in the standard that say anything about this problem, because it's not Mobile IP's idea/purpose.
+That would consist in enabling a bi-directional tunnel, worsening the already present problem of inefficiency (**quadrilateral routing**).
+![[quadrilateral_routing.png]]
 
 ## Chapter 4 - IoT and Related Applications
 
