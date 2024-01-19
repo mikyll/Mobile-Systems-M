@@ -26,3 +26,10 @@
 	- link failure detection and handling
 	- optimizations
 	- loops
+
+## Chapter 3 - Mobile IP and Positioning
+- Host Identity Protocol: general idea
+- Mobile IP
+	- general idea and involved entities
+	- Care-of Address implementations
+	- 
