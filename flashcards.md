@@ -538,8 +538,79 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 
 ## Chapter 3 - Mobile IP and Positioning
 
-### Topic
+### Host Identity Protocol (HIP)
 **Question**:
+- What is **HIP** and how does it work?
+- Why it didn't have success?
+<details><summary><b>Answer: </b></summary>
+
+#### What is HIP and how does it work?
+Host Identity Protocol (HIP) is a protocol (defined by a standard) that proposed to separate the information about hosts identity from the one about their location. In fact, when Internet was born, it was designed for static network infrastructures, completely ignoring mobility and security.
+
+To bypass traditional IP problem, HIP proposed to upgrade the TCP/IP stack inserting a sort of 2.5-level layer between network and transport layers, to include HIP functionalities. This basically included a mechanism that obliged nodes to update their positioning information and propagate those when changing network.
+
+#### Why it didn't have success?
+This solution was never actually successful due to the fact that for a device to be compliant, it must implement HIP at kernel level, in order to upgrade their TCP/IP stack. This and also the creation of Mobile IP, which didn't need any change to devices.
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Mobile IP ([RFC 5944](https://datatracker.ietf.org/doc/html/rfc5944))
+**Question**:
+- What is Mobile IP and what is its purpose?
+- How does Mobile IP work?
+- What happens if the MH moves to another network (different FA)? Is there packet loss?
+
+- Mobile IP is proactive or reactive? Vertical or horizontal?
+
+- 
+- Durante lo spostamento in una località i pacchetti continuano ad arrivare all’FA?
+- Il vecchio FA effettua la ritrasmissione dei pacchetti ?
+
+- Cosa succede nell’handoff in mobile Ip? (x2)
+- Problemi scarto pacchetti ingresso e uscita?
+- Il problema di avere lo stesso indirizzo c’è anche in ip v4?
+- Perché mipv6 non è usato ?
+- In mipv4 si possono perdere pacchetti succede anche in mipv6 con il tunneling?
+- Differenze tra mipv4 e mipv4? (x2)
+- Ottimizzazioni del triangular routing?
+- Problema di mipv6 perché è poco adottato?
+- Ottimizzazioni presenti?
+- principali differenze con MobileIPv6
+
+<details><summary><b>Answer: </b></summary>
+
+#### What is Mobile IP and what is its purpose?
+Mobile IP is a communication protocol (standard) that allows mobile hosts to move by keeping a permanent IP address. That's useful for example to keep ongoing active TCP connections while moving between different APs.
+
+#### How does Mobile IP work?
+In Mobile IP, a Mobile Host (**MH**) has 2 IP addresses:
+- **Home Address (HoA)**, is the permanent IP address;
+- **Care-of Address (CoA)**, is a temporary address, which is associated to the network the MH is currently visiting.
+
+The basic idea can be compared to moving to a new apartment: if the post office is not informed, the mails will keep arrive to the old aparment. Mobile IP works just like that. There are 2 crucial entities:
+- Home Agent (**HA**, ~old post office), is a router that maintains a table with the information of all the MHs whose permanent IP address is in the HA network.
+- Foreign Agent (**FA**, ~new post office), is a router that maintains information about MHs that are visiting its network, by assigning them a CoA, which is needed to route traffic from/to a MH and its HA.
+
+To perform the communication, HA and FA enstablish a tunnel connection whose endpoints are the permament IP address and the CoA of the two hosts involved in communication. HA and FA perform the routing, based on IP-within-IP encapsulation ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003)). The communication chain is CH->HA->FA->MH
+
+#### What happens if the MH moves to another network (different FA)? Is there packet loss?
+If a MH moves to a new FA, the packets that meanwhile were sent to it, will be delivered to the old FA, who will drop them. There's no mechanism that prevents this behaviour in Mobile IP
+
+#### Mobile IP is proactive or reactive? Vertical or horizontal?
+Mobile IP is typically considered to be reactive, due to the registration often being triggered by the movement of the node, with no previous notifications.
+
+I would also consider it horizontal, since it's basically a routing protocol, for mobile nodes in infrastructured networks. It uses and itneracts with different layers too (MAC addresses, upper layers to prevent packet loss in some way, etc.), but it's main purpose is communication routing in mobile nodes.
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### I-TCP
+**Question**: 
 <details><summary><b>Answer: </b></summary>
 
 </details>
@@ -593,5 +664,36 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 
 ---
 ```
+
+Mobile Ip
+- Cosa succede nell’handoff in mobile Ip
+- Cosa succede quando l’MH si sposta in una località diversa
+- C’è perdita di pacchetti?
+- Durante lo spostamento in una località i pacchetti continuano ad arrivare all’fa?
+- Il vecchio fa effettua la ritrasmissione dei pacchetti ?
+- Mobile ip è reattivo o proattivo?
+- È verticale o orizzontale?
+- Problemi scarto pacchetti ingresso e uscita?
+- Il problema di avere lo stesso indirizzo c’è anche in ip v4?
+- Perché mipv6 non è usato ?
+- In mipv4 si possono perdere pacchetti succede anche in mipv6 con il tunneling?
+- Differenze tra mipv4 e mipv4? (x2)
+- Ottimizzazioni del triangular routing?
+- Problema di mipv6 perché è poco adottato?
+- Ottimizzazioni presenti?
+- MobileIP: handoff
+- principali differenze con MobileIPv6
+- HIP
+
+Sistemi di posizionamento
+- GPS
+- Differential GPS
+- Differenza tra precisione e accuratezza
+- Perché non si risolve il multipath fading?
+- Differenza tra KAU e radar
+- Radar vs Ekahau
+
+---
+
 roba da chiedere al prof:
 ho letto che le implementazioni moderne del WiFi utilizzano CSMA/CA, che praticamente integra MACA, ma in questo caso, viene comunque (solitamente) lasciato opzionale?
