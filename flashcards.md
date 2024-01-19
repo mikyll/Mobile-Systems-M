@@ -570,10 +570,10 @@ This solution was never actually successful due to the fact that for a device to
 <details><summary><b>Answer: </b></summary>
 
 #### What is Mobile IP and what is its purpose?
-Mobile IP was the only successful level 3 standard (network layer) that solved mobility issues in infrastructured networks. It allows mobile nodes to move between different APs by keeping a permanent IP address, abstracting it from upper layers, to whitch it's completely transparent.\
+Mobile IP was the only successful level 3 standard (network layer) that solved mobility issues in infrastructured networks. It allows mobile nodes to move between different APs by keeping a permanent IP address, abstracting it from upper layers, to whitch it's completely **transparent**.\
 That's useful for example to keep ongoing active TCP connections while moving between different APs.
 
-NB: Mobile IP idea is to be completely transparent to other layers and be free for extra configuration needed to be done, for example, by network administrators.
+NB: Mobile IP idea is to be a **patch** to the traditional IP, and also be completely transparent to other layers and be free for extra configuration needed to be done, for example, by network administrators.
 
 #### How does Mobile IP work?
 In Mobile IP, a Mobile Host (**MH**) has 2 IP addresses:
@@ -585,12 +585,12 @@ There are 2 crucial entities:
 - Home Agent (**HA**, ~old post office), is a router that maintains a table with the information of all the MHs whose permanent IP address is in the HA network.
 - Foreign Agent (**FA**, ~new post office), is a router that maintains information about MHs that are visiting its network, by assigning them a CoA, which is needed to route traffic from/to a MH and its HA.
 
-To perform the communication, HA and FA enstablish a **tunnel connection** whose endpoints are the permament IP address and the CoA of the two hosts involved in communication. HA and FA perform the routing, based on IP-within-IP encapsulation ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003)). The communication chain is CH->HA->FA->MH.
+To perform the communication, HA and FA enstablish a mono-directional (HA->FA) **tunnel connection**, using as IP addresses respectively the permament IP address (HA) and the CoA (FA). The communication tunnel is based on IP-within-IP standard ([RFC 2003](https://datatracker.ietf.org/doc/html/rfc2003)). The communication chain is CH->HA(encapsulation)->(decapsulation)FA->MH.
 
 #### What's Mobile IP **triangular routing**? How can it be optimized?
-**Triangular routing** is the most common problem in Mobile IP. It occurs when MH and CH are close, but the HA is far, making the path much longer that it should have been, and generating overhead.
+**Triangular routing** is the most common problem in Mobile IP. It occurs when MH and CH are close, but the HA is far, making the path much longer that it could have been, and generating overhead.
 
-A possible optimization would be to make the correspondent node CH aware of the CoA of MH, after the first interaction: when CH sends its first packet to HA, HA sends back the CoA of MH. Afterwards, CH and MH can communicate directly through tunneling. This solution solves both triangular routing and ingress/egress problems, but is only part of Mobile IPv6, so both CH and MH must be compliant with it.
+A possible optimization would be to make the correspondent node CH aware of the CoA of MH, after the first interaction: when CH sends its first packet to HA, HA sends back the CoA of MH. Afterwards, CH and MH can communicate directly through tunneling. This solution solves both triangular routing and ingress/egress problems, but is only part of **Mobile IPv6**, so both CH and MH must be compliant with it.
 
 #### Does Mobile IP face **ingress/egress filtering problems**? How can they be solved?
 Ingress/Egress filtering problem is typical of Mobile IP and occurs when CH is located in the Home Network, due to routers firewalls (FA and HA): the router may decide to drop packets because the address inside the header is "strange":
