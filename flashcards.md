@@ -545,7 +545,7 @@ Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their 
 <details><summary><b>Answer: </b></summary>
 
 #### What is HIP and how does it work?
-Host Identity Protocol (HIP) is a protocol (defined by a standard) that proposed to separate the information about hosts identity from the one about their location. In fact, when Internet was born, it was designed for static network infrastructures, completely ignoring mobility and security.
+**Host Identity Protocol (HIP)** is a protocol (defined by standard [RFC 5203](https://datatracker.ietf.org/doc/html/rfc5203)) that proposed to separate the information about hosts identity from the one about their location. In fact, when Internet was born, it was designed for static network infrastructures, completely ignoring mobility and security.
 
 To bypass traditional IP problem, HIP proposed to upgrade the TCP/IP stack inserting a sort of 2.5-level layer between network and transport layers, to include HIP functionalities. This basically included a mechanism that obliged nodes to update their positioning information and propagate those when changing network.
 
