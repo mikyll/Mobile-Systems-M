@@ -197,7 +197,7 @@ Handoff classifications:
 
 ### GSM: Handoff (2)
 **Question**:
-- How is the **handoff** handled (distinguish between same and different localities)? TODO
+- How is the **handoff** handled (distinguish between same and different localities)?
 - Can packets be **lost**?
 - Does a long call create a chain?
 - Is the MSC chain kept?
@@ -373,7 +373,7 @@ Broadcast storm issue, is something that's often involved in flooding, and occur
 - What **problems** there could be?
 - How can it be **optimized**?
 
-<details><summary><b>Answer: TODO</b></summary>
+<details><summary><b>Answer:</b></summary>
 
 #### What is DSR routing and how does it **work**?
 Dynamic Source Routing (DSR) is a full reactive routing protocol, where the sender has to find a valid routing path. The steps for Source (S) to find a valid route to reach Destination (D), are the following:
@@ -633,8 +633,148 @@ For example, it automatically solves the triangular routing problem, by making C
 
 ---
 
-### GPS
+### Positioning Systems
 **Question**:
+- How can positioning systems be **classified**?
+- What are the **basic techniques** to calculate devices distance? 
+- What are the main **error sources**?
+
+<details><summary><b>Answer: </b></summary>
+
+#### How can positioning systems be **classified**?
+Positioning systems can be classified in the following categories:
+- **physical**/**symbolic** systems:
+  - **physical** systems give specific numeric data that identify a location, such as latitude, longitude, ellipsoid height (altitude);
+  - **symbolic** systems give symbolic positions, at higher level of abstraction, such as "Italy", "University of Bologna", etc. The privacy is higher;
+- **absolute**/**relative** systems:
+  - **absolute** systems have the location refer to only one localization device;  
+  - **relative** systems have the location refer to the position of multiple devices;
+- **centralized**/**decentralized** systems:
+  - **centralized** systems exploit a centralized node that collects info for each considered device;
+  - in **decentralized** systems, each device auto-detects its own location.
+
+Other factors:
+- **accuracy** is the error range (radius of the "coverage area");
+- **precision** is the confidence (probability) or trust degree, associated with the accuracy;
+- **privacy** depends on having to share the information about your position in order to detect your location;
+- **scalability** depends on the area to be covered, the number of users, number of devices to deploy, etc.;
+- **technology costraints** and **costs** depends on infrastructure, environment and hardware needed for the system to work properly;
+
+#### What are the **basic techniques** to calculate devices distance?
+**Lateration** (triangulation): can be used to calculate a 2D point (latitude and longitude) and consists in calculating the distance to at least 3 reference points. Then the distance to each point is used to draw a circumference. The intersection of these circumferences gives the location of the wanted point.
+> If the circumferences are tangent, 2 reference points are enough, but that's quite unusual.
+![alt](./resources/gfx/lateration.png)
+
+
+There are different ways to calculate the distance:
+- Based on **signal propagation**: `d = ToA * vS`, distance is equal to the Time of Arrival of the signal, multiplied for its velocity. Clocks of the two devices (sender and receiver) must be synchronized (used in GPS).
+- Based on **signal strength**: Received Signal Strenght Indication (RSSI).
+
+**Time Difference of Arrival**: uses the difference of arrival of a signal to two reference points. This gives an hyperbole of possible locations. By intersecting two hyperboles it's possible to obtain the location.\
+Difference with lateration is that you don't need clock synchronization.
+
+**Angulation**: is based on Carnot’s theorem. If we have 2 reference points, and the distance within them is, if they are able to calculate the angle they form with the device (quite difficult, they would need a directional antenna), it's possible to calculate the remaining edges (~distances to the device) of the triangle with Carnot’s theorem.
+
+**Proximity**: is based on the coverage range of the reference points. The output is a boolean that indicate if the device is inside or outside an area (the accuracy vary on the hardware of the reference point). Examples: RFID, car seat, etc.
+
+**Scene Analysis**: uses elements from the surrounding environment (RSSI, temperature, images, etc.) to know where a device is located. It's typically used indoor and consists of two phases:
+- environment analysis;
+- real-time processing.
+
+#### What are the main **error sources**?
+The most common error sources are the following:
+- non line of sight (**NLoS**);
+- **shadowing** and **multipath** fading;
+- **clock skew**, which is due to wrong clock synchronization;
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Positioning Systems in MANET
+**Question**:
+- What are **ABC** and **TERRAIN**?
+
+<details><summary><b>Answer: </b></summary>
+
+Assumtpion-Based Coordinates (ABC) and Triangulation via Extended Range and Redundant
+Association of Intermediate Nodes (TERRAIN) are two positioning systems used in MANET. The main difference is that:
+- in ABC nodes use **single-hop** neighbours distances (known data/assumptions) to build a local reference system (~local map) that provides location information;
+- in TERRAIN the approach is **multi-hop**, and nodes **share** their maps with other nodes.
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+- GPS
+- Differential GPS
+- Perché non si risolve il multipath fading?
+- Radar vs Ekahau (x2)
+
+### Positioning Systems with Dedicated Hardware
+**Question**:
+- What is **GPS** and how does it work?
+- What is **D-GPS** and how does it work?
+- What are the **main differences** between GPS and D-GPS? Why doesn't D-GPS solve multipath?
+- What are **Active Badge** and **Active BAT**? What are their main differences?
+
+<details><summary><b>Answer: </b></summary>
+
+> NB: dedicated hardware solutions are tyically better (more accuracy and precision), but tend to increase device size and energy consumption.
+
+#### What is **GPS** and how does it work?
+Global Positioning System (GPS) is a positioning and navigation system that exploits specific hardware. The reference points are satellites that orbits at over 18.000km from the surface of the planet. GPS is based on:
+- **lateration** for the localization of nodes. With 3 satellites we have 3 spheres (3D points), that indicate 2 points, but typically only one is located on the planet surface;
+- **ToA** (Time of Arrival) to calculate distances. Satellites send packets containing a timestamp;
+
+In order to work, satellites clocks and the device one must be synchronized. Satellites use atomic clocks and perform periodic synching processes, while smartphones, for example, have a less precise clock. Typically the position is calculated as a system of 4 (or more) equations in 3 coordinates, obtained for 4 satellites (or more).
+
+> **NB**: since the GPS is based on electromagnetic signals, it can be affected by obstacles, and that's also the reason why it doesn't work correctly in indoor environments.
+
+Some of the most common errors that impact GPS distance calculations are:
+- **atmospheric** conditions;
+- **Ephemerides** errors, due to periodic variations of the satellites orbit trajectiories;
+- **clock drift**;
+- **noise** in measurements;
+- **multipath** fading;
+- **Selective Availability**, which is an artificial error introduced by the american military by purpose, to make the civil usage of GPS less precise;
+
+> Consideration: GPS is "privacy-oriented", since each device can calculate it's position without anyone else knowing it.
+
+#### What is **D-GPS** and how does it work?
+Differential GPS (D-GPS) helps reducing the accuracy error of GPS (from 50-100m to 15-50cm!!!). This standard works thanks to **ground fixed infrastructures** (with well-known position) that periodically perform measurements through GPS and calculate the error between the GPS measurements and their actual position. This difference can then be subtracted from the GPS measurements of any device, to obtain a much more accurate location.
+
+#### What are the **main differences** between GPS and D-GPS? Why doesn't D-GPS solve multipath?
+The main differences between GPS and D-GPS are in error sources:
+
+| Source | GPS    | D-GPS  |
+| ------ | ------ | ------ |
+
+#### What are **Active Badge** and **Active BAT**? What are their main differences?
+TODO
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Active Badge and Active BAT
+**Question**:
+
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Positioning Systems with No Dedicated Hardware
+**Question**:
+
+
 <details><summary><b>Answer: </b></summary>
 
 </details>

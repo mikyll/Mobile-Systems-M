@@ -750,9 +750,68 @@ The main comparison between PMIPv6 and Mobile IP is that:
 The difference is that, in PMIPv6, when a node moves from a MAG to another, the tunnel change occurs through a binding update, while in MIP, MHs are forced to be involved
 
 ### I-TCP
-It's a patch ot TCP. Transport level solution.
+Mobile infrastructured networks at layer 4. Is TCP suitable? Not at all.
+Wireless links in mobile systems are characterized by frequent disconnections and reconnections (high Bit Error Rate - BER). Since TCP treats any problem as a congestion problem, those mobile systems problems causes a degenerative reduction in transmission speed (due to how TCP handles congestions, by incrementally increasing/decreasing the traffic speed).
 
-Any problem in TCP is interpreted as congestion
+I-TCP tries to solve this problem: it's a patch to TCP (transport level). The main idea is to **split the connection in segments**:
+- we leave standard TCP where it doesn't cause problems, such as in cabled links (e.g. from Base Station MSR to Fixed Host);
+- we adopt Wireless-TCP where there could be problems that traditional TCP would handle inefficiently, such as in wireless links.
+![[i-tcp.png]]
+
+
+The main disadvantages are that the end-to-end semantic is violated, and if a MSR breaks, there is a spike of latency and probable connection lost.
+### Recap
+
+### Positioning Systems
+Positioning systems can be classified in:
+- **physical** systems, give specific numeric data that identify a location, such as latitude, longitude and ellipsoid height (altitude) (e.g. GPS); 
+- **symbolic** systems, give symbolic positions, higher level of abstraction, such as "Italy", "University of Bologna", etc. Higher privacy because the position obtained doesn't allow to detect exactly where the device is located;
+- **absolute** systems, the location refers to only one localization system;
+- **relative** systems, the location depends on the position of another device.
+- **centralized** systems, exploit a centralized system that collects info for each considered device;
+- **distributed** systems, each device auto-detects its own location.
+
+**Accuracy**: is the error range (radius of the "coverage range").
+**Privacy**: is the confidence (probability) or trust degree, associated with the accuracy.
+
+#### Basic Techniques
+
+##### Lateration
+![[lateration.png]]
+
+
+#### GPS
+Global Positioning System
+
+#### D-GPS
+Differential GPS (D-GPS)
+
+#### Indoor Environments
+
+##### Active Badge
+
+##### Active BAT
+
+#### Without Dedicated Hardware
+
+##### GSM-based
+
+##### Bluetooth-based
+
+
+#### Wi-Fi Fingerprinting
+
+##### PlaceLab
+
+##### RADAR
+
+##### Ekahau
+
+#### Sensor Fusion and VTT
+
+##### JSR-179 
+
+##### PoSIM
 
 
 
