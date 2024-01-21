@@ -708,11 +708,6 @@ Association of Intermediate Nodes (TERRAIN) are two positioning systems used in 
 
 ---
 
-- GPS
-- Differential GPS
-- Perché non si risolve il multipath fading?
-- Radar vs Ekahau (x2)
-
 ### Positioning Systems with Dedicated Hardware
 **Question**:
 - What is **GPS** and how does it work?
@@ -739,32 +734,31 @@ Some of the most common errors that impact GPS distance calculations are:
 - **clock drift**;
 - **noise** in measurements;
 - **multipath** fading;
-- **Selective Availability**, which is an artificial error introduced by the american military by purpose, to make the civil usage of GPS less precise;
+- **Selective Availability**, which is an artificial random error introduced by the american military by purpose, to make the civil usage of GPS less precise;
 
-> Consideration: GPS is "privacy-oriented", since each device can calculate it's position without anyone else knowing it.
+> Consideration: GPS guarantees privacy, since each device can calculate it's position without anyone else knowing it; the infrastructure cost is quite high (at least 24 satellites); high scalability; can be used only outdoor.
 
 #### What is **D-GPS** and how does it work?
-Differential GPS (D-GPS) helps reducing the accuracy error of GPS (from 50-100m to 15-50cm!!!). This standard works thanks to **ground fixed infrastructures** (with well-known position) that periodically perform measurements through GPS and calculate the error between the GPS measurements and their actual position. This difference can then be subtracted from the GPS measurements of any device, to obtain a much more accurate location.
+Differential GPS (D-GPS) helps reducing the accuracy error of GPS (from 50-100m to 15-50cm!!!). This standard works thanks to **ground fixed infrastructures** (base stations with well-known position) that periodically perform measurements through GPS and calculate the error between the GPS measurements and their actual position. This difference can then be subtracted from the GPS measurements of any device, to obtain a much more accurate location.
 
 #### What are the **main differences** between GPS and D-GPS? Why doesn't D-GPS solve multipath?
 The main differences between GPS and D-GPS are in error sources:
 
-| Source | GPS    | D-GPS  |
-| ------ | ------ | ------ |
+| Error Source | GPS    | D-GPS             |
+| ------------ | ------ | ----------------- |
+| Atmoshere    | 0-30m  | ✔️ Mostly removed |
+| Ephemeris    | 0-10m  | ✔️ All removed    |
+| Clock drift  | 1-5m   | ✔️ All removed    |
+| Signal Noise | 0-1.5m | ✔️ All removed    |
+| Multipath    | 0-1m   | ❌ Not removed    |
+| S.A.         | 0-70m  | ✔️ All removed    |
+
+D-GPS doesn't solve multipath fading, because the obstacles that blocks or reflects signals are also present between the fixed ground stations, and are also bigger.
 
 #### What are **Active Badge** and **Active BAT**? What are their main differences?
-TODO
+Active Badge is an indoor localization system to track employees. The idea is to give each employee a badge that's capable of sending electromagnetic Infra Red (IR) signals, and has a unique ID. IR very easily absorbed but is super low cost and consumes very little energy.
 
-</details>
-<p align="right">(<a href="#back-to-top">back to top</a>)</p>
-
----
-
-### Active Badge and Active BAT
-**Question**:
-
-
-<details><summary><b>Answer: </b></summary>
+Active BAT is similar but based on 2 types of signals: radio frequencies and ultrasound waves.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -773,9 +767,36 @@ TODO
 
 ### Positioning Systems with No Dedicated Hardware
 **Question**:
-
+- What is positioning based on GSM?
+- What is positioning based on Bluetooth?
+- Wi-Fi-based positioning systems: PlaceLab, Radar, Ekahau.
+- What are the main differences between Radar and Ekahau?
 
 <details><summary><b>Answer: </b></summary>
+
+#### What is positioning based on GSM?
+Telco operators are always able to localize our smartphones, even when the GPS is off. That's done through **Cell Global Identity (CGI)**, and indicates to which base station the smartphone is connected (proximity, low accuracy ~100m-35km). This system is centralized and has some privacy implications.
+
+#### What is positioning based on Bluetooth?
+Bluetooth can exploit fixed reference points (Point of Interest - POI) with known position, and give an approximation based on proximity, of the nearest connected device: the one with the strongest RSSI. Obviously more devices give a more accurate measurment.
+Easy to implement, low cost. It's used in museum applications.
+
+#### Wi-Fi-based positioning systems: PlaceLab, Radar, Ekahau.
+They exploit wide-scale Wi-Fi deployments. The main idea is based on two phases:
+- **offline** phase: the RSSI values from different APs and devices coordinates are collected and stored in a database;
+- **tracking** phase: devices send the vector of RSSI to APs in their visibility and their
+
+**PlaceLab**: is based on the APs that a device detects as "available". Their IDs are collected in a centralized server that builds a map where each ID is associated to a specific position. When a device sends the list of available APs to the server, it will receive an approximation of its position.\
+NB: the map also includes home APs, since they typically require a password just for utilizing them, not to be discovered.
+
+**RADAR**: is similiar to PlaceLab, but for *indoor environments*. It's based on a **deterministic model** and exploits Wi-Fi APs but also their RSSI. There are 2 phases:
+1. **Offline** phases, which consists in collecting empiric environment data from devices (scene analysis) and sending them to APs. Those include position and spatial orientation. APs receive those data and store them, along with the **RSSI** average and timestamps, in order to create a map.
+2. **Real-time device tracking** phase, mobile devices periodically send UDP packets, and the centralized server can calculate their position based on many different techniques/algorithms.
+
+**Ekahau**: it's based on a **probabilistic model** that considers the fact that signal measurements are intrinsically affected by errors and noise. The train phase exploits a machine learning algorithm, always based on **RSSI** values. It uses the **rail tracking principle**: it considers that the location of a user will probably be close to more recent measurements, and also that users can only follow valid paths (a person cannot pass through a wall).
+
+#### What are the main differences between Radar and Ekahau?
+The main difference between them is that RADAR uses a deterministic approach, while Ekahau is based on a probabilistic model. Typically in Ekahau, the accuracy of measurements depends on the frequency of updates that a node sends: the less updates are sent, the less accurate it will be. But that could be also be a great thing, since one could prefer privacy over accuracy, and having a less accurate position, is more privacy-safe.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
