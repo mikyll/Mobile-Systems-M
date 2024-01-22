@@ -805,8 +805,69 @@ The main difference between them is that RADAR uses a deterministic approach, wh
 
 ## Chapter 4 - Internet of Things (IoT)
 
-### Topic
+Internet of things
+a. Mqtt quali sono le semantiche dei messaggi?
+b. Vantaggi dell’applicare la crittografie al payload del messaggio o a tutto il messaggio
+c. Con payload encription si può cifrare tutto il payload o anche solo parti?
+d. Ci sono modi per non asofraccaricare il broker con la decription nel caso in cui sia cifrato
+l’intero messaggio?
+
+### Cloud Computing
 **Question**:
+- What is the **cloud** and what are the main **characteristics** it must have?
+- What are the **levels** of cloud architecture?
+- What is **Fog/Edge computing** and what advantages/features does it offer?
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Constrained Devices
+**Question**:
+- What are constrained devices and how can they be classified?
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Data Exchange Protocols
+**Question**:
+- Request/response
+- publish/subscribe
+- CoAP
+- MQTT
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Data Exchange Frameworks
+**Question**:
+- RabbitMQ
+- MTConnect
+- OPC
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### IoT Platforms
+**Question**:
+- Microsoft Azure
+- EdgeX Foundry
+
 <details><summary><b>Answer: </b></summary>
 
 </details>
@@ -818,6 +879,7 @@ The main difference between them is that RADAR uses a deterministic approach, wh
 
 ### Topic
 **Question**:
+
 <details><summary><b>Answer: </b></summary>
 
 </details>
