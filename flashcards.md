@@ -934,37 +934,37 @@ EdgeX Foundry is an open source platform to supports IoT applications. It was de
 ## Chapter 5 - Android
 
 Android
-a. Multithreading in android
-b. Differenze tra service bound o unbounded?
-c. Api per definire bound e unbound services?
-d. Dal punto di vista dei thread come si gestiscono i service?
-e. Se sono dentro la stessa app come sono assegnati i thread?
+1. Multithreading in android
+2. Differenze tra service bound o unbounded?
+3. Api per definire bound e unbound services?
+4. Dal punto di vista dei thread come si gestiscono i service?
+5. Se sono dentro la stessa app come sono assegnati i thread?
 
 Android
-a. Asyntask
-b. Primitive di asynctask
-c. Come sono suddivisi i thread
-d. Quali alternative sono possibili all’uso di asynctask
-e. Sicurezza in android
-f. Come fa un app che non contiene al suo interno un file ad accedere al file di un'altra app?
+1. Asyntask
+2. Primitive di asynctask
+3. Come sono suddivisi i thread
+4. Quali alternative sono possibili all’uso di asynctask
+5. Sicurezza in android
+6. Come fa un app che non contiene al suo interno un file ad accedere al file di un'altra app?
 Condivide gid
-g. Come si accede al file system in android?
+7. Come si accede al file system in android?
 
 Android
-a. Si parli degli asynctask
-b. Come vengono gestiti i thread?
-c. Lo sviluppatore deve estendere AsyncTask?
-d. I thread devono essere istanziati?
-e. Cosa comporterebbe non avere gli asynctask?
+1. Si parli degli asynctask
+2. Come vengono gestiti i thread?
+3. Lo sviluppatore deve estendere AsyncTask?
+4. I thread devono essere istanziati?
+5. Cosa comporterebbe non avere gli asynctask?
 
 Android
-a. Come funzionano gli intent in android?
-b. Come può essere mandato un intent? Unicast multicast broadcast
-c. Quali sono le api relative all’intent
-d. È android che fa match degli intent con l’activity
-e. Come avviene il match tra intent e l’activity?
-f. Cosa succede se ci sono più app che matchano l’intent?
-g. Come si registra il braodcast receiver presso gli intent a cui è interessato?
+1. Come funzionano gli intent in android?
+2. Come può essere mandato un intent? Unicast multicast broadcast
+3. Quali sono le api relative all’intent
+4. È android che fa match degli intent con l’activity
+5. Come avviene il match tra intent e l’activity?
+6. Cosa succede se ci sono più app che matchano l’intent?
+7. Come si registra il braodcast receiver presso gli intent a cui è interessato?
 
 Android:
 - Intent
