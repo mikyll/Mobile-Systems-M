@@ -720,7 +720,7 @@ Association of Intermediate Nodes (TERRAIN) are two positioning systems used in 
 > NB: dedicated hardware solutions are tyically better (more accuracy and precision), but tend to increase device size and energy consumption.
 
 #### What is **GPS** and how does it work?
-Global Positioning System (GPS) is a positioning and navigation system that exploits specific hardware. The reference points are satellites that orbits at over 18.000km from the surface of the planet. GPS is based on:
+Global Positioning System (GPS) is a positioning and navigation system that exploits dedicated hardware. The reference points are satellites that orbits at over 18.000km from the surface of the planet. GPS is based on:
 - **lateration** for the localization of nodes. With 3 satellites we have 3 spheres (3D points), that indicate 2 points, but typically only one is located on the planet surface;
 - **ToA** (Time of Arrival) to calculate distances. Satellites send packets containing a timestamp;
 
@@ -814,11 +814,34 @@ l’intero messaggio?
 
 ### Cloud Computing
 **Question**:
-- What is the **cloud** and what are the main **characteristics** it must have?
+- What is the **cloud computing** and what are the main **characteristics** it must have?
 - What are the **levels** of cloud architecture?
 - What is **Fog/Edge computing** and what advantages/features does it offer?
 
 <details><summary><b>Answer: </b></summary>
+
+#### What is the **cloud computing** and what are the main **characteristics** it must have?
+The idea of cloud/cloud computing, is that the server that's hosting an application/software is located *in the cloud*, which is somewhere not specified, but that allows the services provided by the application to be accessed from potentially anywhere with an Internet connection.
+
+The main characteristics, that a cloud must have to be called so, are the following:
+- being able to handle and respond to user requests quickly enough;
+- reliability;
+- completely virtualized infrastructure;
+- scalable;
+
+#### What are the **levels** of cloud architecture?
+Cloud architecture is made of levels:
+- software (applications and data);
+- platform (Operating System, providing components and services);
+- infrastructure (virtualization of computer, storage, network);
+- hardware (servers);
+
+![alt](./resources/gfx/cloud_architecture.png)
+
+#### What is **Fog/Edge computing** and what advantages/features does it offer?
+Il Fog/Edge Computing permette di ridurre al minimo la latenza, conservare la larghezza di banda della rete, affrontare i problemi di sicurezza, garantire un tempo di risposta migliore e spostare i dati nel posto più
+conveniente per l’elaborazione.
+Qualche caso d'uso?
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
