@@ -853,24 +853,37 @@ Layered structure:
 
 ==TODO==
 
+#### Cloud Architecture
 
 ![[cloud_architecture.png]]
 
+==TODO==
+
+#### Wireless Communication Protocols
+![[iot_wireless_communication_protocols_range.png]]
+
+
+==TODO==
 
 
 
 
+### Data Exchange Protocols
+
+#### Request/Response Model
+
+##### REST
+REpresentational State Transfer (REST) is not a real protocol, but more like an architectural style, based on request/response model. It promotes client/server stateless interaction. It supports caches and code-on-demand. Typically is based on HTTP.
+- URI (Uniform Resource Identifier) to identify the remote resource;
+- HTTP methods to interact: GET, PUT, POST, DELETE.
+- JSON to format/serialize data;
+
+##### CoAP
+Constrained Application Protocol (CoAP) is a request/response protocol designed for M2M/IoT applications, involving constrained devices and limited networks. It's a RESTful protocol, based on HTTP and has very low overhead.
 
 
-
-
-
-
-
-
-
-
-
+##### MQTT
+Message Queue Telemetry Transport (MQTT)
 
 ## Chapter 5 - Android
 
