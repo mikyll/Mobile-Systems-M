@@ -885,7 +885,7 @@ IoT data exchange typically involves gateways and servers and communication can 
 
 The two main models are:
 - **Request**/**response** (both push and pull): a client sends a request and a server replies. The client knows the server and the communication can be started only from the client, not viceversa. 
-- **Publish**/**subscribe** (typically only push), involves 3 entities: **publishers** send  messages, **subscribers** receive the messages they're interested in (through topics), the **broker** is a central component that receives messages from publishers and forwards them to subscribers, according to the message topics. The broker forwards messages based on their **_topic_**, _type_, _header_ and _content_. This model promotes space, time and synchronization decoupling.
+- **Publish**/**subscribe** (typically only push), involves 3 entities: **publisher(s)** sends  messages, **subscriber(s)** receives the messages it's interested in (through topics), the **broker(s)** is a central component that receives messages from publishers and forwards them to subscribers, according to the message topics. The broker forwards messages based on their **_topic_**, _type_, _header_ and _content_. This model promotes space, time and synchronization decoupling.
 
 #### Describe **CoAP** protocol.
 Constrained Application Protocol (CoAP, [RFC 7252](https://datatracker.ietf.org/doc/html/rfc7252)) is a request/response protocol designed for M2M/IoT applications, involving constrained devices and limited networks. It's main characteristics are the following:
@@ -918,25 +918,20 @@ Message Queue Telemetry Transport (MQTT, [RFC 9431](https://datatracker.ietf.org
 
 ---
 
-### Data Exchange Frameworks
-**Question**:
-- RabbitMQ
-- MTConnect
-- OPC
-
-<details><summary><b>Answer: </b></summary>
-
-</details>
-<p align="right">(<a href="#back-to-top">back to top</a>)</p>
-
----
-
 ### IoT Platforms
 **Question**:
+- What are IoT Platforms?
 - Microsoft Azure
 - EdgeX Foundry
 
 <details><summary><b>Answer: </b></summary>
+
+#### What are IoT Platforms?
+IoT Platforms are cloud-based solutions that provide support to Edge/Fog computing and more in general to all the chain that goes from cloud to the IoT device, passing through the Edge node. They simplify the development of industrial IoT applications and allow to connect devices to collect information, to manage these devices and also to analyze the data.
+
+#### EdgeX Foundry
+EdgeX Foundry is an open source platform to supports IoT applications. It was developed by Dell and is hosted by Linux Foundation as an open source project. As the name suggests it works at the edge computing level and allows to answer in near real-time for automation and actuation decisions. It's based on microservices loosely-coupled principles and platform independence.
+[...]
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
