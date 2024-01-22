@@ -761,6 +761,7 @@ I-TCP tries to solve this problem: it's a patch to TCP (transport level). The ma
 
 The main disadvantages are that the end-to-end semantic is violated, and if a MSR breaks, there is a spike of latency and probable connection lost.
 ### Recap
+==TODO==
 
 ### Positioning Systems
 Positioning systems can be classified in:
@@ -779,7 +780,7 @@ Positioning systems can be classified in:
 ##### Lateration
 ![[lateration.png]]
 
-
+==TODO==
 #### GPS
 Global Positioning System
 
@@ -815,7 +816,61 @@ Differential GPS (D-GPS)
 
 
 
-## Chapter 4 - IoT and Related Applications
+## Chapter 4 - Internet of Things (IoT)
+Before IoT: Supervisory Control And Data Acquisition (SCADA), implemented remote monitoring and control for sensors/actuators, controllers, communication equipment and software. There were the "things", but they were connected in a completely ad hoc way, without the possibility to be open to the extern: not reachable through Internet!
+
+Many problems (expensive, difficult to extend, lack of standards). For example, if we wanted to include a prediction model, we would have need to implement everything or pay someone to do it, while for IoT there are platform service providers (AWS, Azure, etc.).
+
+---
+
+**IoT Use cases**: smart wearables, smart home, smart city, smart agriculture, connected car, health care, industry automation, smart energy.
+
+General idea: to extend Internet protocols to Wireless Sensors Networks (WSNs), composed of sensors and actuators.
+
+![[iot_general_idea.png]]
+IoT main tasks:
+- gather information from things and send commands to things (*monitoring/control*);
+- send information back and forth remote locations (*cloud*);
+- store and aggregate information;
+- analyze information to improve system knowledge;
+- take decisions, autonomously or human-assisted.
+
+**IoT Small Environment Scenario**: a network that connects uniquely identifiable "Things" to the Internet. The Things have sensing/actuation and potential programmability capabilities. It's possible to collect information about the Things and change their state, from anywhere, anytime, by anything.
+
+**IoT Large Environment Scenario**: self-configuring, adaptive network that interconnects Things to the Internet through standard communication protocols.
+
+### Cloud IoT
+In cloud-based IoT architectures, there are heterogeneous devices (e.g. sensors, actuators, etc.) and multiple gateways, geographically close to these devices and can send/receive data to/from Internet. Gateways are the point of convergence of the things ad can also host some software-based functionality. Server-side remote applications are stored in the Cloud ("over the Internet layer").
+
+![[iot_cloud_layered_structure.png]]
+Layered structure:
+- **analytics**, complex analysis on data to infer new knowledge;
+- **IoT platform**, provides services to store, process and manage data; 
+- **Data exchange protocol**, software protocol to standardize how information are transmitted;
+- **communication protocol**, cabled/wireless technology to effectively send bytes;
+- **gateway**, located near one or more things, it capable of interacting with them and the Internet;
+- **things**, any physical or digital device that must be monitored or controlled;
+
+==TODO==
+
+
+![[cloud_architecture.png]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Chapter 5 - Android
 
