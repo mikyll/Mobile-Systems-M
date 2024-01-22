@@ -805,13 +805,6 @@ The main difference between them is that RADAR uses a deterministic approach, wh
 
 ## Chapter 4 - Internet of Things (IoT)
 
-Internet of things
-a. Mqtt quali sono le semantiche dei messaggi?
-b. Vantaggi dell’applicare la crittografie al payload del messaggio o a tutto il messaggio
-c. Con payload encription si può cifrare tutto il payload o anche solo parti?
-d. Ci sono modi per non asofraccaricare il broker con la decription nel caso in cui sia cifrato
-l’intero messaggio?
-
 ### Cloud Computing
 **Question**:
 - What is the **cloud computing** and what are the main **characteristics** it must have?
