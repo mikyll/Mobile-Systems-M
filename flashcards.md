@@ -839,9 +839,13 @@ Cloud architecture is made of levels:
 ![alt](./resources/gfx/cloud_architecture.png)
 
 #### What is **Fog/Edge computing** and what advantages/features does it offer?
-Il Fog/Edge Computing permette di ridurre al minimo la latenza, conservare la larghezza di banda della rete, affrontare i problemi di sicurezza, garantire un tempo di risposta migliore e spostare i dati nel posto più
-conveniente per l’elaborazione.
-Qualche caso d'uso?
+First IoT generation had very simple gateways and the most part of computation happened on cloud. Latency was high because gateways had to query cloud for everything.
+
+The second IoT generation "Fog/Edge computing" introduced Fog/Edge nodes, between gateway and cloud. These nodes have high computing power and virtualization capabilities, therefore they can process and handle requests from things without having to always interrogate the cloud.
+- "Edge", because they're located at the edge of the network;
+- "Fog", because they extend the cloud;
+
+Typically fog/edge nodes perform data pre-processing (filtering, aggregation), before sending information to the cloud. This way they can minimize latency, save bandwidth, introduce a security layer and move data in a more convenient place for them to be elaborated.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -850,9 +854,16 @@ Qualche caso d'uso?
 
 ### Constrained Devices
 **Question**:
-- What are constrained devices and how can they be classified?
+- What are constrained devices and how can they be **classified**?
 
 <details><summary><b>Answer: </b></summary>
+
+#### What are constrained devices and how can they be **classified**?
+IoT nodes are typically constrained devices, i.e. devices with limited cost, size and energy consumption. Typically they have low memory, power and network capabilities too.\
+Constrained devices can be classified in 3 categories, often due to their RAM size:
+- **Class 0**: very limited devices (e.g. sensors), with no direct nor secure Internet connectivity, usually pre-configured (rarely reconfigurable). Typically they need extra components (gateways, proxies or servers)) to connect and be used.
+- **Class 1**: can use environment specific protocols (e.g. CoAP, over UDP) but have no access to standard Internet protocols (e.g. HTTP, TLS, XML, etc.). Can participate in IP networks without the need of gateways, and can even support security functionalities.
+- **Class 2**: less limited devices, fundamentally capable of supporting almost any protocol used on notebook or servers (but they can still benefit from lightweight and energy-efficient protocols, or stacks defined for more constrained devices). 
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -861,12 +872,25 @@ Qualche caso d'uso?
 
 ### Data Exchange Protocols
 **Question**:
-- Request/response
-- publish/subscribe
-- CoAP
-- MQTT
+- Who **starts** the communication in IoT data exchange? What are the two **main protocol models**?
+- Describe **CoAP** protocol.
+- Describe **MQTT** protocol.
 
 <details><summary><b>Answer: </b></summary>
+
+#### What are the two main models for data exchange protocols?
+IoT data exchange typically involves gateways and servers and communication can be initiated in two ways:
+- **push**, gateways autonomously decide to send messages to servers (proactive);
+- **pull**, servers ask gateways to send messages (reactive);
+
+The two main models are:
+- **Request**/**response** (both push and pull): a client sends a request and a server replies. The client knows the server and the communication can be started only from the client, not viceversa. 
+- **Publish**/**subscribe** (typically only push): .
+
+#### Describe **CoAP** protocol.
+
+
+#### Describe **MQTT** protocol.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
