@@ -307,7 +307,7 @@ In Bluetooth SCO there is NO retransmission if packets are lost, because in real
 - What are the possible **topologies**?
 - What are the **roles**?
 
-<details open><summary><b>Answer: TODO</b></summary>
+<details><summary><b>Answer:</b></summary>
 
 #### What is ZigBee and what are its **characteristics**?
 ZigBee (IEEE 802.15.4) is a PAN standard, specifically designed for industrial environments: networks of sensors and actuators. It optimizes network formation time (less than 30ms) and supports full mesh networking.
