@@ -98,7 +98,7 @@ Moreover, there are 2 most common issues
 <details><summary><b>Answer: </b></summary>
 
 #### What is **WiFi** and what are its characteristics?
-WiFi (IEEE 802.11) is a standard for short range (up to 250m) wireless transmission, up to 866Mbps bandwidth. The standard covers the first two layers (physical and data link/MAC) and provides some security aspects. It doesn't include quality of service specifications.
+WiFi (IEEE 802.11) is a standard for short range (up to 250m) wireless transmission, up to 866Mbps bandwidth. The standard covers the first two layers (physical and data link/MAC) and provides some security aspects. It doesn't include Quality of Service (QoS) specifications.
 
 #### What are the primary WiFi **configurations**?
 There are two primary WiFi configurations:
