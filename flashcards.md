@@ -1049,7 +1049,7 @@ It has a layered hierarchical architecture:
   - Advanced power management (different management policies via WakeLocks);
 
 #### Describe Android **threading** model.
-In Android each application is associated with a **single thread** that has an _infinite loop_, and manages a _message queue_ to handle external events (including user inputs). This loop executes each Activity of the application.
+In Android each application is associated with a **single thread** that has an _infinite loop_, and manages a _message queue_ to handle events (from system and from user input). This loop executes each Activity of the application.
 Android applications can be based on two models:
 - one DVK for each application (default), which runs on a separate process;
 - one DVK for different applications (applications must set a shared ID - security risk).
@@ -1083,18 +1083,19 @@ TODO
 
 <details><summary><b>Answer: </b></summary>
 
-#### What is an **Activity** and what's its life cycle?
-prepares a GUI to be shown to the user and typically occupies all the screen of the smartphone.
+#### What is an **Activity** and what's its lifecycle?
+Activity is the **main component** of Android middleware (when writing an application, developers must extend the `Activity` class): it represents a single action that a user can perform via a window (a single view/screen) and typically occupies all the screen of the smartphone. Activities are typically stacked in a LIFO structure, called **Task**, and only the one at the top is the one running, with most of the CPU assigned, and it's the only one the user can interact with.
 
-Activity to model a simple action or set of actions that an user can use to accomplish a task.
+Activity **lifecycle** is based on different states:
+- **RUNNING**, when it's in foreground (there can only be one at a time);
+- **PAUSED**, when it's visibile but not active (e.g. there's a dialog in front of it), i.e. it's not the one in foreground;
+- **STOPPED**, when it's not visibile (e.g. it went in background);
+- **KILLED**, when it's destroyed and the resources are deallocated (e.g. the device needs them for other operations).
 
-Typically on Android you start from the home: all the icons, that if you click on them you open them.
-Even that is an activity!!! And occupies all the screen. When the user performs something on the screen, that trigger something (e.g. execution of an app) that are put on top of the stack of activities that you had before.
+![alt](./resources/gfx/android_activity_lifecycle.png)
 
-Android continuosly works to make 1 activity visible and when the user triggers something a new activity is put on top, then what it's finished it's removed from top, and the previous one is show (piled up in a stack).
-
-the user interacts just with the activity currently shown on the screen.
-
+Example:
+![alt](./resources/gfx/android_activity_states_example_edited.png)
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
