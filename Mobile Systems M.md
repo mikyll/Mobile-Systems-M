@@ -940,7 +940,7 @@ The higher layer is the one that developers can use, and it includes a Package M
 - Inactive
 - Killed
 
-
+![[android_activity_lifecycle.png]]
 
 #### Task
 a Task is an entity that models a "conversation" with the user. It's associated with each application in execution and contains a stack LIFO of Activities. Only the one on top of it is the running one, (state running). The Activities in the task can also be from other applications!
