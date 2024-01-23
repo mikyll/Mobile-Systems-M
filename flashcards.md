@@ -217,10 +217,13 @@ Steps for the **handoff under the same MSC**:
 8. The MSC deallocates resources of the old routing path and notifies the old BSS that deallocates the old radio channel not used anymore.
 
 Steps for the **handoff under different MSCs**:
-1. Suppose a mobile node S starts a call towards a mobile node D.
-2. Through the phone number of D the PSTN reaches the HLR of D.
-3. From the HLR it's possible to reach the current MSC to which D is attached: this is the Anchor MSC, and will be the first MSC node, forming a chain. The anchor node also saves all the info needed for the call or data session.
-4. When the destination moves, if it switches MSC, the new MSC will be appended at the end of the chain.
+Suppose that a correspondent node wants to call a mobile node D:
+1. MSC_S (to which S is attached) queries HLR_D, through D's phone number, to obtain information about the called node D (including the current VLR of D);
+2. from D's HLR (HLR_D) it's possible to reach to the current VLR (VLR_D) of MSC (MSC_D1) to which D is attached;
+3. MSC_S reaches to MSC_D1 to coordinate the call setup;
+4. a path is enstablished between MSC_S and MSC_D1 and the call starts.
+
+MSC_D1 will be the **anchor MSC** and everytime the destination moves, changing MSC, the new MSC will be happended to the end of the chain. E.g. if MSC_D2 is the new MSC: MSC_S -> [...] -> MSC_D1 -> MSC_D2.
 
 #### Can packets be **lost**?
 Yes they can, especially with hard handoffs. Actually, it's almost impossible to have avoid packet loss completely, but there are mitigation techniques
