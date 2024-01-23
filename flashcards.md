@@ -831,7 +831,7 @@ Easy to implement, low cost. It's used in museum applications.
 #### Wi-Fi-based positioning systems: PlaceLab, Radar, Ekahau.
 They exploit wide-scale Wi-Fi deployments. The main idea is based on two phases:
 - **offline** phase: the RSSI values from different APs and devices coordinates are collected and stored in a database;
-- **tracking** phase: devices send the vector of RSSI to APs in their visibility and their
+- **tracking** (online) phase: devices send a vector containing RSSI of the APs in their visibility to a server, that compares the received values with the one stored in the database, and returns an estimation of the position.
 
 **PlaceLab**: is based on the APs that a device detects as "available". Their IDs are collected in a centralized server that builds a map where each ID is associated to a specific position. When a device sends the list of available APs to the server, it will receive an approximation of its position.\
 NB: the map also includes home APs, since they typically require a password just for utilizing them, not to be discovered.
@@ -901,7 +901,7 @@ Typically fog/edge nodes perform data pre-processing (filtering, aggregation), b
 #### What are constrained devices and how can they be **classified**?
 IoT nodes are typically constrained devices, i.e. devices with limited cost, size and energy consumption. Typically they have low memory, power and network capabilities too.\
 Constrained devices can be classified in 3 categories, often due to their RAM size:
-- **Class 0**: very limited devices (e.g. sensors), with no direct nor secure Internet connectivity, usually pre-configured (rarely reconfigurable). Typically they need extra components (gateways, proxies or servers)) to connect and be used.
+- **Class 0**: very limited devices (e.g. sensors), with no direct nor secure Internet connectivity, usually pre-configured (rarely reconfigurable). Typically they need extra components (gateways, proxies or servers) to connect and be used.
 - **Class 1**: can use environment specific protocols (e.g. CoAP, over UDP) but have no access to standard Internet protocols (e.g. HTTP, TLS, XML, etc.). Can participate in IP networks without the need of gateways, and can even support security functionalities.
 - **Class 2**: less limited devices, fundamentally capable of supporting almost any protocol used on notebook or servers (but they can still benefit from lightweight and energy-efficient protocols, or stacks defined for more constrained devices). 
 
@@ -919,7 +919,7 @@ Constrained devices can be classified in 3 categories, often due to their RAM si
 <details><summary><b>Answer: </b></summary>
 
 #### What are the two main models for data exchange protocols?
-IoT data exchange typically involves gateways and servers and communication can be initiated in two ways:
+IoT data exchange typically involves gateways and servers, and communication can be initiated in two ways:
 - **push**, gateways autonomously decide to send messages to servers (proactive);
 - **pull**, servers ask gateways to send messages (reactive);
 
@@ -1053,33 +1053,6 @@ Android:
 ---
 ```
 
-Mobile Ip
-- Cosa succede nell’handoff in mobile Ip
-- Cosa succede quando l’MH si sposta in una località diversa
-- C’è perdita di pacchetti?
-- Durante lo spostamento in una località i pacchetti continuano ad arrivare all’fa?
-- Il vecchio fa effettua la ritrasmissione dei pacchetti ?
-- Mobile ip è reattivo o proattivo?
-- È verticale o orizzontale?
-- Problemi scarto pacchetti ingresso e uscita?
-- Il problema di avere lo stesso indirizzo c’è anche in ip v4?
-- Perché mipv6 non è usato ?
-- In mipv4 si possono perdere pacchetti succede anche in mipv6 con il tunneling?
-- Differenze tra mipv4 e mipv4? (x2)
-- Ottimizzazioni del triangular routing?
-- Problema di mipv6 perché è poco adottato?
-- Ottimizzazioni presenti?
-- MobileIP: handoff
-- principali differenze con MobileIPv6
-- HIP
-
-Sistemi di posizionamento
-- GPS
-- Differential GPS
-- Differenza tra precisione e accuratezza
-- Perché non si risolve il multipath fading?
-- Differenza tra KAU e radar
-- Radar vs Ekahau
 
 ---
 

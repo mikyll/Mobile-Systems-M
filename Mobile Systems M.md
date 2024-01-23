@@ -887,5 +887,31 @@ Message Queue Telemetry Transport (MQTT)
 
 ## Chapter 5 - Android
 
+### Mobile Middleware
+
+Typically hourglass model in mobile application: heterogeneous lower layers, convergence at transport layer (TCP/IP), and again different upper layers related to different needs and requirements of applications.
+
+
+Cross-layering: different types of interaction for different ways of cross-layering in a protocol stack
+
+- upward information flow
+	example: could be useful to propagate location information from hardware (e.g. GPS) to upper layer, cause maybe an application needs them.
+- downward information flow
+	typically used to configure parameters and settings of lower levels.
+
+#### Architectural Patterns
+
+#### Mobile Computing Patterns
+3 main categories:
+- for distribution
+- for resource management and synchronization
+- for communication
+
+
+
+### Android
+
+
+
 ## Chapter 6 - Discovery
 
