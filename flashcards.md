@@ -169,26 +169,27 @@ When a MS moves to a new MSC (MSC1 -> MSC2), the VLR of MSC2 will add an entry f
 <details><summary><b>Answer:</b></summary>
 
 #### What is the **handoff** in GSM?
-The handoff (or handover) is a procedure in GSM that allows a mobile device to seamlessly switch connection from one cell to another, without interrupting an ongoing call or a data session. It's purpose is to provide service continuity.
+The handoff (or handover) is a procedure in GSM that allows a mobile device to seamlessly **switch connection** from one cell to another, without interrupting an ongoing call or a data session. It's purpose is to provide service continuity.
 It has many advantages, such as:
-- always be connected to the BSS with the strongest signal;
-- load balancing between different BSS;
+- always be connected to the BSS with the **strongest signal**;
+- **load balancing** between different BSS;
+
 The GSM standard doesn't specify when or why the handover should occur, but just the mechanism.
 
 #### How is it **classified**?
 Handoff classifications:
 - connectivity:
-  - horizontal, if same connectivity (GSM);
-  - vertical, if different connectivity (WiFi -> 4G);
+  - **horizontal**, if same connectivity (GSM);
+  - **vertical**, if different connectivity (WiFi -> 4G);
 - node that initiate the procedure:
-  - network-initiated (GSM);
-  - mobile-initiated (WiFi);
+  - **network-initiated** (GSM);
+  - **mobile-initiated** (WiFi);
 - when it's triggered:
-  - proactive, if the handoff is triggered before the connection to previous AP is lost (GSM);
-  - reactive, if the handoff is triggered after the connection to previous AP is lost (WiFi);
+  - **proactive**, if the handoff is triggered before the connection to previous AP is lost (GSM);
+  - **reactive**, if the handoff is triggered after the connection to previous AP is lost (WiFi);
 - management
-  - hard, when the old connection breaks before the new one is established (GSM, WiFi);
-  - soft, when the old connection is kept until the new one is established (WiFi with 2 cards);
+  - **hard**, when the old connection breaks before the new one is established (GSM, WiFi);
+  - **soft**, when the old connection is kept until the new one is established (WiFi with 2 cards);
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
