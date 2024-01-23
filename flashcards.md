@@ -1020,9 +1020,81 @@ Android:
 
 ### Mobile Middleware
 **Question**:
-- 
+- Cross-layering
 
 <details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Android
+**Question**:
+- How is Android structured? Describe its **architecture**.
+- Describe Android **threading** model.
+
+<details><summary><b>Answer: </b></summary>
+
+#### How is Android structured? Describe its **architecture**.
+Android is not only a mere Operating System: it's a mobile middleware. It's based on Linux Kernel, with some changes and improvements for mobile devices (removed useless stuff for mobile, such as compilers, unused libraries and commands, etc.). For example, on Android we cannot create processes (in standard Java we could use ProcessBuilder), because the Android middleware is also a **programming model**, that force us to make compliant applications.
+
+It has a layered hierarchical architecture:
+- **Applications**, basically everything that is visibile and the user can interact with, without invalidating the Warranty of the device (jailbreak). The applications are made of specific components (Activity, Service, Intent, Broadcast Receiver).
+- **Application Framework**, provides APIs and systems like Package Manager, Activity Manager, "Window" Manager, Resource Manager and everything that's needed for application to work (e.g. also telephony, notification, location utilities).
+- **Libraries** + **Android Runtime** (Dalvik Virtual Machine DVM -> Android RunTime ART): libraries are typically for graphics and multimedia intensive operations. The Runtime is basically a tuned JVM, which is NOT the standard Java Virtual Machine: the SDK compiles to totally different bytecode, which has been stripped of some instructions, and the DVK cannot run standard Java bytecode (viceversa the JVM cannot run "dalvik java code). Some classes have been removed and some have been added.
+- **Linux Kernel**, optimized version of the Linux Kernel 3.x, with hardware abstraction layer (HAL) and some extensions such as:
+  - Ashmem: shared memory manager;
+  - IPC binder: used to access resources;
+  - Advanced power management (different management policies via WakeLocks);
+
+#### Describe Android **threading** model.
+In Android each application is associated with a **single thread** that has an _infinite loop_, and manages a _message queue_ to handle external events (including user inputs). This loop executes each Activity of the application.
+Android applications can be based on two models:
+- one DVK for each application (default), which runs on a separate process;
+- one DVK for different applications (applications must set a shared ID - security risk).
+
+Activity can have different priority levels:
+- foreground (the one shown on the screen);
+- visible;
+- Service;
+- background;
+
+The runtime handles the scheduling, that do its best to assign most of the CPU (over 90%) to the foreground Activity.
+
+TODO
+1. Multithreading in android
+4. Dal punto di vista dei thread come si gestiscono i service?
+5. Se sono dentro la stessa app come sono assegnati i thread?
+3. Come sono suddivisi i thread
+2. Come vengono gestiti i thread?
+4. I thread devono essere istanziati?
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Android Components
+**Question**:
+- What is an **Activity** and what's its life cycle?
+- What is a **Task**?
+- What is an **Intent**? **IntentFilter**?
+
+<details><summary><b>Answer: </b></summary>
+
+#### What is an **Activity** and what's its life cycle?
+prepares a GUI to be shown to the user and typically occupies all the screen of the smartphone.
+
+Activity to model a simple action or set of actions that an user can use to accomplish a task.
+
+Typically on Android you start from the home: all the icons, that if you click on them you open them.
+Even that is an activity!!! And occupies all the screen. When the user performs something on the screen, that trigger something (e.g. execution of an app) that are put on top of the stack of activities that you had before.
+
+Android continuosly works to make 1 activity visible and when the user triggers something a new activity is put on top, then what it's finished it's removed from top, and the previous one is show (piled up in a stack).
+
+the user interacts just with the activity currently shown on the screen.
+
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -1036,6 +1108,8 @@ Android:
 - What are `AsyncTask` and what's their purpose? What are the primitives?
 
 <details><summary><b>Answer: </b></summary>
+
+TODO
 
 #### What are `AsyncTask` and what's their purpose? What are the primitives? What if we didn't have AsyncTask?
 AsyncTask is a component useful for performing operations UI-related (in fact, Services cannot directly interact with the UI). AsyncTask is a component that is creted on the main thread and can be executed exactly once, on the background thread. They provide APIs to perform the operations, and other to update the UI accordingly, before, during and after their execution. The most obvious example for their usage is the downloading of files.\
@@ -1089,6 +1163,19 @@ class MyActivity extends Activity {
 ```
 
 </details>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Android: Security and Filesystem
+**Question**:
+TODO
+
+<details><summary><b>Answer: </b></summary>
+
+TODO
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
