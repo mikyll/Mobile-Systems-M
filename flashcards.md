@@ -163,12 +163,12 @@ When a MS moves to a new MSC (MSC1 -> MSC2), the VLR of MSC2 will add an entry f
 
 ### GSM: Handoff (1)
 **Question**:
-- What is the **handoff** in in GSM?
+- What is the **handoff** in GSM?
 - How is it **classified**?
 
 <details><summary><b>Answer:</b></summary>
 
-#### What is the **handoff** in in GSM?
+#### What is the **handoff** in GSM?
 The handoff (or handover) is a procedure in GSM that allows a mobile device to seamlessly switch connection from one cell to another, without interrupting an ongoing call or a data session. It's purpose is to provide service continuity.
 It has many advantages, such as:
 - always be connected to the BSS with the strongest signal;
