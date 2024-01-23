@@ -243,6 +243,7 @@ The MSC chain can be kept or not, it depends. There is a standard called IS-41, 
 **Question**:
 - What is Bluetooth and what are its main **characteristics**?
 - What are the differences with **WiFi**?
+- How is a piconet built? What are Bluetooth **phases**?
 - What is **frequency hopping**?
 - What are the differences between **ACL** and **SCO**?
 - Is there **retransmission** in SCO? Why?
@@ -263,8 +264,13 @@ The main differences with Wi-Fi are:
 - Bluetooth needs a preliminar discovery phase;
 - Bluetooth has a very limited broadcast mechanism;
 
+#### How is a piconet built? What are Bluetooth phases?
+Bluetooth piconets are built through 2 phases:
+1. **Inquiry** phase: a node that wants to communicate enters the inquiry mode, sends its ID to neighbours and collects answers (IDs) from them. After some time, if it has collected at least one ID, it enters the page phase. The node that initiated the inquiry phase typically becomes the master; 
+2. **Page** phase: the master sends its clock value to slaves to synchronize with them. There is some information exchange, including the sequence for the frequency hopping. Then the data exchange can begin.
+
 #### What is **frequency hopping**?
-Bluetooth uses the 2.4GHz ISM band (from 2.4 to 2.4835 GHz), which is also the same range of frequencies used by many wireless technologies/devices (including WiFi), since this band was designated for unlicensed operation. What's the consequence of this? It's that different technologies based on 2.4GHz, may interfere the one with the other.
+Bluetooth uses the 2.4GHz ISM band (from 2.4 to 2.4835 GHz), which is also the same range of frequencies used by many wireless technologies/devices (including WiFi), since this band was designated for unlicensed operations. What's the consequence of this? It's that different technologies based on 2.4GHz, may interfere the one with the other.
 
 Bluetooth, to manage its communication over this overcrowded band, uses a mechanism called "**frequency hopping**": the 2.4GHz band can be divided into 79 channels, each of 1MHz width. The bluetooth actively changes communication channel, by hopping between frequencies in a defined sequence (based on master's address): the communication _timeline_ is divided in time slots (625 picoseconds, 1600 times per second), in which only a device can communicate. This prevents interferences and adds a layer of security.
 
