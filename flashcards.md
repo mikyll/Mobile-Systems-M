@@ -1018,6 +1018,83 @@ Android:
 - IntentFilter
 - BroadcastReceiver
 
+### Mobile Middleware
+**Question**:
+- 
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Asynchronous Techniques
+**Question**:
+- Service
+- IntentService
+- What are `AsyncTask` and what's their purpose? What are the primitives?
+
+<details><summary><b>Answer: </b></summary>
+
+#### What are `AsyncTask` and what's their purpose? What are the primitives? What if we didn't have AsyncTask?
+AsyncTask is a component useful for performing operations UI-related (in fact, Services cannot directly interact with the UI). AsyncTask is a component that is creted on the main thread and can be executed exactly once, on the background thread. They provide APIs to perform the operations, and other to update the UI accordingly, before, during and after their execution. The most obvious example for their usage is the downloading of files.\
+They have 3 parameters (types):
+1. the type of the **parameter/s** it accepts (e.g. URL/URLs);
+2. the type (unit of measure) of the **progress** (e.g. Integer -> 5, 10, 20, could be the download percentage);
+3. the type of the **result** (e.g. Image);
+
+The primitives are the following (the developer must override them):
+- `void onPreExecute()`;
+- `Image doInBackground(T1... params)`;
+- `void onProgressUpdate(T2... progress)`;
+- `void onPostExecute(T3 result)`;
+
+If we didn't have AsyncTask, developer would have to exploit other ways to perform some operations on other threads, for example by creating them by hand, or using Handlers, which is much more error prone and difficult. That's because Services for example cannot interact directly with UI, and since applications are single-threaded by default, if we were to perform some CPU-intensive operation on it, the UI would slow down or even freeze. And that's not acceptable.
+
+Example:
+<details>
+<summary>Show/Hide code</summary>
+
+```
+private class MyDownloader extends AsyncTask<T1, T2, T3> {
+  @Override
+	protected void onPreExecute() {
+    // run on UI thread
+	}
+  @Override
+	protected Image doInBackground(T1... params) {
+    // run on worker thread
+	}
+  @Override
+	protected void onProgressUpdate(T2... progress) {
+    // run on UI thread
+	}
+  @Override
+	protected void onPostExecute(T3 result) {
+    // run on UI thread
+	}
+}
+
+class MyActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		// Run the AsyncTask
+		MyDownloader myDownloader = new MyDownloader();
+    myDownloader.execute();
+	}
+}
+```
+
+</details>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
 ### Topic
 **Question**:
 
@@ -1029,6 +1106,30 @@ Android:
 ---
 
 ## Chapter 6 - Discovery, Messaging, and Events
+
+Service discovery upnp
+1. Parlare del supporto alle notifiche
+2. Se ci sono molti control point registrati per lo stesso evento come viene gestita la
+propagazione? (No ottimizzato) 
+
+Gestione degli eventi
+1. Modalità di propagazione delle Subscription in convering based routing?
+2. Come si risolve il problema della cancellazione delle sottoscrizioni più generali?
+
+JINI (broker+client+provider; lease)
+- LEASE: vantaggi rispetto a deregistrazione manuale (affidabilità, il provider se cade non riuscirebbe a deregistrarsi, e minore impegno di banda per i messaggi scambiati). Il lease è negoziato tra provider e broker; il provider propone e il broker decide se accettare o meno in base alle proprie politiche interne.
+-	JSPO può avere un timeout interno che alla scadenza del lease non consente di effettuare più richieste. JSPO scritto da provider. 
+-	FEDERAZ: (broker si registra come provider presso un altro broker) 
+-	REPLICHE: (1)→registrazione a tutti. Se qualcosa si rompe non avviso nessuno. (2)→ registro a uno e lui propaga. Ma se si rompe il primo devo avvisare provider di registrarsi all’altro, meglio la precedente. 
+-	UPnP (discovery, eventi, GENA, quando multicast/unicast)
+-	DISCOVERY = due possibilità (ssdp:discover, ssdp:alive).
+-	MSG = tra device e control point; per ogni messaggio quale protocollo si usa, quali sono fatti in multicast. GENA ha voluto sapere cosa invia in risposta il device al control point (solo cambiamenti). La Notify è fatta in unicast. 
+-	SIP (protocollo; esempio d'uso).
+
+- Definizione e mini analisi bridging UPnP
+- Upnp, sottoscrizione eventi : cosa sono  variabili di stato? a cosa serve il timeout nella sottoscrizione ? (Leasing, stesso meccanismo di jini)
+
+- UPNP - invocazione CP - Device
 
 ### Topic
 **Question**:
