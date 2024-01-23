@@ -147,7 +147,7 @@ GSM architecture includes different elements:
 - a Base Station Subsystem (**BSS**), that is composed by:
   - Base Station Controller (**BSC**), that allocates radio channels and handles handovers. BSC manages many BTS;
   - Base Transceiver Station (**BTS**), that handles connections with MS;
-- a Mobile Switching Center (**MSC**), that acts like a gateway to Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
+- a Mobile Switching Center (**MSC**), that acts like a gateway to the Wide Area Network (WAN), that includes Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
 
 #### What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 MSC contains 2 registries, needed to perform calls processing, location tracking and mobility management in GSM networks:
@@ -223,7 +223,8 @@ Suppose that a correspondent node wants to call a mobile node D:
 3. MSC_S reaches to MSC_D1 to coordinate the call setup;
 4. a path is enstablished between MSC_S and MSC_D1 and the call starts.
 
-MSC_D1 will be the **anchor MSC** and everytime the destination moves, changing MSC, the new MSC will be happended to the end of the chain. E.g. if MSC_D2 is the new MSC: MSC_S -> [...] -> MSC_D1 -> MSC_D2.
+MSC_D1 will be the **anchor MSC** and everytime the destination moves, changing MSC, the new MSC will be happended to the end of the chain. E.g. if MSC_D2 is the new MSC: MSC_S -> [...] -> MSC_D1 -> MSC_D2.\
+The anchor MSC serves to maintain information about the call or data session (such as the cost, duration, etc.)
 
 #### Can packets be **lost**?
 Yes they can, especially with hard handoffs. Actually, it's almost impossible to have avoid packet loss completely, but there are mitigation techniques
