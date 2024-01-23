@@ -186,7 +186,7 @@ Handoff classifications:
   - **mobile-initiated** (WiFi);
 - when it's triggered:
   - **proactive**, if the handoff is triggered before the connection to previous AP is lost (GSM);
-  - **reactive**, if the handoff is triggered after the connection to previous AP is lost (WiFi);
+  - **reactive**, if the handoff is triggered only after the connection to previous AP is lost (WiFi);
 - management
   - **hard**, when the old connection breaks before the new one is established (GSM, WiFi);
   - **soft**, when the old connection is kept until the new one is established (WiFi with 2 cards);
