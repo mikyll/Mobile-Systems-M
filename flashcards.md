@@ -147,7 +147,12 @@ GSM architecture includes different elements:
 - a Base Station Subsystem (**BSS**), that is composed by:
   - Base Station Controller (**BSC**), that allocates radio channels and handles handovers. BSC manages many BTS;
   - Base Transceiver Station (**BTS**), that handles connections with MS;
-- a Mobile Switching Center (**MSC**), that acts like a gateway to the Wide Area Network (WAN), that includes Public Switching Telephone Network (PSTN) and packet data networks (such as Internet).
+- a Mobile Switching Center (**MSC**), that acts like a gateway to the Wide Area Network (WAN), that includes Public Switching Telephone Network (PSTN) and packet data networks (such as Internet);
+- an Operation Support System (**OSS**), that handles monitoring, control and management of the network;
+
+2 registers in OSS:
+- AUthentication Center (AUC), used by HLR to authenticate users before service access;
+- Equipment Identity Register (EIR), is used to identify stolen devices through IMEI.
 
 #### What are Home Location Register (**HLR**) and Visitor Location Register (**VLR**)?
 MSC contains 2 registries, needed to perform calls processing, location tracking and mobility management in GSM networks:
