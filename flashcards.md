@@ -623,11 +623,25 @@ Mobile IP is typically considered to be reactive, due to the registration often 
 
 I would also consider it horizontal, since it's basically a routing protocol, for mobile nodes in infrastructured networks. It uses and itneracts with different layers too (MAC addresses, upper layers to prevent packet loss in some way, etc.), but it's main purpose is communication routing in mobile nodes.
 
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### I-TCP
+**Question**: 
+- What are the main **differences** between Mobile IP and Mobile IPv6?
+- HMip VS MobileIPv6?
+
+<details><summary><b>Answer: </b></summary>
+
 #### What are the main **differences** between Mobile IP and Mobile IPv6?
 Mobile IP was created as a patch to the existing IP, in order to support mobility in infrastructure network, trying to make it the most transparent as possible. This transparency constraints, as a direct consequence, generates some obvious overhead and side-effects, such as triangular routing and ingress/egress filtering problems.
 
 Mobile IPv6, on the other hand, doesn't have those problems
 For example, it automatically solves the triangular routing problem, by making CH aware of MH CoA: after the first message from CH to HA, the HA sends back a CoA update, so that further communication between CH and MH can happen in a direct way between the two nodes.
+
+#### TODO
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -637,6 +651,8 @@ For example, it automatically solves the triangular routing problem, by making C
 ### I-TCP
 **Question**: 
 <details><summary><b>Answer: </b></summary>
+
+TODO
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
