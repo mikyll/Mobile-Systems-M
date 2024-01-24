@@ -947,6 +947,19 @@ a Task is an entity that models a "conversation" with the user. It's associated 
 
 When an activity starts it's pushed on top of the stack.
 
+important concept of Task: for each app in execution, the different activities that has been started for this app are organized in task (android modeling of the concept of conversation)
+e.g. I have a complex high level operation to be completed for the user, I split it in different steps 
+
+each activity is one step of the high level operation, and you pass them to
+
+a task in android is represented as a stack
+
+only the activity on top of the stack is the one currently running.
+
+each app has a task describing the set of operations.
+
+
+the task support is not so separated app per app: it's very frequent/common in android that when a user interacts with the activity of an app, it triggers the activity from another app.
 
 #### Intent and IntentFilter
 Intent is used to specify a "control passing".
