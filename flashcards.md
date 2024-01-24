@@ -1084,7 +1084,7 @@ When searching for an Activity that match the Intent (through IntentFilters) the
 - there are **no** matches, the intent is not delivered (lost intent);
 - there are **multiple** matches, Android prompts the user to choose which application to use;
 
-Example of an Intent that needs an application to read a pdf file:
+Example of an (implicit) Intent that needs an application to read a pdf file:
 ```
 Uri pdfUri = Uri.parse(myPDF);
 
