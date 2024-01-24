@@ -1325,23 +1325,117 @@ Gestione degli eventi
 1. Modalità di propagazione delle Subscription in convering based routing?
 2. Come si risolve il problema della cancellazione delle sottoscrizioni più generali?
 
-JINI (broker+client+provider; lease)
-- LEASE: vantaggi rispetto a deregistrazione manuale (affidabilità, il provider se cade non riuscirebbe a deregistrarsi, e minore impegno di banda per i messaggi scambiati). Il lease è negoziato tra provider e broker; il provider propone e il broker decide se accettare o meno in base alle proprie politiche interne.
--	JSPO può avere un timeout interno che alla scadenza del lease non consente di effettuare più richieste. JSPO scritto da provider. 
--	FEDERAZ: (broker si registra come provider presso un altro broker) 
--	REPLICHE: (1)→registrazione a tutti. Se qualcosa si rompe non avviso nessuno. (2)→ registro a uno e lui propaga. Ma se si rompe il primo devo avvisare provider di registrarsi all’altro, meglio la precedente. 
--	UPnP (discovery, eventi, GENA, quando multicast/unicast)
--	DISCOVERY = due possibilità (ssdp:discover, ssdp:alive).
--	MSG = tra device e control point; per ogni messaggio quale protocollo si usa, quali sono fatti in multicast. GENA ha voluto sapere cosa invia in risposta il device al control point (solo cambiamenti). La Notify è fatta in unicast. 
--	SIP (protocollo; esempio d'uso).
+### Service Discovery
+**Question**:
+- What are **service discovery systems** and what's their purpose?
+- What is **Jini**/**Apache River**? How are **reliability** and **scalability** implemented?
+- UPnP
+
+<details><summary><b>Answer: </b></summary>
+
+#### What are **service discovery systems** and what's their purpose?
+Service discovery systems are **naming systems** designed to help mobile devices discover and access resources or services in their neighborhood. In fact, typically mobile systems have a very **limited knowledge** of the surrounding environment and what it offers (resources and services). The goal is also to achieve reliability and scalability.
+
+Example: I'm a mobile node at Unibo and I want to find a printer in the vicinity to print my pdf. Printer is a resource, printing service is a service.
+
+The main characteristics/key features of a discovery service are:
+- **Auto-configuration**, the devices must configure themselves (usually in a short time for mobile systems) to participate the system workflow and access the resources/services (e.g. obtaining a temporary IP address).
+- Resources/Services **discovery**: resource/service providers must be able to advertise properly the services/resources they offer, and be sure devices can find them (provide the available resources/services but also the interfaces to access them).
+- Resources/Services **access**: service discovery systems must help the client to access the resource/service, besides linking to it. Typically it's done through interfaces/APIs provided by the resource/service providers, that abstract the real implementation (those also include authentication and authorization support).
+
+#### What is **Jini**/**Apache River**? How are **reliability** and **scalability** implemented?
+Apache **River** (previously Jini) is one if not the most relevant discovery solution for the Java world (based on standard Java). It has some characteristics that make it particularly suitable for mobile devices. It's based on 3 main components:
+- service **Provider**: can register a resource/service object (Java object) to the broker, providing also the service  attributes and details;
+- service **Broker**: is a naming server containing a table with the registered service attributes, and each service/resource is associated with a **Java Service Proxy Object** (a sort of interface to use the service/resource);
+- a **Client** can lookup the Broker for services/resources that match some attributes, and obtain (download) the Proxy object, which he can then exploit to interact directly with the service provider, and use its service/resource,
+
+To implement reliability, Apache River adopts a **leasing mechanism** (~"noleggio a tempo"): when a client obtains the proxy object, it won't be available forever, but it's a limited time for its usage (limit included in Proxy Object). After it expires the client must perform another lookup. The same applies for registered entries in Brokers (typically with longer expiration times).\
+> **NB**: Jini doesn't have any specific support for redundancy (no "native" support for fault management), but the developer can implement it by simply replicating the infrastructure (e.g. multiple brokers).
+
+Apache River supports scalability: services/resources can be aggregated into **communities** and different communities can be aggregated into **federations**.
+
+If compared to traditional and simple RMI/RPC, River overcomes limitations and overhead due to compile-time creation of structures (stub/skeleton), since it provides a Proxy Object _at runtime_ instead.
+
+#### What is **UPnP**? How does the bridging work? 
+**Universal Plug and Play** (UPnP) is the most used and widespread standard for services and resources discovery, for mobile systems and not only. It doesn't require any infrastructure
+
+TODO (rewrite)
+Goal: be able to run very conveniently on simple devices (target was electronics for domestic environments, similiar reasoning of Bluetooth)
+Approach: be extremely simple with no need for infrastructure deployment or configuration (in domestic envs we don't have experts to setup the infrastructure).
+
+What it uses: UDP, TCP, HTTP, DHCP, ARP, XML
+
+AUTOMATED CONFIG
+Automated config: [...] IP assignment (via **autoIP** protocol: search for DHCP servers. Not found? Pick a random IP in a certain range and check if it's used with ARP. It's used? Pick another random one, until a valid one is found)
+Very simple but automatic!
+Consequences?
+1. A specific device could be assigned different IPs in the same day;
+2. the IP assigned is local, and it's not completely forbidden to go outside the LAN. However, if that's the case, there's the need of a NAT that maps the local address with a public one, but that's completely delegated and not part of the UPnP protocol (standard).
+
+DISCOVERY
+NB: devices and control points
+2 modes, through using SSDP (Simple Service Discovery Protocol):
+1. a device can advertise itself and its local services/resources (with URL at which download the DDF file);
+2. a control point can send a discover message in broadcast;
+
+Device Description File (DDF) is an XML document that includes all the resources and services offered by a device
+Part of [DDF schema p.54](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf):
+```
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0"
+configId="configuration number">
+  <specVersion>
+    <!-- [...] -->
+  </specVersion>
+  <device>
+    <!-- [...] -->
+    <serviceList>
+      <service>
+        <serviceType> urn:schemas-upnp-org:service:serviceType:v </serviceType>
+        <serviceId> urn:upnp-org:serviceId:serviceID </serviceId>
+        <SCPDURL> URL to service description </SCPDURL>
+        <controlURL> URL for control </controlURL>
+        <eventSubURL> URL for eventing </eventSubURL>
+      </service>
+    </serviceList>
+  </device>
+</root>
+```
+
+
+
+
+
+
+Service discovery upnp
+1. Parlare del supporto alle notifiche
+2. Se ci sono molti control point registrati per lo stesso evento come viene gestita la
+propagazione? (No ottimizzato) 
 
 - Definizione e mini analisi bridging UPnP
-- Upnp, sottoscrizione eventi : cosa sono  variabili di stato? a cosa serve il timeout nella sottoscrizione ? (Leasing, stesso meccanismo di jini)
-
+- Upnp, sottoscrizione eventi: cosa sono variabili di stato? a cosa serve il timeout nella sottoscrizione ? (Leasing, stesso meccanismo di jini)
 - UPNP - invocazione CP - Device
 
-### Topic
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Mobile Messaging
 **Question**:
+- 
+
+<details><summary><b>Answer: </b></summary>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Events Management
+**Question**:
+- 
+
 <details><summary><b>Answer: </b></summary>
 
 </details>
