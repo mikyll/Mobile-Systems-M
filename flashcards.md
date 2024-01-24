@@ -1062,8 +1062,13 @@ Activity **lifecycle** is based on different states:
 
 </details>
 
+<details>
+<summary>Show/Hide Example</summary>
+  
 Example:
 ![alt](./resources/gfx/android_activity_states_example_edited.png)
+
+</details>
 
 A **Task** models the concept of conversation: each application in execution is associated with a task, which contains the stack (a LIFO structure) of piled Activities, where the one on top is Running (foreground). In fact, we must think of activities as operational steps of a bigger "task", that constitutes an application.\
 **NB**: a collection of currently active tasks can be shown with one of the 3 control button on the bottom of the screen, that displays the "recents tasks" or "overview".
@@ -1171,7 +1176,10 @@ There are two types:
 
 > **NB**: It's a _good practice™_ to restrict broadcasts as much as possible and just use local broadcast if feasible, to prevent security threats.
 
-Examples: register a BroadcastReceiver to perform some operation when the airplane mode changes, i.e. goes from ON to OFF or viceversa.
+<details>
+<summary>Show/Hide Example</summary>
+
+Example: register a BroadcastReceiver to perform some operation when the airplane mode changes, i.e. goes from ON to OFF or viceversa.
 - **Static** registration:
 ```
 <receiver
@@ -1196,6 +1204,8 @@ this.registerReceiver(myBroadcastReceiver, myIntentFilter);
 // We un-register the receiver
 this.unregisterReceiver(myBroadcastReceiver);
 ```
+
+</details>
 
 The main difference between Broadcasts and implicit Intents is that Broadcasts are typically used for notification purposes (handling events and triggering UI updates), while Intents are used to pass the execution to some other component.
 
