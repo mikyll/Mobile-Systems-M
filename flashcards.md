@@ -1056,16 +1056,15 @@ Activity **lifecycle** is based on different states:
 - **KILLED**, when it's destroyed and the resources are deallocated (e.g. the device needs them for other operations).
 
 <details>
-<summary>Show/Hide Lifecycle Image</summary>
+<summary>Show/Hide <b>Lifecycle Image</b></summary>
 
 ![alt](./resources/gfx/android_activity_lifecycle.png)
 
 </details>
 
 <details>
-<summary>Show/Hide Example</summary>
-  
-Example:
+<summary>Show/Hide <b>Example</b></summary>
+
 ![alt](./resources/gfx/android_activity_states_example_edited.png)
 
 </details>
@@ -1177,7 +1176,7 @@ There are two types:
 > **NB**: It's a _good practice™_ to restrict broadcasts as much as possible and just use local broadcast if feasible, to prevent security threats.
 
 <details>
-<summary>Show/Hide Example</summary>
+<summary>Show/Hide <b>Example</b></summary>
 
 Example: register a BroadcastReceiver to perform some operation when the airplane mode changes, i.e. goes from ON to OFF or viceversa.
 - **Static** registration:
@@ -1224,9 +1223,8 @@ The primitives are the following (the developer must override them):
 
 If we didn't have AsyncTask, developer would have to exploit other ways to perform some operations on other threads, for example by creating them by hand, or using Handlers, which is much more error prone and difficult. That's because Services for example cannot interact directly with UI, and since applications are single-threaded by default, if we were to perform some CPU-intensive operation on it, the UI would slow down or even freeze. And that's not acceptable.
 
-Example:
 <details>
-<summary>Show/Hide code</summary>
+<summary>Show/Hide <b>Example</b></summary>
 
 ```
 private class MyDownloader extends AsyncTask<T1, T2, T3> {
