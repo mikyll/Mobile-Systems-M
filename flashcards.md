@@ -981,24 +981,11 @@ EdgeX Foundry is an open source platform to supports IoT applications. It was de
 ## Chapter 5 - Android
 
 Android
-1. Asyntask
-2. Primitive di asynctask
-3. Come sono suddivisi i thread
-4. Quali alternative sono possibili all’uso di asynctask
-5. Sicurezza in android
-6. Come fa un app che non contiene al suo interno un file ad accedere al file di un'altra app?
-Condivide gid
-7. Come si accede al file system in android?
-
-Android
-1. Si parli degli asynctask
-2. Come vengono gestiti i thread?
-3. Lo sviluppatore deve estendere AsyncTask?
-4. I thread devono essere istanziati?
-5. Cosa comporterebbe non avere gli asynctask?
-
-Android:
-- BroadcastReceiver
+1. Quali alternative sono possibili all’uso di asynctask
+2. Cosa comporterebbe non avere gli asynctask?
+3. Sicurezza in android
+4. Come fa un app che non contiene al suo interno un file ad accedere al file di un'altra app? Condivide gid
+5. Come si accede al file system in android?
 
 ### Mobile Middleware
 **Question**:
@@ -1061,7 +1048,6 @@ TODO
 **Question**:
 - What is an **Activity** and what's its life cycle? What is a **Task**?
 - What is an **Intent**? **IntentFilter**? Can they be multicast? What are its **APIs**? How does the **match** with an Activity occur?
-- BroadcastReceiver
 
 <details><summary><b>Answer: </b></summary>
 
@@ -1128,23 +1114,6 @@ Example of an IntentFilter (in Manifest.xml):
   [...]
 </manifest>
 ```
-
-#### Broadcast Receiver
-Broadcast
-8. Come si registra il broadcast receiver presso gli intent a cui è interessato?
-
-
-Broadcast Receiver:
-While Intents are one-to-one (only one application will receive it)
-
-when we have more than one app to do a certain task asked by an Intent, Android usually prompts us to enter the application with which open it (e.g. open a pdf file). That happens because the Intent is only one-to-one.
-
-What about battery is almost drained? Probably many receivers are interested in it, and that's where Broadcast Receivers make their appearence.
-
-Activities and Intents are probably the most crucial and characterizing Android elements.
-
-
-NB: from next lesson we will see actual code.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -1276,6 +1245,43 @@ class MyActivity extends Activity {
 ```
 
 </details>
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Android Alarms
+**Question**:
+- What are Alarms?
+- What's the difference between Alarms and Intents?
+
+<details><summary><b>Answer: TODO</b></summary>
+
+TODO
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Android Internet Connection
+**Question**:
+- How is it possible to connect to Internet in Android? What are the policies?
+- How to check if connection is available?
+- Efficient data transfer (energy POV).
+
+<details><summary><b>Answer: TODO </b></summary>
+
+#### How is it possible to connect to Internet in Android? What are the policies?
+In Android developers can use traditional Sockets.
+
+Method `setPerformancePreferences(int connectionTime, int latency, int bandwidth)` allows to specify what is our performance preference. E.g. (0, 1, 2) means that we prefer bandwidth over latency, and latency over connectionTime.
+
+#### How to check if connection is available?
+ConnectionManager
+
+TODO
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
