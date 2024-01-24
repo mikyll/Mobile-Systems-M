@@ -1052,7 +1052,7 @@ TODO
 <details><summary><b>Answer: </b></summary>
 
 #### What is an **Activity** and what's its lifecycle? What is a **Task**?
-Activity is the **main component** of Android middleware (when writing an application, developers must extend the `Activity` class): it represents a single action that a user can perform via a window (a single view/screen) and typically occupies all the screen of the smartphone. Activities are typically stacked in a LIFO structure, called **Task**, and only the one at the top is the one running, with most of the CPU assigned, and it's the only one the user can interact with.
+Activity is the **main component** of Android middleware (when writing an application, developers must extend the `Activity` class): it represents a single action that a user can perform via a window (a single view/screen) and typically occupies all the screen of the smartphone. Activities are typically stacked in a LIFO structure, called **Task**, and only the one at the top is the one running, with most of the CPU assigned, and it's the only one the user can interact with. Android also offers a **Bundle**, an info container, where developers can save state to recover it after re-allocations (can be passed as argument in Activity API methods).
 
 Activity **lifecycle** is based on different states:
 - **RUNNING**, when it's in foreground (there can only be one at a time);
@@ -1070,7 +1070,8 @@ Activity **lifecycle** is based on different states:
 Example:
 ![alt](./resources/gfx/android_activity_states_example_edited.png)
 
-A **Task** models the concept of conversation: each application in execution is associated with a task, which contains the stack (a LIFO structure) of piled Activities, where the one on top is Running (foreground). In fact, we must think of activities as operational steps of a bigger "task", that constitutes an application.
+A **Task** models the concept of conversation: each application in execution is associated with a task, which contains the stack (a LIFO structure) of piled Activities, where the one on top is Running (foreground). In fact, we must think of activities as operational steps of a bigger "task", that constitutes an application.\
+**NB**: a collection of currently active tasks can be shown with one of the 3 control button on the bottom of the screen, that displays the "recents tasks" or "overview".
 
 #### What is an **Intent**? **IntentFilter**? Can they be multicast? What are its APIs? How does the match with an Activity occur?
 **Intents** are similiar to events: they represent the exchange of messages between different Android components. They typically are used to pass from an Activity to another component (also from another application). They can be of two types:
@@ -1095,6 +1096,8 @@ pdfIntent.setDataAndType(pdfUri, "application/pdf");
 
 startActivity(pdfIntent); // tells Android to search for an Activity that can handle a PDF file and start it
 ```
+
+> **NB**: when an Intent starts an Activity from a different application, a separate task is created, and the activity is put on top of it.
 
 **IntentFilters** are declared in the _manifest_ of an application, and specify which Intents the application can handle (i.e. which Intents can target it).
 
@@ -1122,15 +1125,15 @@ Example of an IntentFilter (in Manifest.xml):
 
 ### Asynchronous Techniques
 **Question**:
-- What is a **Service**? What are their **types**? What are the **APIs** to define them?
+- What is a **Service**? What are their **types**? What are the **APIs** to define them? What can you use to update the UI?
 - What is an **IntentService**?
 - What is an **Handler** component? What can it be used for?
-- What are **Broadcast** and **BroadcastReceivers**?
+- What are **Broadcast** and **BroadcastReceivers**? What's the difference between Broadcasts and implicit Intents?
 - What are **AsyncTask** and what's their purpose? What are the **APIs**?
 
 <details><summary><b>Answer: </b></summary>
 
-#### What is a **Service**? What are their **types**? What are the **APIs** to define them?
+#### What is a **Service**? What are their **types**? What are the **APIs** to define them?  What can you use to update the UI?
 A **Service** is a component that typically runs in background (if you invoke it when in an Activity, it'll work in time-sharing, along with the Activity), can NOT interact directly with UI and usually performs long-term operations. It can be activated through an Intent and it executes on the main thread (since they run in background there are no problems: it doesn't slow down the app/UI).
 > **NB**: to create a service, the developer must add the corresponding entry in the Manifest file: `<service android:name=".ExampleService" />`.
 
@@ -1144,6 +1147,8 @@ APIs:
 - **bound**: `onBind()`, `bindService()`;
 - **foreground**: `onStartCommand()`, `startForegroundService()`;
 
+Since Services cannot directly access the UI, to update it you could use BroadcastReceivers or other asynchronous components, such as AsyncTask.
+
 #### What is an **IntentService**?
 An **IntentService** is a service with a simplified lifecycle, that uses worker threads (no UI interaction), cannot be interrupted and stops itself when it's done.
 
@@ -1154,7 +1159,7 @@ Handlers can be used in two ways:
 - to schedule messages and runnables to be executed at some point in the future;
 - to add an action into a queue associated with a different thread.
 
-#### What are **Broadcast** and **BroadcastReceivers**? 
+#### What are **Broadcast** and **BroadcastReceivers**? What's the difference between Broadcasts and implicit Intents?
 **Broadcast** are message sent from Android system or other applications when an event of interest occur, and are wrapped in an Intent object.
 There are two types:
 - broadcast related to **system** events (e.g. `ACTION_BOOT_COMPLETED`);
@@ -1165,33 +1170,39 @@ There are two types:
 - **normal** Broadcast, sent through `sendBroadcast()`, is delivered to all registered receivers in undefined order (they cannot propagate or abort it);
 - **local** Broadcast, sent through `LocalBroadcastManager.getInstance(this).sendBroadcast()`, is delivered to receivers within the app that sent it;
 
-**BroadcastReceiver** are components that registers to Broadcast in which they are interested. Can be registered in two ways:
-- **static**, with the specification inside the manifest file:
+**BroadcastReceiver** are components that _registers_ to Broadcast they are interested in receiving. They can be registered in two ways:
+- **static**, with the specification inside the manifest file, through the element `<receiver></receiver>` that wraps an `<intent-filter></intent-filter>`:
+- **dynamic**, by using the context of an application or Activity, through `this.registerReceiver(myBroadcastReceiver, myIntentFilter)`;
+
+> **NB**: It's a _good practice™_ to restrict broadcasts as much as possible and just use local broadcast if feasible, to prevent security threats.
+
+Examples: register a BroadcastReceiver to perform some operation when the airplane mode changes, i.e. goes from ON to OFF or viceversa.
+- **Static** registration:
 ```
 <receiver
-    android:name=".CustomReceiver"
+    android:name=".MyBroadcastReceiver"
     android:enabled="true"
-    android:exported="true">
+    android:exported="false"> <!-- this restricts the receiver to be used only within the same application -->
   <intent-filter>
     <action
-        android:name="android.intent.action.BOOT_COMPLETED"/>
+        android:name="android.intent.action.AIRPLANE_MODE"/>
   </intent-filter>
 </receiver>
 ```
-- **dynamic**, by using the context of an application or Activity:
+- **Dynamic** registration:
 ```
-BroadcastReceiver myBroadcastReceiver = new MyBroadcastReceiver();
-IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+MyBroadcastReceiver myBroadcastReceiver = new MyBroadcastReceiver();
+IntentFilter myIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 
-// We register the receiver using the Activity context
-this.registerReceiver(mReceiver, filter);
+// We register (dynamically) the receiver using the Activity context
+this.registerReceiver(myBroadcastReceiver, myIntentFilter);
 // [...]
 // We un-register the receiver
-this.unregisterReceiver(mReceiver);
+this.unregisterReceiver(myBroadcastReceiver);
 ```
 
-> **NB**: It's a good practice to restrict broadcasts as much as possible and user local broadcast if feasible, to prevent security threats.
+The main difference between Broadcasts and implicit Intents is that Broadcasts are typically used for notification purposes (handling events and triggering UI updates), while Intents are used to pass the execution to some other component.
 
 #### What are `AsyncTask` and what's their purpose? What are the primitives? What if we didn't have AsyncTask?
 **AsyncTask** is a component useful for performing operations UI-related (in fact, Services cannot directly interact with the UI). AsyncTask is a component that is creted on the main thread and can be executed exactly once, on the background thread. They provide APIs to perform the operations, and other to update the UI accordingly, before, during and after their execution. The most obvious example for their usage is the downloading of files.\
@@ -1215,32 +1226,32 @@ Example:
 ```
 private class MyDownloader extends AsyncTask<T1, T2, T3> {
   @Override
-	protected void onPreExecute() {
+  protected void onPreExecute() {
     // run on UI thread
-	}
+  }
   @Override
-	protected Image doInBackground(T1... params) {
+  protected Image doInBackground(T1... params) {
     // run on worker thread
-	}
+  }
   @Override
-	protected void onProgressUpdate(T2... progress) {
+  protected void onProgressUpdate(T2... progress) {
     // run on UI thread
-	}
+  }
   @Override
-	protected void onPostExecute(T3 result) {
+  protected void onPostExecute(T3 result) {
     // run on UI thread
-	}
+  }
 }
 
 class MyActivity extends Activity {
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		// Run the AsyncTask
-		MyDownloader myDownloader = new MyDownloader();
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    // Run the AsyncTask
+    MyDownloader myDownloader = new MyDownloader();
     myDownloader.execute();
-	}
+  }
 }
 ```
 
