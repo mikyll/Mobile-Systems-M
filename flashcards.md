@@ -981,13 +981,6 @@ EdgeX Foundry is an open source platform to supports IoT applications. It was de
 ## Chapter 5 - Android
 
 Android
-1. Multithreading in android
-2. Differenze tra service bound o unbounded?
-3. Api per definire bound e unbound services?
-4. Dal punto di vista dei thread come si gestiscono i service?
-5. Se sono dentro la stessa app come sono assegnati i thread?
-
-Android
 1. Asyntask
 2. Primitive di asynctask
 3. Come sono suddivisi i thread
@@ -1004,18 +997,7 @@ Android
 4. I thread devono essere istanziati?
 5. Cosa comporterebbe non avere gli asynctask?
 
-Android
-1. Come funzionano gli intent in android?
-2. Come può essere mandato un intent? Unicast multicast broadcast
-3. Quali sono le api relative all’intent
-4. È android che fa match degli intent con l’activity
-5. Come avviene il match tra intent e l’activity?
-6. Cosa succede se ci sono più app che matchano l’intent?
-7. Come si registra il braodcast receiver presso gli intent a cui è interessato?
-
 Android:
-- Intent
-- IntentFilter
 - BroadcastReceiver
 
 ### Mobile Middleware
@@ -1049,7 +1031,7 @@ It has a layered hierarchical architecture:
   - Advanced power management (different management policies via WakeLocks);
 
 #### Describe Android **threading** model.
-In Android each application is associated with a **single thread** that has an _infinite loop_, and manages a _message queue_ to handle events (from system and from user input). This loop executes each Activity of the application.
+In Android each application is associated with a **single thread** that has an _infinite loop_, and manages a _message queue_ to handle events (from system and from user input). This loop executes each Activity of the application. Being single-threaded, there are no concurrency problems when accessing resources.
 Android applications can be based on two models:
 - one DVK for each application (default), which runs on a separate process;
 - one DVK for different applications (applications must set a shared ID - security risk).
@@ -1078,7 +1060,7 @@ TODO
 ### Android Components
 **Question**:
 - What is an **Activity** and what's its life cycle? What is a **Task**?
-- What is an **Intent**? **IntentFilter**?
+- What is an **Intent**? **IntentFilter**? Can they be multicast? What are its **APIs**? How does the **match** with an Activity occur?
 - Service
 - BroadcastReceiver
 
@@ -1133,22 +1115,34 @@ startActivity(pdfIntent); // tells Android to search for an Activity that can ha
 
 Example of an IntentFilter (in Manifest.xml):
 ```
-<intent-filter>
-  <action android:name="android.intent.action.VIEW" />
-  <category android:name="android.intent.category.DEFAULT" />
-  <data android:mimeType="application/pdf" />
-</intent-filter>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myapp">
+  [...]
+  <intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="application/pdf" />
+  </intent-filter>
+  [...]
+</manifest>
 ```
 
-1. Come funzionano gli intent in android?
-2. Come può essere mandato un intent? Unicast multicast broadcast
-3. Quali sono le api relative all’intent
-4. È android che fa match degli intent con l’activity
-5. Come avviene il match tra intent e l’activity?
-6. Cosa succede se ci sono più app che matchano l’intent?
-
 #### Broadcast Receiver
-8. Come si registra il braodcast receiver presso gli intent a cui è interessato?
+Broadcast
+8. Come si registra il broadcast receiver presso gli intent a cui è interessato?
+
+
+Broadcast Receiver:
+While Intents are one-to-one (only one application will receive it)
+
+when we have more than one app to do a certain task asked by an Intent, Android usually prompts us to enter the application with which open it (e.g. open a pdf file). That happens because the Intent is only one-to-one.
+
+What about battery is almost drained? Probably many receivers are interested in it, and that's where Broadcast Receivers make their appearence.
+
+Activities and Intents are probably the most crucial and characterizing Android elements.
+
+
+NB: from next lesson we will see actual code.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -1157,13 +1151,33 @@ Example of an IntentFilter (in Manifest.xml):
 
 ### Asynchronous Techniques
 **Question**:
-- Service
+- What is a **Service**? What are their **types**? What are the **APIs** to define them?
+- What is an **Handler** component? What can it be used for?
+- Broadcast
 - IntentService
 - What are `AsyncTask` and what's their purpose? What are the primitives?
 
 <details><summary><b>Answer: </b></summary>
 
-TODO
+#### What is a **Service**? What are their **types**? What are the **APIs** to define them?
+A **Service** is a component that typically runs in background (if you invoke it when in an Activity, it'll work in time-sharing, along with the Activity), can NOT interact directly with UI and usually performs long-term operations. It can be activated through an Intent and it executes on the main thread (since they run in background there are no problems: it doesn't slow down the app/UI).
+
+There are 3 types of Services:
+- **Started**/**Unbound** service, is started with `startService()` and keeps running until it finishes its operations (lifecycle coded by the developer);
+- **Bound** service, is started with `bindService()` and allows other components to interact with it by "binding" as clients. It then terminates when it has no more clients connected (a client can unbind with `unbindService()`).
+- **Foreground** service, is started with `startForeground()` has higher priority than other services and also runs in background, but requires the user to be aware of its existence (done through a notification they cannot dismiss).
+
+APIs:
+- **unbound**: `onStartCommand()`, `startService()`;
+- **bound**: `onBind()`, `bindService()`;
+- **foreground**: `onStartCommand()`, `startForegroundService()`;
+
+#### What is an **Handler** component? What can it be used for?
+The **Handler** component is specifically designed to interact with the **message queue**: each application has a main thread, and that thread is associated with a message queue (for systems events and user events).
+
+Handlers can be used in two ways:
+- to schedule messages and runnables to be executed at some point in the future;
+- to add an action into a queue associated with a different thread.
 
 #### What are `AsyncTask` and what's their purpose? What are the primitives? What if we didn't have AsyncTask?
 AsyncTask is a component useful for performing operations UI-related (in fact, Services cannot directly interact with the UI). AsyncTask is a component that is creted on the main thread and can be executed exactly once, on the background thread. They provide APIs to perform the operations, and other to update the UI accordingly, before, during and after their execution. The most obvious example for their usage is the downloading of files.\
