@@ -403,21 +403,21 @@ Broadcast storm issue, is something that's often involved in flooding, and occur
 
 #### What is DSR routing and how does it **work**?
 Dynamic Source Routing (DSR) is a full reactive routing protocol, where the sender has to find a valid routing path. The steps for Source (S) to find a valid route to reach Destination (D), are the following:
-1. S uses **flooding** to send a **control packet RREQ** (Route REQuest) in broadcast;
-2. Each node that receives RREQ check if it doesn't have already sent it, and if it did not, it appends its node ID in the packet header and forwards the packet again in broadcast;
+1. S uses **flooding** to send a control packet **RREQ** (Route REQuest) in broadcast;
+2. Each node that receives RREQ check if it doesn't have already sent it, and if it did not, it appends its node ID in the packet **header** and forwards the packet again in broadcast;
 3. This procedure repeats until D is reached;
-4. When D receives the packet, it uses the chain of nodes in the header (path S->D), builds a control packet RREP (Route REPly), adding the path to it and sends it back in unicast to S;
+4. When D receives the packet, it uses the chain of nodes in the header (path S->D), builds a control packet **RREP** (Route REPly), adding the path to its header, and sends it back in unicast to S;
 5. S receives RREP, retrieves the path to reach D and saves it in its cache;
 6. S sends the actual data packets to D, including the path in their headers.
 
 #### What **problems** there could be?
-- This protol faces many collisions, due to the fact that the traffic concentrates in small intervals of time (broadcast storm issue).
-- Moreover there is the hidden node issue, when for example two nodes are sending to the same destination, a collision is very likely to occur. 
+- This protol faces many **collisions**, due to the fact that the traffic concentrates in small intervals of time (**broadcast storm issue**).
+- Moreover there is the **hidden node issue**, when for example two nodes are sending to the same destination, a collision is very likely to occur. 
 
-In general, it's a matter of trade-offs.
+In general, it's a matter of _trade-offs_.
 
 #### How can it be **optimized**?
-For example through **path caching**: any node cache new path that it happens to discover (in any possible ways). Some obvious advantages, but also some disadvantages, such as invalid caches (being a MANET, after some time, the path doesn't work anymore). How can those be invalidated in a MANET? Through Route ERRor (RERR) control packet.
+For example through **path caching**: any node cache new path that it happens to discover (in any possible ways). Some obvious advantages, but also some disadvantages, such as **invalid caches** (being a MANET, after some time, the path doesn't work anymore, e.g. for mobility reasons). How can those be invalidated in a MANET? Through Route ERRor (**RERR**) control packet.
 
 When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path tha is not available anymore. Any node that overhears this, can update its cache as well.
 
@@ -439,7 +439,7 @@ When a node cannot reach the following one in the route chain, it sends back to 
 <details><summary><b>Answer: TODO</b></summary>
 
 #### What is AODV routing protocol?
-Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that consists in [...]
+Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that consists in [...] TODO
 Its main difference with DSR is that AODV doesn't save path information inside packet headers, but instead stores them into the single nodes (similiar to IP routing). That reduces the overhead and allows for more data to be transferred inside the packet payloads.
 
 #### What do tables contain?
