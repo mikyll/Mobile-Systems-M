@@ -118,7 +118,7 @@ There are two primary WiFi configurations:
 
 #### Does **MACA** solve hidden node and exposed node issues?
 ![alt](./resources/gfx/hidden-node-maca.png)
-- **Hidden node issue**: MACA can partially solve this issue, but there are still few cases when it may occurr. For example, C may not hear CTS because it was out of range, but it's moving towards B.
+- **Hidden node issue**: MACA can partially solve this issue, but there are still few cases when it may occur. For example, C may not hear CTS because it was out of range, but it's moving towards B.
 - **Exposed node issue**: is untouched.
 
 However, MACA introduces also some **overhead**, and that's the reason why in modern implementations it's left **optional**.
@@ -1077,13 +1077,14 @@ TODO
 
 ### Android Components
 **Question**:
-- What is an **Activity** and what's its life cycle?
-- What is a **Task**?
+- What is an **Activity** and what's its life cycle? What is a **Task**?
 - What is an **Intent**? **IntentFilter**?
+- Service
+- BroadcastReceiver
 
 <details><summary><b>Answer: </b></summary>
 
-#### What is an **Activity** and what's its lifecycle?
+#### What is an **Activity** and what's its lifecycle? What is a **Task**?
 Activity is the **main component** of Android middleware (when writing an application, developers must extend the `Activity` class): it represents a single action that a user can perform via a window (a single view/screen) and typically occupies all the screen of the smartphone. Activities are typically stacked in a LIFO structure, called **Task**, and only the one at the top is the one running, with most of the CPU assigned, and it's the only one the user can interact with.
 
 Activity **lifecycle** is based on different states:
@@ -1092,10 +1093,62 @@ Activity **lifecycle** is based on different states:
 - **STOPPED**, when it's not visibile (e.g. it went in background);
 - **KILLED**, when it's destroyed and the resources are deallocated (e.g. the device needs them for other operations).
 
+<details>
+<summary>Show/Hide Lifecycle Image</summary>
+
 ![alt](./resources/gfx/android_activity_lifecycle.png)
+
+</details>
 
 Example:
 ![alt](./resources/gfx/android_activity_states_example_edited.png)
+
+A **Task** models the concept of conversation: each application in execution is associated with a task, which contains the stack (a LIFO structure) of piled Activities, where the one on top is Running (foreground). In fact, we must think of activities as operational steps of a bigger "task", that constitutes an application.
+
+#### What is an **Intent**? **IntentFilter**? Can they be multicast? What are its APIs? How does the match with an Activity occur?
+**Intents** are similiar to events: they represent the exchange of messages between different Android components. They typically are used to pass from an Activity to another component (also from another application). They can be of two types:
+- **Explicit**, when the class of the component to activate is already known (at compile time);
+- **Implicit**, when the class is unknown, and we delegate the middleware to find an appropriate receiver. In this case, the intent must specify some additional information, to help Android find a suitable destination (action & category, URL, mime type).
+
+Intents are ONE-TO-ONE triggers, so they are unicast only (they cannot be multicast or broadcast).
+
+When searching for an Activity that match the Intent (through IntentFilters) there could be different scenarios:
+- there is only one match, simplest one, the Activity just starts right away;
+- there are no matches, the intent is not delivered (lost intent);
+- there are multiple matches, Android prompts the user to choose which application to use;
+
+Example of an Intent that needs an application to read a pdf file:
+```
+Uri pdfUri = Uri.parse(myPDF);
+
+Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+pdfIntent.addCategory(Intent.CATEGORY_DEFAULT);
+pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+pdfIntent.setDataAndType(pdfUri, "application/pdf");
+
+startActivity(pdfIntent); // tells Android to search for an Activity that can handle a PDF file and start it
+```
+
+**IntentFilters** are declared in the _manifest_ of an application, and specify which Intents the application can handle (i.e. which Intents can target it).
+
+Example of an IntentFilter (in Manifest.xml):
+```
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <data android:mimeType="application/pdf" />
+</intent-filter>
+```
+
+1. Come funzionano gli intent in android?
+2. Come può essere mandato un intent? Unicast multicast broadcast
+3. Quali sono le api relative all’intent
+4. È android che fa match degli intent con l’activity
+5. Come avviene il match tra intent e l’activity?
+6. Cosa succede se ci sono più app che matchano l’intent?
+
+#### Broadcast Receiver
+8. Come si registra il braodcast receiver presso gli intent a cui è interessato?
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
