@@ -473,7 +473,7 @@ Also, forward routes are removed after a certain amount of time (active_route_ti
 
 #### Link Failure Detection
 Failure detection is performed both in reactive and proactive ways:
-- **reactive**, when a forward towards an active node (towards which there was a route) fails. In this case all neighbours are informed, through a RERR packet and they invalidate their entry. When S receives RERR, it starts a new route discovery process towards D (NB: there's no certainty that there will be a node with a route to S, in this case typically it performs a flooding, hoping it will reach);
+- **reactive**, when a forward towards an active node (towards which there was a route) fails. In this case all neighbors are informed, through a RERR packet and they invalidate their entry. When S receives RERR, it starts a new route discovery process towards D (NB: there's no certainty that there will be a node with a route to S, in this case typically it performs a flooding, hoping it will reach);
 - **proactive**, by periodically sending hello messages to active nodes.
 
 #### Optimizations
@@ -1117,3 +1117,19 @@ class MyActivity extends Activity {
 
 ## Chapter 6 - Discovery
 
+"service discovery" = naming system specifically designed for mobile systems
+
+Scenario/idea: mobile systems, with very limited knowledge of the surrounding environment, who wants to access resources or services in it's neighborhood.
+
+Common characteristics of service discovery systems:
+- **automatic configuration**;
+- resource/service **discovery**;
+- resource/service **delivery**;
+
+### Apache River (Jini)
+![[apache_river.png]]
+
+### UPnP
+Universal Plug and Play (UPnP)
+
+![[upnp_discovery.png]]
