@@ -2,18 +2,13 @@
 <h1 align="center">Flashcards</h1>
 
 ## Table of Contents
-
-<details open>
-  <br/>
   
-  1. [Wireless Communication](#chapter-1---wireless-communication)
-  2. [MANET](#chapter-2---mobile-ad-hoc-network-manet)
-  3. [Mobile IP and Positioning](#chapter-3---mobile-ip-and-positioning)
-  4. [Internet of Things](#chapter-4---internet-of-things-iot)
-  5. [Android](#chapter-5---android)
-  6. [Discovery, Messaging and Events](#chapter-6---discovery-messaging-and-events)
-  
-</details>
+1. [Wireless Communication](#chapter-1---wireless-communication)
+2. [MANET](#chapter-2---mobile-ad-hoc-network-manet)
+3. [Mobile IP and Positioning](#chapter-3---mobile-ip-and-positioning)
+4. [Internet of Things](#chapter-4---internet-of-things-iot)
+5. [Android](#chapter-5---android)
+6. [Discovery, Messaging and Events](#chapter-6---discovery-messaging-and-events)
 
 ## Chapter 1 - Wireless Communication
 
