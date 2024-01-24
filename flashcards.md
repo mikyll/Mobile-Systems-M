@@ -386,7 +386,7 @@ Examples:
 - to **avoid infinite hops** even after the packet is received, we could use a TTL (Time-To-Live);
 
 #### What is the **broadcast storm issue**?
-Broadcast storm issue, is something that's often involved in flooding, and occur when a large number of broacast or multicast messages are rapidly propagated and circulated through the network (nothing -> nothing -> spike of traffic -> nothing -> ...). That creates excessive traffic and potentially degrading network performances.
+Broadcast storm issue, is something that's often involved in flooding, and occur when a large number of broacast or multicast messages are rapidly propagated and circulated through the network (nothing -> nothing -> spike of traffic -> nothing -> ...). That creates excessive traffic and potentially **degrading network performances**.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
