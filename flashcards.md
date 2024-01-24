@@ -419,7 +419,7 @@ In general, it's a matter of _trade-offs_.
 #### How can it be **optimized**?
 For example through **path caching**: any node cache new path that it happens to discover (in any possible ways). Some obvious advantages, but also some disadvantages, such as **invalid caches** (being a MANET, after some time, the path doesn't work anymore, e.g. for mobility reasons). How can those be invalidated in a MANET? Through Route ERRor (**RERR**) control packet.
 
-When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path tha is not available anymore. Any node that overhears this, can update its cache as well.
+When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path that is not available anymore. Any node that overhears this, can update its cache as well.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
@@ -443,7 +443,7 @@ Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that cons
 Its main difference with DSR is that AODV doesn't save path information inside packet headers, but instead stores them into the single nodes (similiar to IP routing). That reduces the overhead and allows for more data to be transferred inside the packet payloads.
 
 #### What do tables contain?
-AODV exploits routing tables, saved on each MANET node, to save information about routes to reach the nodes. When a node S wants to send a packet to a node D, it first check if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding (RREQ(ID,src,dst) in broadcast). Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (direct path and inverse path entries). To prevent outdated or invalid routing table entries, there is a timeout mechanism (which is longer for direct routes).
+AODV exploits routing tables, saved on each MANET node, to store information about routes to reach the nodes. When a node S wants to send a packet to a node D, it first checks if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding with RREQ(ID,src,dst) in broadcast. Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (direct path and inverse path entries). To prevent outdated or invalid routing table entries, there is a timeout mechanism (which is longer for direct routes).
 
 Example:
 - when receiving a RREQ a node updates its routing table by adding an "inverse path entry"
