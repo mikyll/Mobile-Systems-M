@@ -1358,27 +1358,40 @@ If compared to traditional and simple RMI/RPC, River overcomes limitations and o
 
 #### What is **UPnP** and why is so popular? How does the service discovery work? How does UPnP's support for events work? bridging work? 
 **Universal Plug and Play** (UPnP) is the most used and widespread standard for services and resources discovery, for mobile systems and not only. Its target were simple devices and electronics for **domestic** environments (similar target of Bluetooth), therefore the idea was to make it as **simple to use** as possible: in fact, UPnP doesn't require any infrastructure, and the configuration (client-side) is automatic.
-> **NB**: terminology reference: **Device** is a service/resource provider, **Control Point** is a service/resource client. 
+> **NB**: terminology reference: **Device** is a service/resource provider, **Control Point** is a service/resource client.
+
+UPnP uses different technologies:
+- HTTP over UDP for control messages (discovery, advertisement, etc.);
+- HTTP over TCP for service usage (invocation, etc.);
 
 Here's how UPnP implements service discovery basic features:
 - **Automatic configuration**: the IP assignment is done via **Auto IP**, a protocol that allows devices to connect to network in a very simple way (search for DHCP servers. Not found? Pick a random IP in a defined range and check if it's already used via ARP. It's used? Pick another one, and so on). Very simple but automatic. Some consequences are that a device could change IP address after some time, and the IP is local and there's the need of NAT mapping to get a public one, but that's none of UPnP business (not part of its standard).
-- **Discovery**: 
+- **Discovery**: there are two ways of disovering an UPnP device:
+  - `Device -> Control Point`, a Device can **advertise** itself and its local services/resources, by sending an SSDP broadcast message containing a URL at which download the DDF (Device Description File in XML);
+  - `Control Point -> Device`, a Control Point can search for available Devices or services (optionally specifying some attributes it's interested in), by sending a SSDP **discovery** message in broadcast, and receiving - if someone matches the preferences - a reply containing the URL needed to download the DDF. If the Control Point already knows the device or service information, it doesn't need to download that file.
+> **Device Description File** (DDF) is an XML document that includes all the resources and services offered by a device (`<device>`). For each service offered by the device, there's a `<service>` section, which includes also a URL to a **Service Description File** (SDF): an XML file about how to use the specific service (list of actions, parameters, etc. `<action>`). The XML schemas for DDF and SDF are reported [below](#ddf-schema).
+- **Access**:
 
 
-What it uses: UDP, TCP, HTTP, DHCP, ARP, XML
+ACCESS
+XML under service section contains in particular:
+- URL to invocate the service;
+- URL to enable/subscribe to notifications (eventSubURL);
+Control Points can access a service by sending a SOAP message to the URL of the service specified in the DDF (there's an element called 
+
+Example workflow:
+1.
+2. 
 
 
 
-DISCOVERY
-NB: devices and control points
-2 modes, through using SSDP (Simple Service Discovery Protocol):
-1. a device can advertise itself and its local services/resources (with URL at which download the DDF file);
-2. a control point can send a discover message in broadcast (optinally specifying which devices/services it's interested in);
+with a projector: [...]
+
+
 
 ![alt](./resources/gfx/upnp_discovery.png)
 
-Device Description File (DDF) is an XML document that includes all the resources and services offered by a device (`<device>`). For each service offered by the device, there's a `<service>` section, which includes also a URL to a service descriptor file: an XML file about how to use the specific service (list of actions, parameters, etc. `<action>`).
-
+<span id="ddf-schema"/>
 <details>
 <summary>Hide/Show DDF Schema</summary>
 
@@ -1457,19 +1470,6 @@ Part of [SDF schema (p.54)](https://openconnectivity.org/upnp-specs/UPnP-arch-De
 ```
 
 </details>
-
-ACCESS
-XML under service section contains in particular:
-- URL to invocate the service;
-- URL to enable/subscribe to notifications (eventSubURL);
-Control Points can access a service by sending a SOAP message to the URL of the service specified in the DDF (there's an element called 
-
-Example workflow:
-1.
-2. 
-
-with a projector: [...]
-
 
 Service discovery upnp
 1. Parlare del supporto alle notifiche
