@@ -1329,7 +1329,7 @@ Gestione degli eventi
 **Question**:
 - What are **service discovery systems** and what's their purpose?
 - What is **Jini**/**Apache River**? How are **reliability** and **scalability** implemented?
-- UPnP
+- What is **UPnP** and why is so popular? How does the service discovery work?
 
 <details><summary><b>Answer: </b></summary>
 
@@ -1356,7 +1356,7 @@ Apache River supports scalability: services/resources can be aggregated into **c
 
 If compared to traditional and simple RMI/RPC, River overcomes limitations and overhead due to compile-time creation of structures (stub/skeleton), since it provides a Proxy Object _at runtime_ instead.
 
-#### What is **UPnP**? How does the bridging work? 
+#### What is **UPnP** and why is so popular? How does the service discovery work? bridging work? 
 **Universal Plug and Play** (UPnP) is the most used and widespread standard for services and resources discovery, for mobile systems and not only. It doesn't require any infrastructure
 
 TODO (rewrite)
@@ -1377,6 +1377,8 @@ NB: devices and control points
 2 modes, through using SSDP (Simple Service Discovery Protocol):
 1. a device can advertise itself and its local services/resources (with URL at which download the DDF file);
 2. a control point can send a discover message in broadcast;
+
+![alt](./resources/gfx/upnp_discovery.png)
 
 Device Description File (DDF) is an XML document that includes all the resources and services offered by a device
 Part of [DDF schema p.54](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf):
@@ -1402,7 +1404,7 @@ configId="configuration number">
 </root>
 ```
 
-
+To 
 
 
 
