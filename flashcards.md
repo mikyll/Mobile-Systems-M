@@ -664,17 +664,6 @@ For example, it automatically solves the triangular routing problem, by making C
 
 ---
 
-### I-TCP
-**Question**: 
-<details><summary><b>Answer: </b></summary>
-
-TODO
-
-</details>
-<p align="right">(<a href="#back-to-top">back to top</a>)</p>
-
----
-
 ### Positioning Systems
 **Question**:
 - How can positioning systems be **classified**?
