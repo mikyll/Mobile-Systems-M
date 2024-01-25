@@ -456,10 +456,10 @@ AODV Steps:
 2. S checks if it has a route to D;
 3. If it doesnt, it starts a route discovery process (**flooding** in broadcast with RREQ);
 4. Each node receiving **RREQ**, if it doesn't have a valid route to D, rebroadcast the message and updates its own ***route table***. A route table includes entries with the following information:
-  - seq (sequence number), is used to track the freshness of routing information;
-  - dest (destination node), identifies a destination node;
-  - next (next-hop), contains the address of the next node of the route, to forward packets towards the destination node;
-  - hop (hop count), the number of hops to reach the destination node;
+    - seq (sequence number), is used to track the freshness of routing information;
+    - dest (destination node), identifies a destination node;
+    - next (next-hop), contains the address of the next node of the route, to forward packets towards the destination node;
+    - hop (hop count), the number of hops to reach the destination node;
 5. When RREQ reaches D or a node with a valid route to D, a **RREP** is generated and sent back to S (in unicast);
 6. When RREP travels back towards S, each node it passes by updates its route table, adding another entry.
 
