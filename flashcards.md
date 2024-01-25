@@ -418,7 +418,9 @@ Dynamic Source Routing (DSR) is a full reactive routing protocol, where the send
 In general, it's a matter of _trade-offs_.
 
 #### How can it be **optimized**?
-For example through **path caching**: any node cache new paths that it happens to discover (in any possible ways). Some obvious advantages, but also some disadvantages, such as **invalid caches** (being a MANET, after some time, the path doesn't work anymore, e.g. for mobility reasons). How can those be invalidated in a MANET? Through Route ERRor (**RERR**) control packet.
+For example through **path caching**: any node caches new paths that it happens to discover (in any possible ways). Some obvious advantages, such as quicker discovery process, but also some disadvantages, such as **stale caches** (being a MANET, after some time, the path doesn't work anymore, e.g. for mobility reasons).
+
+How can stale caches be invalidated in a MANET? Through Route ERRor (**RERR**) control packet.
 
 #### How are **link errors** handled?
 When a node C cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path that is not available anymore (e.g. [S,A,B,C,D]. Any node that overhears this, can update its cache as well, to remove the outdated entry. If the RERR is lost as well, S can keep using the old routes until it receives an RERR that invalidates it.
