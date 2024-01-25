@@ -439,16 +439,32 @@ When a node cannot reach the following one in the route chain, it sends back to 
 <details><summary><b>Answer: TODO</b></summary>
 
 #### What is AODV routing protocol?
-Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that consists in [...] TODO
+Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that consists in:
+- **Ad hoc**, because it's for MANET;
+- **On-demand**, beucase it's reactive (routes only enstablished and kept when needed);
+- **Distance Vector**, refers to the routing algorithm used: each "router node" maintains a table containing the distances to every other router node in the network and the direction/path (vector) to reach a destination.
+
 Its main difference with DSR is that AODV doesn't save path information inside packet headers, but instead stores them into the single nodes (similiar to IP routing). That reduces the overhead and allows for more data to be transferred inside the packet payloads.
 
 #### What do tables contain?
 AODV exploits routing tables, saved on each MANET node, to store information about routes to reach the nodes. When a node S wants to send a packet to a node D, it first checks if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding with RREQ(ID,src,dst) in broadcast. Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (direct path and inverse path entries). To prevent outdated or invalid routing table entries, there is a timeout mechanism (which is longer for direct routes).
 
-Example:
-- when receiving a RREQ a node updates its routing table by adding an "inverse path entry"
-- inverse paths are the ones to return from D to S (used for RRES);
-- direct paths are the ones to reach 
+<details>
+<summary>Show/Hide <b>Example</b></summary>
+
+AODV Steps:
+1. S wants to send a packet to D;
+2. S checks if it has a route to D;
+3. If it doesnt, it starts a route discovery process (**flooding** in broadcast with RREQ);
+4. Each node receiving RREQ, if it doesn't have a valid route to D, rebroadcast the message and updates its own ***route table***. A route table includes entries with the following information:
+	- seq (sequence number), is used to track the freshness of routing information;
+	- dest (destination node), identifies a destination node;
+	- next (next-hop), contains the address of the next node of the route, to forward packets towards the destination node;
+	- hop (hop count), the number of hops to reach the destination node;
+5. When RREQ reaches D or a node with a valid route to D, a RREP is generated and sent back to S (in unicast);
+6. When RREP travels back towards S, each node it passes by updates its route table, adding another entry.
+
+</details>
 
 #### Can loops be formed? How?
 Routing loops, even if very unlikely, can occur in AODV. For example, a loop can be formed when optimizing the route discovery process: if the protocol allows nodes to reply to RREQ with a path they know (so that the RREQ doesn't have to reach D), then there could be the possibility that the path is invalid due to a lost RERR packet. Visual example:\
