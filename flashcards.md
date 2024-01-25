@@ -1482,11 +1482,11 @@ Example: typical interaction for UPnP, step by step.
 #### How can a Device know when the Control Point leaves, and stop sending event messages?
 UPnP events support exploit GENA (over HTTP over TCP) to send notifications. Being it over TCP, when a Control Point leaves, the Devices tries to send an update to its SID, but doesn't get the proper HTTP response and knows that it didn't receive the notification.
 
-</details>
-<p align="right">(<a href="#back-to-top">back to top</a>)</p>
-
 #### If I wanted to federate 2 separated UPnP localities? How is it possible to do that?
 One possible solution would be to use a node as a gateway/bridge between the two localities.
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
