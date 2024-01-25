@@ -575,10 +575,17 @@ Leach and Heed are two algorithms for Clustering in MANETs:
 <details><summary><b>Answer: TODO</b></summary>
 
 #### How does **Wi-Fi Direct** work?
-In Wi-Fi Direct nodes communicate by establishing a Peer-to-Peer (P2P) group, through a software based AP. In Wi-Fi P2P groups, there is a P2P Group Owner (GO) and other devices act like clients.
+In Wi-Fi Direct nodes communicate by establishing a **Peer-to-Peer (P2P) group**, through a software based AP. In Wi-Fi P2P groups, there is a **P2P Group Owner (GO)** and other devices act like clients.
 
 #### Provide a **comparison** between **Bluetooth Scatternet** and Wi-Fi Direct groups.
 Wi-Fi Direct groups and  Bluetooth Scatternets are somewhat similiar, for their topology and the fact that only the P2P GO and the master can communicate with external nodes (from other P2P groups or other scatternets).
+
+|  | Bluetooth Scatternet | Wi-Fi Direct P2P Group |
+| ---- | ---- | ---- |
+| **Communication towards extern** | Only the master can communicate with nodes from other scatternets | Only the P2P GO can communicate with clients from other P2P groups |
+| **Leader substitution** | If the master goes offline, a new one is elected | If the P2P GO goes offline, the P2P group needs to be recreated. |
+| **Communication** | Only between master and slave | Full P2P (also between client and another client) |
+
 
 #### What are the possible **group formation techniques**?
 
