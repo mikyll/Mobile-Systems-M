@@ -470,11 +470,13 @@ AODV Steps:
 #### What happens if there are **link errors**? How are them handled?
 
 #### Can **loops** be formed? How?
-Routing loops, even if very unlikely, can occur in AODV. For example, a loop can be formed when optimizing the route discovery process: if the protocol allows nodes to reply to RREQ with a path they know (so that the RREQ doesn't have to reach D), then there could be the possibility that the path is invalid due to a lost RERR packet. Visual example:\
+Routing loops, even if very unlikely, can occur in AODV. For example, a loop can be formed when optimizing the route discovery process: if the protocol allows nodes to **reply to RREQ with a path they know** (so that the RREQ doesn't have to reach D), then there could be the possibility that the path is invalid due to a lost RERR packet.
+
+Visual example:\
 ![alt](./resources/gfx/routing_loops.png)
 
 #### How can loops be **avoided**?
-Routing loops can be avoided by using a Destination Sequence Number (DSN): each route entry in nodes route tables, has a sequence number field that indicates the freshness of the route. The DSNs are incremented each time the nodes send a message.
+Routing loops can be avoided by using a **Destination Sequence Number** (DSN): each route entry in nodes route tables, has a sequence number field that indicates the freshness of the route. The DSNs are incremented each time the nodes send a message.
 During the route discovery phase, the RREQ will be carrying the destination node D as well as a DSN. Upon reaching a node, if the current node has a route to D with an higher DSN (compared to the one in RREQ), it immediately replies with RREP containing the route to D; otherwise, it forwards the RREQ to the next nodes.
 
 #### What happens if nobody has a path towards the destination node, after a fault?
