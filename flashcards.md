@@ -1316,20 +1316,10 @@ TODO
 
 ## Chapter 6 - Discovery, Messaging, and Events
 
-Service discovery upnp
-1. Parlare del supporto alle notifiche
-2. Se ci sono molti control point registrati per lo stesso evento come viene gestita la
-propagazione? (No ottimizzato) 
-
-Gestione degli eventi
-1. Modalità di propagazione delle Subscription in convering based routing?
-2. Come si risolve il problema della cancellazione delle sottoscrizioni più generali?
-
 ### Service Discovery
 **Question**:
 - What are **service discovery systems** and what's their purpose?
 - What is **Jini**/**Apache River**? How are **reliability** and **scalability** implemented?
-- What is **UPnP** and why is so popular? How does the service discovery work?
 
 <details><summary><b>Answer: </b></summary>
 
@@ -1356,44 +1346,45 @@ Apache River supports scalability: services/resources can be aggregated into **c
 
 If compared to traditional and simple RMI/RPC, River overcomes limitations and overhead due to compile-time creation of structures (stub/skeleton), since it provides a Proxy Object _at runtime_ instead.
 
-#### What is **UPnP** and why is so popular? How does the service discovery work? How does UPnP's support for events work? bridging work? 
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### Service Discovery (2): UPnP
+**Questions**:
+- What is **UPnP** and why is so popular?
+- How does the **service discovery** work?
+- How does UPnP's support for **events**/notifications work?
+- How can a device know when the control point leaves?
+
+<details><summary><b>Answer: </b></summary>
+
+#### What is **UPnP** and why is so popular?
 **Universal Plug and Play** (UPnP) is the most used and widespread standard for services and resources discovery, for mobile systems and not only. Its target were simple devices and electronics for **domestic** environments (similar target of Bluetooth), therefore the idea was to make it as **simple to use** as possible: in fact, UPnP doesn't require any infrastructure, and the configuration (client-side) is automatic.
 > **NB**: terminology reference: **Device** is a service/resource provider, **Control Point** is a service/resource client.
 
 UPnP uses different technologies:
-- HTTP over UDP for control messages (discovery, advertisement, etc.);
-- HTTP over TCP for service usage (invocation, etc.);
+- SSDP (HTTP over UDP) for discovery/advertising messages (multicast);
+- SOAP (over HTTP over TCP) for control messages, i.e. invocation ;
+- plain HTTP for description (web pages and download of XML files);
+- GENA (over HTTP over TCP) for event messages (unicast);
 
+![alt](./resources/gfx/upnp_message_stack.png)
+
+#### How does the service discovery work?
 Here's how UPnP implements service discovery basic features:
 - **Automatic configuration**: the IP assignment is done via **Auto IP**, a protocol that allows devices to connect to network in a very simple way (search for DHCP servers. Not found? Pick a random IP in a defined range and check if it's already used via ARP. It's used? Pick another one, and so on). Very simple but automatic. Some consequences are that a device could change IP address after some time, and the IP is local and there's the need of NAT mapping to get a public one, but that's none of UPnP business (not part of its standard).
 - **Discovery**: there are two ways of disovering an UPnP device:
-  - `Device -> Control Point`, a Device can **advertise** itself and its local services/resources, by sending an SSDP broadcast message containing a URL at which download the DDF (Device Description File in XML);
-  - `Control Point -> Device`, a Control Point can search for available Devices or services (optionally specifying some attributes it's interested in), by sending a SSDP **discovery** message in broadcast, and receiving - if someone matches the preferences - a reply containing the URL needed to download the DDF. If the Control Point already knows the device or service information, it doesn't need to download that file.
-> **Device Description File** (DDF) is an XML document that includes all the resources and services offered by a device (`<device>`). For each service offered by the device, there's a `<service>` section, which includes also a URL to a **Service Description File** (SDF): an XML file about how to use the specific service (list of actions, parameters, etc. `<action>`). The XML schemas for DDF and SDF are reported [below](#ddf-schema).
-- **Access**:
-
-
-ACCESS
-XML under service section contains in particular:
-- URL to invocate the service;
-- URL to enable/subscribe to notifications (eventSubURL);
-Control Points can access a service by sending a SOAP message to the URL of the service specified in the DDF (there's an element called 
-
-Example workflow:
-1.
-2. 
-
-
-
-with a projector: [...]
-
-
-
+  - `Device -> Control Point`, a Device can **advertise** itself and its local services/resources, by sending an SSDP multicast message containing a URL at which download the DDF (Device Description File in XML);
+  - `Control Point -> Device`, a Control Point can search for available Devices or services (optionally specifying some attributes it's interested in), by sending a SSDP **discovery** message in multicast, and receiving - if someone matches the preferences - a reply (**notify**) containing the URL needed to download the DDF. If the Control Point already knows the device or service information, it doesn't need to download that file.
 ![alt](./resources/gfx/upnp_discovery.png)
+> **Device Description File** (DDF) is an XML document that includes all the resources and services offered by a device (`<device>`). For each service offered by the Device, there's a `<service>` section, which includes also a URL to invoke it and a URL to download a **Service Description File** (SDF): an XML file about how to use the specific service (list of actions, parameters, etc.). The XML schemas for DDF and SDF are reported [below](#ddf-schema).
+- **Access**: to access a service/resource via UPnP, a Control Point can send a **SOAP message** (basically an HTTP POST) containing the operation it wants to invoke and the parameter values.
 
 <span id="ddf-schema"/>
 <details>
-<summary>Hide/Show DDF Schema</summary>
+<summary>Hide/Show <b>DDF Schema</b></summary>
 
 Part of [DDF schema (p.49)](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf):
 ```
@@ -1421,7 +1412,7 @@ Part of [DDF schema (p.49)](https://openconnectivity.org/upnp-specs/UPnP-arch-De
 </details>
 
 <details>
-<summary>Hide/Show SDF Schema</summary>
+<summary>Hide/Show <b>SDF Schema</b></summary>
 
 Part of [SDF schema (p.54)](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf):
 ```
@@ -1471,14 +1462,23 @@ Part of [SDF schema (p.54)](https://openconnectivity.org/upnp-specs/UPnP-arch-De
 
 </details>
 
-Service discovery upnp
-1. Parlare del supporto alle notifiche
-2. Se ci sono molti control point registrati per lo stesso evento come viene gestita la
-propagazione? (No ottimizzato) 
+#### How does UPnP's support for events/notifications work?
+UPnP also supports an **event system**: Each service (in SDF) contains a table with values that can be "observed" by Control Points. Control Points can subscribe to specific device events (not single variables) and get notified when a variable changes. Event messages are sent through **GENA** (basically HTTP over TCP) in **unicast**.
 
-- Definizione e mini analisi bridging UPnP
-- Upnp, sottoscrizione eventi: cosa sono variabili di stato? a cosa serve il timeout nella sottoscrizione ? (Leasing, stesso meccanismo di jini)
-- UPNP - invocazione CP - Device
+Devices can also provide a web page for their services, that allows Control Points (after downloading and opening it in their browser) to control them and view their state.
+
+Example: typical interaction for UPnP, step by step.
+1. the Control Point sends a discovery message via SSDP;
+2. the Device replies with a notify message (UDP, unicast), containing the URL for its DDF;
+3. the Control Point downloads the DDF through an HTTP GET request;
+4. the Device web server (http server is needed on the Device for UPnP to work) replies by sending the DDF;
+5. the Control Point can register to events (e.g. it's interested in some value changes of a specific service variable);
+6. the Device replies with an ACK and a Subscription Identifier (SID);
+7. the Control Point can invoke operations on the device (and change variable values), by sending SOAP HTTP requests to the URL specified in the DDF;
+8. the Device, upon receiving variable changes invocation, edits the variable and sends a reply via a SOAP message;
+9. the Device sends notify messages in unicast HTTP to subscribed clients to notify the variable changes.
+
+#### How can a device know when the control point leaves?
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
