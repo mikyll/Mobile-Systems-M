@@ -555,7 +555,7 @@ Nodes have different **types**:
 - Weighted Clustering Algorithm (WCA), similiar to Heed but takes into account different weights for the cost function.
 
 ### Wi-Fi Direct
-In a Wi-Fi Direct network, nodes communicate by establishing a Peer-To-Peer (P2P) group, through a software Access Point. The device implementing the AP functionality, is called P2P Group Owner GO, and other devices acts like clients.
+In a Wi-Fi Direct network, nodes communicate by establishing a **Peer-To-Peer (P2P) group**, through a software Access Point. The device implementing the AP functionality, is called **P2P Group Owner GO**, and other devices acts like clients.
 A device can also be both client and P2P GO, alternating the two roles by time-sharing the Wi-Fi interface.
 
 #### Comparison Bluetooth Scatternet vs Wi-Fi Direct P2P Group
