@@ -404,9 +404,9 @@ Broadcast storm issue, is something that's often involved in flooding, and occur
 #### What is DSR routing and how does it **work**?
 Dynamic Source Routing (DSR) is a full reactive routing protocol, where the sender has to find a valid routing path. The steps for Source (S) to find a valid route to reach Destination (D), are the following:
 1. S uses **flooding** to send a control packet **RREQ** (Route REQuest) in broadcast;
-2. Each node that receives RREQ check if it doesn't have already sent it, and if it did not, it appends its node ID in the packet **header** and forwards the packet again in broadcast;
+2. Each node that receives RREQ check if it doesn't have already sent it, and if it did not, it appends its node ID in the packet **header** and forwards the packet again in **broadcast**;
 3. This procedure repeats until D is reached;
-4. When D receives the packet, it uses the chain of nodes in the header (path S->D), builds a control packet **RREP** (Route REPly), adding the path to its header, and sends it back in unicast to S;
+4. When D receives the packet, it uses the chain of nodes in the header (path S->D), builds a control packet **RREP** (Route REPly), adding the path to its header, and sends it back in **unicast** to S;
 5. S receives RREP, retrieves the path to reach D and saves it in its cache;
 6. S sends the actual data packets to D, including the path in their headers.
 
