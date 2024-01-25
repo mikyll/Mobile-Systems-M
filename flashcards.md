@@ -1356,7 +1356,8 @@ If compared to traditional and simple RMI/RPC, River overcomes limitations and o
 - What is **UPnP** and why is so popular?
 - How does the **service discovery** work?
 - How does UPnP's support for **events**/notifications work?
-- How can a device know when the control point leaves?
+- How can a device know when the control point leaves, and stop sending event messages?
+- If I wanted to federate 2 separated UPnP localities? How is it possible to do that?
 
 <details><summary><b>Answer: </b></summary>
 
@@ -1478,18 +1479,30 @@ Example: typical interaction for UPnP, step by step.
 8. the Device, upon receiving variable changes invocation, edits the variable and sends a reply via a SOAP message;
 9. the Device sends notify messages in unicast HTTP to subscribed clients to notify the variable changes.
 
-#### How can a device know when the control point leaves?
+#### How can a Device know when the Control Point leaves, and stop sending event messages?
+UPnP events support exploit GENA (over HTTP over TCP) to send notifications. Being it over TCP, when a Control Point leaves, the Devices tries to send an update to its SID, but doesn't get the proper HTTP response and knows that it didn't receive the notification.
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+#### If I wanted to federate 2 separated UPnP localities? How is it possible to do that?
+One possible solution would be to use a node as a gateway/bridge between the two localities.
 
 ---
 
 ### Mobile Messaging
 **Question**:
-- 
+- SOAP
+- REST
+TODO (ammasso di informazioni troppo denso 😭)
 
 <details><summary><b>Answer: </b></summary>
+
+#### REST
+The idea of rest is that web services have a big problem: they're stateful. REST is a architectural style, rather than a protocol, that promotes **client-server stateless interaction** where, instead of transmitting resources, there's the transmission of their representation (typically JSON).
+HTTP Methods: POST, PUT, GET, DELETE
+
+TODO
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
