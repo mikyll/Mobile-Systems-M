@@ -1133,3 +1133,5 @@ Common characteristics of service discovery systems:
 Universal Plug and Play (UPnP)
 
 ![[upnp_discovery.png]]
+
+![[upnp_message_stack.png]]
