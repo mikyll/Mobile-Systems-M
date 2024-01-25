@@ -853,10 +853,10 @@ They exploit wide-scale Wi-Fi deployments. The main idea is based on two phases:
 - **offline** phase: the RSSI values from different APs and devices coordinates are collected and stored in a database;
 - **tracking** (online) phase: devices send a vector containing RSSI of the APs in their visibility to a server, that compares the received values with the one stored in the database, and returns an estimation of the position.
 
-**PlaceLab**: is based on the APs that a device detects as "available". Their IDs are collected in a centralized server that builds a map where each ID is associated to a specific position. When a device sends the list of available APs to the server, it will receive an approximation of its position.\
-NB: the map also includes home APs, since they typically require a password just for utilizing them, not to be discovered.
+**PlaceLab**: is based on the APs that a device detects as "available". Their IDs are collected in a **centralized server** that builds a map where each ID is associated to a specific position. When a device sends the list of available APs to the server, it will receive an approximation of its position.\
+> NB: the map also includes home APs, since they typically require a password just for utilizing them, not to be discovered.
 
-**RADAR**: is similiar to PlaceLab, but for *indoor environments*. It's based on a **deterministic model** and exploits Wi-Fi APs but also their RSSI. There are 2 phases:
+**RADAR**: is similiar to PlaceLab, but for ***indoor** environments*. It's based on a **deterministic model** and exploits Wi-Fi **APs** but also their **RSSI**. There are 2 phases:
 1. **Offline** phases, which consists in collecting empiric environment data from devices (scene analysis) and sending them to APs. Those include position and spatial orientation. APs receive those data and store them, along with the **RSSI** average and timestamps, in order to create a map.
 2. **Real-time device tracking** phase, mobile devices periodically send UDP packets, and the centralized server can calculate their position based on many different techniques/algorithms.
 
