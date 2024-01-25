@@ -791,7 +791,7 @@ Global Positioning System (GPS) is a positioning and navigation system that expl
 - **lateration** for the localization of nodes. With 3 satellites we have 3 spheres (3D points), that indicate 2 points, but typically only one is located on the planet surface;
 - **ToA** (Time of Arrival) to calculate distances. Satellites send packets containing a timestamp;
 
-In order to work, satellites clocks and the device one must be synchronized. Satellites use atomic clocks and perform periodic synching processes, while smartphones, for example, have a less precise clock. Typically the position is calculated as a system of 4 (or more) equations in 3 coordinates, obtained for 4 satellites (or more).
+In order to work, satellites **clocks** and the device one must be **synchronized**. Satellites use atomic clocks and perform periodic synching processes, while smartphones, for example, have a less precise clock. Typically the position is calculated as a system of 4 (or more) equations in 3 coordinates, obtained for 4 satellites (or more).
 
 > **NB**: since the GPS is based on electromagnetic signals, it can be affected by obstacles, and that's also the reason why it doesn't work correctly in indoor environments.
 
