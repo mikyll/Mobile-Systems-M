@@ -853,7 +853,7 @@ They exploit wide-scale Wi-Fi deployments. The main idea is based on two phases:
 - **offline** phase: the RSSI values from different APs and devices coordinates are collected and stored in a database;
 - **tracking** (online) phase: devices send a vector containing RSSI of the APs in their visibility to a server, that compares the received values with the one stored in the database, and returns an estimation of the position.
 
-**PlaceLab**: is based on the APs that a device detects as "available". Their IDs are collected in a **centralized server** that builds a map where each ID is associated to a specific position. When a device sends the list of available APs to the server, it will receive an approximation of its position.\
+**PlaceLab**: is based on the APs that a device detects as "available". Their IDs are collected in a **centralized server** that builds a map where each ID is associated to a specific position. When a device sends the list of available APs to the server, it will receive an approximation of its position.
 > NB: the map also includes home APs, since they typically require a password just for utilizing them, not to be discovered.
 
 **RADAR**: is similiar to PlaceLab, but for ***indoor** environments*. It's based on a **deterministic model** and exploits Wi-Fi **APs** but also their **RSSI**. There are 2 phases:
