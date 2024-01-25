@@ -398,11 +398,12 @@ Broadcast storm issue, is something that's often involved in flooding, and occur
 - What is DSR routing and how does it **work**?
 - What **problems** there could be?
 - How can it be **optimized**?
+- How are **link errors** handled?
 
 <details><summary><b>Answer:</b></summary>
 
 #### What is DSR routing and how does it **work**?
-Dynamic Source Routing (DSR) is a full reactive routing protocol, where the sender has to find a valid routing path. The steps for Source (S) to find a valid route to reach Destination (D), are the following:
+Dynamic Source Routing (DSR) is a full reactive routing protocol, where the sender has to find a valid routing path. It includes a discovery phase, that exploits flooding to find a eventual route to the destination. The steps for Source (S) to find a valid route to reach Destination (D), are the following:
 1. S uses **flooding** to send a control packet **RREQ** (Route REQuest) in broadcast;
 2. Each node that receives RREQ check if it doesn't have already sent it, and if it did not, it appends its node ID in the packet **header** and forwards the packet again in **broadcast**;
 3. This procedure repeats until D is reached;
@@ -419,6 +420,8 @@ In general, it's a matter of _trade-offs_.
 #### How can it be **optimized**?
 For example through **path caching**: any node cache new path that it happens to discover (in any possible ways). Some obvious advantages, but also some disadvantages, such as **invalid caches** (being a MANET, after some time, the path doesn't work anymore, e.g. for mobility reasons). How can those be invalidated in a MANET? Through Route ERRor (**RERR**) control packet.
 
+#### How are **link errors** handled?
+If a link between two nodes A and B breaks (could be due to their mobility), when A tries to send a packet to B, it detects that it cannot reach  
 When a node cannot reach the following one in the route chain, it sends back to S a RERR control packet, containing the path that is not available anymore. Any node that overhears this, can update its cache as well.
 
 </details>
