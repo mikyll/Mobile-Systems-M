@@ -450,7 +450,7 @@ Ad hoc On-demand Distance Vector (AODV) is a reactive routing protocol that cons
 Its main difference with DSR is that AODV doesn't save path information inside packet headers, but instead stores them into the single nodes (similiar to IP routing). That reduces the overhead and allows for more data to be transferred inside the packet payloads.
 
 #### What do **tables** contain?
-AODV exploits routing tables, saved on each MANET node, to store information about routes to reach the nodes. When a node S wants to send a packet to a node D, it first checks if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding with RREQ(ID,src,dst) in broadcast. Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (direct path and inverse path entries). To prevent outdated or invalid routing table entries, there is a timeout mechanism (which is longer for direct routes).
+AODV exploits routing tables, saved on each MANET node, to store information about **routes to reach the nodes**. When a node S wants to send a packet to a node D, it first checks if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding with RREQ(ID,src,dst) in broadcast. Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (`direct path` and `inverse path` entries). To prevent outdated or invalid routing table entries, there is a **timeout mechanism** (which is longer for direct routes).
 
 <details>
 <summary>Show/Hide <b>Example</b></summary>
