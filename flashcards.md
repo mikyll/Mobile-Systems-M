@@ -452,6 +452,8 @@ Its main difference with DSR is that AODV doesn't save path information inside p
 #### What do **tables** contain?
 AODV exploits routing tables, saved on each MANET node, to store information about **routes to reach the nodes**. When a node S wants to send a packet to a node D, it first checks if its routing table has an entry with the path to reach D. If not, S performs a path discovery, by exploiting flooding with RREQ(ID,src,dst) in broadcast. Each node maintains a route table, where it saves entries about the "known paths", and the hops needed to reach it. Therefore there will be two types of entries (`direct path` and `inverse path` entries). To prevent outdated or invalid routing table entries, there is a **timeout mechanism** (which is longer for direct routes).
 
+![alt](./resources/gfx/aodv_routing_table.png)
+
 <details>
 <summary>Show/Hide <b>Example</b></summary>
 
@@ -479,7 +481,7 @@ Visual example:\
 
 #### How can loops be **avoided**?
 Routing loops can be avoided by using a **Destination Sequence Number** (DSN): each route entry in nodes route tables, has a sequence number field that indicates the freshness of the route. The DSNs are incremented each time the nodes send a message.
-During the route discovery phase, the RREQ will be carrying the destination node D as well as a DSN. Upon reaching a node, if the current node has a route to D with an higher DSN (compared to the one in RREQ), it immediately replies with RREP containing the route to D; otherwise, it forwards the RREQ to the next nodes.
+During the route discovery phase, the RREQ will be carrying the destination node D as well as a DSN. Upon reaching a node, if the current node has a route to D with an **higher DSN** (compared to the one in RREQ), it immediately replies with RREP containing the route to D; otherwise, it forwards the RREQ to the next nodes.
 
 #### What happens if nobody has a path towards the destination node, after a fault?
 The source starts a new discovery phase, performing RREQ flooding.
