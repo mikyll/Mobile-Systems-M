@@ -644,7 +644,7 @@ To perform the communication, HA and FA enstablish a mono-directional (HA->FA) *
 A possible optimization would be to make the correspondent node CH aware of the CoA of MH, after the first interaction: when CH sends its first packet to HA, HA sends back the CoA of MH. Afterwards, CH and MH can communicate directly through tunneling. This solution solves both triangular routing and ingress/egress problems, but is only part of **Mobile IPv6**, so both CH and MH must be compliant with it.
 
 #### Does Mobile IP face **ingress/egress filtering problems**? How can they be solved?
-Ingress/Egress filtering problem is typical of Mobile IP and occurs when CH is located in the Home Network, due to routers firewalls (FA and HA): the router may decide to drop packets because the address inside the header is "strange":
+Ingress/Egress filtering problem is typical of Mobile IP and occurs when CH is located in the Home Network, due to routers **firewalls** (FA and HA): the router may decide to drop packets because the address inside the header is "strange":
 - **egress filtering**, the source address of a packet coming from the internal network doesn't belonging to the internal network;
 - **ingress filtering**, the destination address of a packet arriving from an external network belongs to the internal network (HA's one), instead of an external one.
 
