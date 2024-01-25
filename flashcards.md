@@ -496,7 +496,7 @@ The source starts a new discovery phase, performing RREQ flooding.
 <details><summary><b>Answer: </b></summary>
 
 #### What is **GPSR** routing protocol?
-Greedy Perimeter Stateless Routing (GSPR) is a geographical routing protocol, that makes two important assumptions:
+Greedy Perimeter Stateless Routing (GSPR) is a **geographical** routing protocol, that makes 2 important **assumptions**:
 - the source node S knows the location of the destination node D;
 - every node has a list of its neighbor nodes and their locations (collected by periodically exchanging beacons).
 
@@ -506,8 +506,8 @@ GPSR performs data fowarding according to 2 schemas, _greedy forwarding_ and _pe
 - **perimeter forwarding**, each node calculates a Relative Neighborhood Graph (RNG) based on the constraint that two nodes are connected only if there isn't a third node that is closer to both. Then the graph is traversed applying the right-hand rule (counter clockwise choice), to select the next hop.
 
 #### How is the perimeter forwarding **graph** built?
-The perimeter forwarding graph is called Relative Neighborhood Graph (RNG) and is built by each node based on a constraint: two nodes A and B are connected if and only if there is not a third node C whose distance to both A and B is closer than the one between A and B (C-A < A-B && C-B < A-B).
-![alt](./resources/gfx/gpsr_rng.png)
+The perimeter forwarding graph is called Relative Neighborhood Graph (RNG) and is built by each node based on a **constraint**: two nodes A and B are connected if and only if there is not a third node C whose distance to both A and B is closer than the one between A and B (C-A < A-B && C-B < A-B).
+![alt](./resources/gfx/gpsr_perimeter_forwarding_rng.png)
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
