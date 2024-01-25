@@ -267,7 +267,7 @@ The main differences with Wi-Fi are:
 
 #### How is a piconet built? What are Bluetooth phases?
 Bluetooth piconets are built through 2 phases:
-1. **Inquiry** phase: a node that wants to communicate enters the inquiry mode, sends its ID to neighbours and collects answers (IDs) from them. After some time, if it has collected at least one ID, it enters the page phase. The node that initiated the inquiry phase typically becomes the master; 
+1. **Inquiry** phase: a node that wants to communicate enters the inquiry mode, sends its ID to neighbors in "inquiry scan" mode and collects answers (IDs) from them. After some time, if it has collected at least one ID, it enters the page phase. The node that initiated the inquiry phase typically becomes the master; 
 2. **Page** phase: the master sends its clock value to slaves to synchronize with them. There is some information exchange, including the sequence for the frequency hopping. Then the data exchange can begin.
 
 #### What is **frequency hopping**?
