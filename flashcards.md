@@ -1428,31 +1428,31 @@ Part of [SDF schema (p.54)](https://openconnectivity.org/upnp-specs/UPnP-arch-De
   </specVersion>
   <actionList>
     <action>
-      <name>actionName</name>
+      <name> actionName </name>
       <argumentList>
         <argument>
-          <name>argumentNameIn1</name>
-          <direction>in</direction>
-          <relatedStateVariable>stateVariableName</relatedStateVariable>
+          <name> argumentNameIn1 </name>
+          <direction> in </direction>
+          <relatedStateVariable> stateVariableName </relatedStateVariable>
         </argument>
         <argument>
-          <name>argumentNameOut1</name>
-          <direction>out</direction>
+          <name> argumentNameOut1 </name>
+          <direction> out </direction>
           <retval/>
-          <relatedStateVariable>stateVariableName</relatedStateVariable>
+          <relatedStateVariable> stateVariableName </relatedStateVariable>
         </argument>
         <!-- [...] -->
       </argumentList>
     </action>
     <serviceStateTable>
       <stateVariable sendEvents="yes"|"no" multicast="yes"|"no">
-        <name>variableName</name>
-        <dataType>basic data type</dataType>
-        <defaultValue>default value</defaultValue>
+        <name> variableName </name>
+        <dataType> basic data type </dataType>
+        <defaultValue> default value </defaultValue>
         <allowedValueRange>
-          <minimum>minimum value</minimum>
-          <maximum>maximum value</maximum>
-          <step>increment value</step>
+          <minimum> minimum value </minimum>
+          <maximum> maximum value </maximum>
+          <step> increment value </step>
         </allowedValueRange>
       </stateVariable>
       <!-- [...] -->
