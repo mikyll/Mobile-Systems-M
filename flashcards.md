@@ -1122,7 +1122,7 @@ Example of an IntentFilter (in Manifest.xml):
 <details><summary><b>Answer: </b></summary>
 
 #### What is a **Service**? What are their **types**? What are the **APIs** to define them?  What can you use to update the UI?
-A **Service** is a component that typically runs in background (if you invoke it when in an Activity, it'll work in time-sharing, along with the Activity), can NOT interact directly with UI and usually performs long-term operations. It can be activated through an Intent and it executes on the main thread (since they run in background there are no problems: it doesn't slow down the app/UI).
+A **Service** is a component that typically runs in background (if you invoke it when in an Activity, it'll work in time-sharing, along with the Activity), can **NOT interact directly with UI** and usually performs long-term operations. It can be activated through an Intent and it executes on the main thread (since they run in background there are no problems: it doesn't slow down the app/UI).
 > **NB**: to create a service, the developer must add the corresponding entry in the Manifest file: `<service android:name=".ExampleService" />`.
 
 There are 3 types of Services:
@@ -1148,7 +1148,7 @@ Handlers can be used in two ways:
 - to add an action into a queue associated with a different thread.
 
 #### What are **Broadcast** and **BroadcastReceivers**? What's the difference between Broadcasts and implicit Intents?
-**Broadcast** are message sent from Android system or other applications when an event of interest occur, and are wrapped in an Intent object.
+**Broadcast** are message sent from Android system or other applications when an **event** of interest occur, and are wrapped in an Intent object.
 There are two types:
 - broadcast related to **system** events (e.g. `ACTION_BOOT_COMPLETED`);
 - **custom** broadcast (user-defined), both sender and receiver must agree on unique name for the Intent;
@@ -1198,9 +1198,9 @@ this.unregisterReceiver(myBroadcastReceiver);
 The main difference between Broadcasts and implicit Intents is that Broadcasts are typically used for notification purposes (handling events and triggering UI updates), while Intents are used to pass the execution to some other component.
 
 #### What are `AsyncTask` and what's their purpose? What are the primitives? What if we didn't have AsyncTask?
-**AsyncTask** is a component useful for performing operations UI-related (in fact, Services cannot directly interact with the UI). AsyncTask is a component that is creted on the main thread and can be executed exactly once, on the background thread. They provide APIs to perform the operations, and other to update the UI accordingly, before, during and after their execution. The most obvious example for their usage is the downloading of files.\
+**AsyncTask** is a component useful for performing operations **UI-related** (in fact, Services cannot directly interact with the UI). AsyncTask is a component that is creted on the main thread and can be executed exactly once, on the background thread. They provide APIs to perform the operations, and other to update the UI accordingly, before, during and after their execution. The most obvious example for their usage is the downloading of files.\
 They have 3 parameters (types):
-1. the type of the **parameter/s** it accepts (e.g. URL/URLs);
+1. the type of the **parameter(s)** it accepts (e.g. URL/URLs);
 2. the type (unit of measure) of the **progress** (e.g. Integer -> 5, 10, 20, could be the download percentage);
 3. the type of the **result** (e.g. Image);
 
