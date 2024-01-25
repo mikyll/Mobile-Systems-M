@@ -342,7 +342,7 @@ The roles of nodes are:
 ### MANET
 **Question**:
 - What are MANETs and what are their main **characteristics**?
-- What are their main **problems**?
+- What are their **main problems**?
 - What are the **types** of routing protocols?
 
 <details><summary><b>Answer: </b></summary>
@@ -350,8 +350,8 @@ The roles of nodes are:
 #### What are MANETs and what are their main **characteristics**?
 Mobile Ad hoc NETworks are networks made by nodes that communicate in ad hoc mode, therefore there's **no infrastructure** of any kind that supports the communication between devices, compared to the more common base station mode. Its main characteristics are that they're very dynamic, they can be created and configured quickly, on-the-fly; the involved nodes are typically heterogeneous; each node is a potential router.
 
-#### What are their main **problems**?
-MANETs problems are: limited range, hidden node issue, transmission error, mobility, energetic limits and security. Also, even though it should be obvious in ad-hoc mode, in MANETs the routing is quite complicated.
+#### What are their **main problems**?
+MANETs problems are: limited range, hidden node issue, transmission error, mobility, energetic limits and security. Also, even though it should be obvious in ad-hoc mode, in MANETs the **routing** is quite complicated.
 
 #### What are the **types** of routing protocols?
 Routing protocols in MANETs can be divided into:
