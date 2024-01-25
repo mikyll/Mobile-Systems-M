@@ -621,7 +621,7 @@ This solution was never actually successful due to the fact that for a device to
 <details><summary><b>Answer: </b></summary>
 
 #### What is Mobile IP and what is its purpose?
-Mobile IP was the only successful level 3 standard (network layer) that solved mobility issues in infrastructured networks. It allows mobile nodes to move between different APs by keeping a permanent IP address, abstracting it from upper layers, to whitch it's completely **transparent**.\
+Mobile IP was the only successful level 3 standard (network layer) that solved mobility issues in **infrastructured networks**. It allows mobile nodes to move between different APs by keeping a permanent IP address, abstracting it from upper layers, to whitch it's completely **transparent**.\
 That's useful for example to keep ongoing active TCP connections while moving between different APs.
 
 NB: Mobile IP idea is to be a **patch** to the traditional IP, and also be completely transparent to other layers. It's goal was to be also free from extra configuration.
