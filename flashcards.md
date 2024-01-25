@@ -529,12 +529,12 @@ Temporally Ordered Routing Algorithm (TORA) is a more recent routing protocol, t
 - is loop-free by design;
 - is highly distributed;
 
-It's based on a graph structure called Directed Acyclic Graph (DAG), organized by an height metric. The data packets flows in this graph towards the bottom, as a liquid. 
+It's based on a graph structure called Directed Acyclic Graph (DAG), organized by an **height metric**. The data packets **flows** in this graph towards the bottom, as a liquid. 
 
 #### What are its main **functions**?
 TORA is based on 3 main functions:
 - Route **creation**, based on a query/reply process, started by the source node, towards the destination. It's performed by flooding the network with a QRY packet and, if a route exists, an UDP packet is returned to source.
-- Route **maintenance**, consists of a LOCAL link repair, when a link failuer is detected (reactive repair).
+- Route **maintenance**, consists of a _LOCAL_ link repair, when a link failuer is detected (reactive repair).
 - Route **failure**, a CLR packet is flooded to erase invalid routes.
 
 </details>
