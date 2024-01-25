@@ -669,7 +669,7 @@ I would also consider it horizontal, since it's basically a routing protocol, fo
 
 ---
 
-### I-TCP
+### Mobile IPv6
 **Question**: 
 - What are the main **differences** between Mobile IP and Mobile IPv6?
 - HMip VS MobileIPv6?
@@ -683,6 +683,17 @@ Mobile IPv6, on the other hand, doesn't have those problems
 For example, it automatically solves the triangular routing problem, by making CH aware of MH CoA: after the first message from CH to HA, the HA sends back a CoA update, so that further communication between CH and MH can happen in a direct way between the two nodes.
 
 #### TODO
+
+</details>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+
+---
+
+### I-TCP
+**Question**:
+TODO
+
+<details><summary><b>Answer: TODO</b></summary>
 
 </details>
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
