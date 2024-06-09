@@ -1,10 +1,10 @@
 <span id="back-to-top"/>
 
-[[Index](../)]&nbsp;&nbsp;
+[[Index](./README.md)]&nbsp;&nbsp;
 [⏮️]
 [◀️]
 [[▶️](./02%20-%20MANET%20and%20Routing.md)]
-[[⏭️](.)]
+[[⏭️](./06%20-%20Discovery.md)]
 
 <h1 align="center">Chapter 1 - Wireless (ISO/OSI Layer 1/2)</h1>
 
