@@ -1,4 +1,15 @@
-Notes for the course [Mobile Systems M](https://www.unibo.it/it/didattica/insegnamenti/insegnamento/2022/468026) held by professor [Paolo Bellavista](https://www.unibo.it/sitoweb/paolo.bellavista), at Alma Mater Studiorum - University of Bologna. Edited by [Michele Righi](https://github.com/mikyll).
+<!-- Notes for the course [Mobile Systems M](https://www.unibo.it/it/didattica/insegnamenti/insegnamento/2022/468026) held by professor [Paolo Bellavista](https://www.unibo.it/sitoweb/paolo.bellavista), at Alma Mater Studiorum - University of Bologna. Edited by [Michele Righi](https://github.com/mikyll). -->
+
+**NB**: the following notes are incomplete!
+
+Missing chapters:
+- 4 - Internet of Things
+- 6 - Service Discovery
+- 7 - 5G and Mobile Edge Computing
+
+Incomplete chapters:
+- 3 - Mobile IP and Positioning
+- 5 - Android
 
 ## Index
 
