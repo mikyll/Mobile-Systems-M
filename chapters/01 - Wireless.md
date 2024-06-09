@@ -4,7 +4,7 @@
 [⏮️]
 [◀️]
 [[▶️](./02%20-%20MANET%20and%20Routing.md)]
-[[⏭️](./06%20-%20Discovery.md)]
+[[⏭️](./07%20-%205G%20and%20Mobile%20Edge%20Computing.md)]
 
 <h1 align="center">Chapter 1 - Wireless (ISO/OSI Layer 1/2)</h1>
 

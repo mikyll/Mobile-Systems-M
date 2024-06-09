@@ -12,3 +12,5 @@
     - TODO
 6. [Service Discovery](./06%20-%20Discovery.md)
     - TODO
+7. [(Optional) 5G and Mobile Edge Computing](./07%20-%205G%20and%20Mobile%20Edge%20Computing.md)
+    - TODO

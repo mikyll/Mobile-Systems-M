@@ -4,7 +4,7 @@
 [[⏮️](./01%20-%20Wireless.md)]
 [[◀️](./01%20-%20Wireless.md)]
 [[▶️](./03%20-%20Mobile%20IP%20and%20Positioning.md)]
-[[⏭️](./06%20-%20Discovery.md)]
+[[⏭️](./07%20-%205G%20and%20Mobile%20Edge%20Computing.md)]
 
 <h1 align="center">Chapter 2 - MANET and Routing (ISO/OSI Layer 3)</h1>
 
